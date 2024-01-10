@@ -1,13 +1,18 @@
 import "./Pages.css";
-import React from "react";
+import React, { useState } from "react";
 import { Stack } from "components/common/Stack";
 import { Card } from "components/common/Card";
 import { KeycloakIdirUser, useKeycloak } from "@bcgov/citz-imb-kc-react";
 import { Txt } from "components/common/Txt";
 import { Link } from "components/common/Link";
+import { Button } from "components/common/Button";
 
 const KeycloakPage = () => {
-  const { user } = useKeycloak();
+  const { state, user, hasRole, isAuthenticated, getAuthorizationHeaderValue } =
+    useKeycloak();
+
+  const [hasRoleInput, setHasRoleInput] = useState("");
+
   const versions = window.configuration?.packageVersions;
   const latestVersions = window.configuration?.latestPackageVersions;
   return (
@@ -134,6 +139,15 @@ const KeycloakPage = () => {
                 <Txt size="s">{user?.scope}</Txt>
               </Stack>
             )}
+            {/* ROLES */}
+            <Stack direction="row" gap="10px">
+              <Txt size="s" bold>
+                Roles:
+              </Txt>
+              <Txt size="s">
+                {user?.client_roles ? JSON.stringify(user.client_roles) : "[]"}
+              </Txt>
+            </Stack>
             {user?.identity_provider === "idir" && (
               <>
                 {/* GUID */}
@@ -170,6 +184,47 @@ const KeycloakPage = () => {
                 </Stack>
               </>
             )}
+          </Stack>
+        </Card>
+        <Card>
+          <Stack gap="10px">
+            <h4>Keycloak React</h4>
+            <hr />
+            {/* IS AUTHENTICATED */}
+            <Stack direction="row" gap="10px" center>
+              <Txt bold>isAuthenticated:</Txt>
+              <Txt>{String(isAuthenticated)}</Txt>
+            </Stack>
+            {/* STATE */}
+            <Stack direction="row" gap="10px" center>
+              <Txt bold>state:</Txt>
+              <Button onClick={() => console.log(state)}>
+                Click to Console Log Object
+              </Button>
+            </Stack>
+            {/* AUTH HEADER VALUE */}
+            <Stack direction="row" gap="10px" center>
+              <Txt bold>getAuthorizationHeaderValue:</Txt>
+              <Button
+                onClick={() => console.log(getAuthorizationHeaderValue())}
+              >
+                Click to Console Log Value
+              </Button>
+            </Stack>
+            {/* HAS ROLE */}
+            <Stack direction="row" gap="10px" center>
+              <Txt bold>hasRole:</Txt>
+              <input
+                type="text"
+                placeholder="Type a role name"
+                onChange={(e) => setHasRoleInput(e.target.value)}
+              ></input>
+              <Txt>
+                {hasRole([hasRoleInput])
+                  ? "User HAS role."
+                  : "User does NOT have role."}
+              </Txt>
+            </Stack>
           </Stack>
         </Card>
       </Stack>

@@ -9,6 +9,11 @@ body {
   font-family: 'BC Sans', 'Noto Sans', 'Verdana', 'Arial', 'sans-serif';
 }
 
+input {
+  border: 1px solid var(--dark-grey);
+  padding: 2px;
+}
+
 a {
   color: var(--bcgov_lighter-blue3);
 }

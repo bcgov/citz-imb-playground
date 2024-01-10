@@ -192,20 +192,27 @@ const KeycloakPage = () => {
             <hr />
             {/* IS AUTHENTICATED */}
             <Stack direction="row" gap="10px" center>
-              <Txt bold>isAuthenticated:</Txt>
-              <Txt>{String(isAuthenticated)}</Txt>
+              <Txt size="s" bold>
+                isAuthenticated:
+              </Txt>
+              <Txt size="s">{String(isAuthenticated)}</Txt>
             </Stack>
             {/* STATE */}
             <Stack direction="row" gap="10px" center>
-              <Txt bold>state:</Txt>
-              <Button onClick={() => console.log(state)}>
+              <Txt size="s" bold>
+                state:
+              </Txt>
+              <Button size="s" onClick={() => console.log(state)}>
                 Click to Console Log Object
               </Button>
             </Stack>
             {/* AUTH HEADER VALUE */}
             <Stack direction="row" gap="10px" center>
-              <Txt bold>getAuthorizationHeaderValue:</Txt>
+              <Txt size="s" bold>
+                getAuthorizationHeaderValue:
+              </Txt>
               <Button
+                size="s"
                 onClick={() => console.log(getAuthorizationHeaderValue())}
               >
                 Click to Console Log Value
@@ -213,13 +220,15 @@ const KeycloakPage = () => {
             </Stack>
             {/* HAS ROLE */}
             <Stack direction="row" gap="10px" center>
-              <Txt bold>hasRole:</Txt>
+              <Txt size="s" bold>
+                hasRole:
+              </Txt>
               <input
                 type="text"
                 placeholder="Type a role name"
                 onChange={(e) => setHasRoleInput(e.target.value)}
               ></input>
-              <Txt>
+              <Txt size="s">
                 {hasRole([hasRoleInput])
                   ? "User HAS role."
                   : "User does NOT have role."}

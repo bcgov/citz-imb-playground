@@ -8,6 +8,14 @@ button:hover {
   box-shadow: 4px 2px var(--white);
 }
 
+.textSmall:is(button) {
+  padding: 5px;
+}
+
+.textLarge:is(button) {
+  padding: 15px;
+}
+
 .backgroundLightBlue {
   background-color: var(--bcgov_lighter-blue);
   color: var(--white);

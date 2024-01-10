@@ -11,10 +11,10 @@ export const LeftArrowIcon = () => {
     >
       <g
         stroke="#292d32"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-miterlimit="10"
-        stroke-width="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeMiterlimit="10"
+        strokeWidth="1.5"
       >
         <path d="m9.57 5.92993-6.07 6.06997 6.07 6.07" />
         <path d="m20.5 12h-16.82996" />

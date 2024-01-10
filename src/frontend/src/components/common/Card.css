@@ -5,3 +5,8 @@
   background-color: var(--white);
   flex: 1;
 }
+
+.justifyCenter {
+  display: flex;
+  justify-content: center;
+}

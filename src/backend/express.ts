@@ -49,6 +49,6 @@ app.disable("x-powered-by");
 // Routing
 app.use("/health", healthRouter);
 app.use("/config", configRouter);
-app.use("/cssAPI", protectedRoute(["admin"]), cssAPIRouter);
+app.use("/cssAPI", protectedRoute(["playground-admin"]), cssAPIRouter);
 
 export default app;

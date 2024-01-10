@@ -3,18 +3,19 @@ import React from "react";
 import { useKeycloak } from "@bcgov/citz-imb-kc-react";
 import { Button } from "./Button";
 import { Stack } from "./Stack";
-import { GearsIcon, KeyIcon, TextIcon } from "components/icons";
+import { GearsIcon, KeyIcon } from "components/icons";
 import { useNavigate } from "react-router-dom";
+import { Txt } from "./Txt";
 
 export const Nav = () => {
-  const { user, login, logout } = useKeycloak();
+  const { isAuthenticated, user, login, logout } = useKeycloak();
   const navigate = useNavigate();
 
   return (
     <nav>
       <h3>CITZ IMB Playground</h3>
 
-      {user && (
+      {isAuthenticated && (
         <Stack>
           <Button color="blue" onClick={() => navigate("/keycloak")}>
             <Stack direction="row" gap="10px">
@@ -32,16 +33,20 @@ export const Nav = () => {
       )}
 
       <div className="auth">
-        {user && (
+        {isAuthenticated && (
           <>
             <p>Hello,</p>
             <p className="displayName">{user?.display_name}</p>
           </>
         )}
-        {!user ? (
-          <Button color="blue" onClick={() => login({ idpHint: "idir" })}>
-            LOGIN WITH IDIR
-          </Button>
+        {!isAuthenticated ? (
+          <>
+            <Txt>Start by logging in!</Txt>
+            <br />
+            <Button color="blue" onClick={() => login({ idpHint: "idir" })}>
+              LOGIN WITH IDIR
+            </Button>
+          </>
         ) : (
           <Button color="blue" onClick={() => logout()}>
             LOGOUT

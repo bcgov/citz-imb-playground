@@ -1,0 +1,13 @@
+/* MODIFIERS */
+
+.bold {
+  font-weight: var(--bold);
+}
+
+.textSmall {
+  font-size: calc(var(--fs-base) * 0.75);
+}
+
+.textLarge {
+  font-size: calc(var(--fs-base) * 1.25);
+}

@@ -1,0 +1,19 @@
+button {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+button:hover {
+  cursor: pointer;
+  box-shadow: 4px 2px var(--white);
+}
+
+.backgroundLightBlue {
+  background-color: var(--bcgov_lighter-blue);
+  color: var(--white);
+}
+
+.backgroundLightGrey {
+  background-color: var(--light-grey);
+  color: var(--bcgov_lighter-blue2);
+}

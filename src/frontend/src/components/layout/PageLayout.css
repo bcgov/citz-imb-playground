@@ -1,0 +1,15 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 4.5fr;
+}
+
+.nav {
+  height: 100svh;
+  padding: 10px;
+  border-right: 2px solid var(--bcgov_yellow);
+  background-color: var(--bcgov_blue);
+}
+
+.page {
+  height: 100svh;
+}

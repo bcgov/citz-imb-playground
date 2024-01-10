@@ -1,0 +1,12 @@
+# Allows for development build and hot reloading.
+services:
+  playground-express-api:
+    build:
+      target: dev
+    volumes:
+      - ./src/backend:/app
+  playground-react-frontend:
+    build:
+      target: dev
+    volumes:
+      - ./src/frontend/src:/app/src

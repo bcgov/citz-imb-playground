@@ -1,0 +1,19 @@
+nav p, nav h1, nav h2, nav h3, nav h4 {
+  color: var(--white);
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  height: 100%;
+  padding-bottom: 10px;
+}
+
+.auth {
+  margin-top: auto;
+}
+
+.displayName {
+  margin-bottom: 10px;
+}

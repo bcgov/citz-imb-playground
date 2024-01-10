@@ -1,0 +1,53 @@
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          description: The unique identifier for the user.
+        guid:
+          type: string
+          description: The unique identifier for the user from Keycloak.
+          example: W7802F34D2390EFA9E7JK15923770279
+        username:
+          type: string
+          description: The username for the user.
+          example: JOHNDOE
+        email:
+          type: string
+          description: The email address for the user.
+          example: john.doe@gov.bc.ca
+        firstName:
+          type: string
+          description: The first name of the user.
+          example: John
+        lastName:
+          type: string
+          description: The last name of the user.
+          example: Doe
+        displayName:
+          type: string
+          description: The display name of the user.
+          example: Doe, John CITZ:EX
+        roles:
+          type: array
+          items:
+            type: string
+          description: The roles assigned to the user.
+          example: ['Admin']
+        createdOn:
+          type: string
+          format: date-time
+          description: The timestamp when the user was created.
+        lastUpdated:
+          type: string
+          format: date-time
+          description: The timestamp when the user was last updated.
+        lastLogin:
+          type: string
+          format: date-time
+          description: The timestamp when the user last logged in.
+          

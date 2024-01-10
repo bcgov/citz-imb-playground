@@ -1,0 +1,53 @@
+@import './reset.css';
+@import './variables.css';
+@import './modifiers.css';
+@import '@bcgov/bc-sans/css/BC_Sans.css';
+
+body {
+  width: 100vw;
+  height: 100svh;
+  font-family: 'BC Sans', 'Noto Sans', 'Verdana', 'Arial', 'sans-serif';
+}
+
+a {
+  color: var(--bcgov_lighter-blue3);
+}
+
+a:hover {
+  color: var(--bcgov_blue)
+}
+
+hr {
+  height: 1.5px;
+  background-color: var(--light-grey);
+}
+
+p {
+  color: var(--dark-grey);
+  font-size: var(--fs-base);
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: 'BC Sans', 'Noto Sans', 'Verdana', 'Arial', 'sans-serif';
+}
+
+h1, h2, h3, h4 {
+  color: var(--dark-grey);
+  font-weight: var(--bold);
+  font-family: 'BC Sans', 'Noto Sans', 'Verdana', 'Arial', 'sans-serif';
+}
+
+h1 {
+  font-size: var(--fs-h1);
+}
+
+h2 {
+  font-size: var(--fs-h2);
+}
+
+h3 {
+  font-size: var(--fs-h3);
+}
+
+h4 {
+  font-size: var(--fs-h4);
+}

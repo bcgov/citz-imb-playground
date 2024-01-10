@@ -1,0 +1,12 @@
+{
+  "name": "@bcgov/citz-imb-playground",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "scripts": {
+    "up": "docker compose up -d",
+    "down": "docker compose down",
+    "prune": "docker compose down --rmi all --volumes",
+    "install:frontend": "cd src/frontend && rm -rf node_modules package-lock.json && npm i",
+    "install:backend": "cd src/backend && rm -rf node_modules package-lock.json && npm i"
+  }
+}

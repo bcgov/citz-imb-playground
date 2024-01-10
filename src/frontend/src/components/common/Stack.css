@@ -1,0 +1,15 @@
+.stack {
+  display: flex;
+}
+
+.directionRow {
+  flex-direction: row;
+}
+
+.directionColumn {
+  flex-direction: column;
+}
+
+.alignCenter {
+  align-items: center;
+}

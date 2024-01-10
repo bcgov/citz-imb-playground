@@ -11,7 +11,7 @@ const LandingPage = () => {
   return (
     <>
       {isAuthenticated && (
-        <Card center paddingY="50px">
+        <Card center paddingY="80px" height="100%">
           <Stack center>
             <img src="./src/assets/family.png" width="350px" />
             <h3>Welcome to your CITZ IMB Playground!</h3>

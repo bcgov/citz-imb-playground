@@ -6,10 +6,11 @@ type CardProps = {
   center?: boolean;
   paddingY?: string;
   paddingX?: string;
+  height?: string;
 };
 
 export const Card = (props: CardProps) => {
-  const { children, center, paddingY, paddingX } = props;
+  const { children, center, paddingY, paddingX, height } = props;
   return (
     <div
       style={{
@@ -17,6 +18,7 @@ export const Card = (props: CardProps) => {
         paddingRight: paddingX ?? "",
         paddingTop: paddingY ?? "",
         paddingBottom: paddingY ?? "",
+        height: height ?? "",
       }}
       className={`card ${center ? "justifyCenter" : ""}`}
     >

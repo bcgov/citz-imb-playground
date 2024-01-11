@@ -1,5 +1,5 @@
 import "./Pages.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Stack } from "components/common/Stack";
 import { Card } from "components/common/Card";
 import { KeycloakIdirUser, useKeycloak } from "@bcgov/citz-imb-kc-react";
@@ -15,6 +15,12 @@ const KeycloakPage = () => {
 
   const versions = window.configuration?.packageVersions;
   const latestVersions = window.configuration?.latestPackageVersions;
+
+  // Redirect if not logged in.
+  useEffect(() => {
+    if (!isAuthenticated) setTimeout(() => (window.location.href = "/"), 1000);
+  }, [isAuthenticated]);
+
   return (
     <>
       <Card>

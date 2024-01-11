@@ -1,5 +1,5 @@
 import "./Pages.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Stack } from "components/common/Stack";
 import { Card } from "components/common/Card";
 import { Txt } from "components/common/Txt";
@@ -9,7 +9,8 @@ import { DeniedIcon } from "components/icons";
 import { Button } from "components/common/Button";
 
 const CSSAPIPage = () => {
-  const { hasRole, getAuthorizationHeaderValue } = useKeycloak();
+  const { hasRole, getAuthorizationHeaderValue, isAuthenticated } =
+    useKeycloak();
 
   const [getRoleInput, setGetRoleInput] = useState("");
 
@@ -37,6 +38,11 @@ const CSSAPIPage = () => {
       console.error(error);
     }
   };
+
+  // Redirect if not logged in.
+  useEffect(() => {
+    if (!isAuthenticated) setTimeout(() => (window.location.href = "/"), 1000);
+  }, [isAuthenticated]);
 
   return (
     <>

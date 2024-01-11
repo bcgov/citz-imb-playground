@@ -155,32 +155,28 @@ const KeycloakPage = () => {
                   <Txt size="s" bold>
                     GUID:
                   </Txt>
-                  <Txt size="s">
-                    {(user as KeycloakIdirUser)?.idir_user_guid}
-                  </Txt>
+                  <Txt size="s">{user?.idir_user_guid}</Txt>
                 </Stack>
                 {/* Username */}
                 <Stack direction="row" gap="10px">
                   <Txt size="s" bold>
                     Username:
                   </Txt>
-                  <Txt size="s">
-                    {(user as KeycloakIdirUser)?.idir_username}
-                  </Txt>
+                  <Txt size="s">{user?.idir_username}</Txt>
                 </Stack>
                 {/* GIVEN NAME */}
                 <Stack direction="row" gap="10px">
                   <Txt size="s" bold>
                     Given Name:
                   </Txt>
-                  <Txt size="s">{(user as KeycloakIdirUser)?.given_name}</Txt>
+                  <Txt size="s">{user?.given_name}</Txt>
                 </Stack>
                 {/* FAMILY NAME */}
                 <Stack direction="row" gap="10px">
                   <Txt size="s" bold>
                     Family Name:
                   </Txt>
-                  <Txt size="s">{(user as KeycloakIdirUser)?.family_name}</Txt>
+                  <Txt size="s">{user?.family_name}</Txt>
                 </Stack>
               </>
             )}

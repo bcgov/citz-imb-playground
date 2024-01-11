@@ -15,7 +15,11 @@ export const Link = (props: LinkProps) => {
     size === "s" ? "textSmall" : size === "l" ? "textLarge" : "";
 
   return (
-    <a href={url ?? children} className={`${sizeClass} ${bold ? "bold" : ""}`}>
+    <a
+      href={url ?? children}
+      target="_blank"
+      className={`${sizeClass} ${bold ? "bold" : ""}`}
+    >
       {children}
     </a>
   );

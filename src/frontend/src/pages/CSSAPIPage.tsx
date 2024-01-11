@@ -24,6 +24,7 @@ const CSSAPIPage = () => {
     query?: string
   ) => {
     try {
+      console.log("Calling API...");
       const response = await fetch(`/api${endpoint}${query ?? ""}`, {
         method,
         headers: { Authorization: getAuthorizationHeaderValue() },
@@ -118,9 +119,14 @@ const CSSAPIPage = () => {
                   ></input>
                   <Button
                     size="s"
-                    onClick={() =>
-                      callAPI("/cssAPI/getRole", "GET", `?role=${getRoleInput}`)
-                    }
+                    onClick={() => {
+                      if (getRoleInput !== "")
+                        callAPI(
+                          "/cssAPI/getRole",
+                          "GET",
+                          `?role=${getRoleInput}`
+                        );
+                    }}
                   >
                     Search
                   </Button>

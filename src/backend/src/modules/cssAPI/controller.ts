@@ -1,6 +1,11 @@
 import { Request, Response } from "express";
 import { errorWrapper } from "../../utils";
-import { getRole, getRoles } from "@bcgov/citz-imb-kc-css-api";
+import {
+  getRole,
+  getRoles,
+  createRole,
+  deleteRole,
+} from "@bcgov/citz-imb-kc-css-api";
 
 import config from "../../../config";
 const { DEBUG } = config;
@@ -35,3 +40,45 @@ export const getKCRole = errorWrapper(async (req: Request, res: Response) => {
 
   res.json(await getRole(role));
 });
+
+/**
+ * @method POST
+ * @param role - The role name to create.
+ * @route /cssAPI/createRole/:role
+ * @protected Requires "playground-admin"
+ */
+export const createKCRole = errorWrapper(
+  async (req: Request, res: Response) => {
+    if (DEBUG)
+      console.info("DEBUG: createKCRole controller in modules/cssAPI called.");
+
+    const role = req.params.role;
+    if (!role || role === "" || typeof role !== "string") {
+      res.status(404).send("Missing 'role' in request param.");
+      return;
+    }
+
+    res.json(await createRole(role));
+  }
+);
+
+/**
+ * @method DELETE
+ * @param role - The role name to delete.
+ * @route /cssAPI/deleteRole/:role
+ * @protected Requires "playground-admin"
+ */
+export const deleteKCRole = errorWrapper(
+  async (req: Request, res: Response) => {
+    if (DEBUG)
+      console.info("DEBUG: deleteKCRole controller in modules/cssAPI called.");
+
+    const role = req.params.role;
+    if (!role || role === "" || typeof role !== "string") {
+      res.status(404).send("Missing 'role' in request param.");
+      return;
+    }
+
+    res.json(await deleteRole(role));
+  }
+);

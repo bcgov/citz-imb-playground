@@ -13,6 +13,8 @@ const CSSAPIPage = () => {
     useKeycloak();
 
   const [getRoleInput, setGetRoleInput] = useState("");
+  const [createRoleInput, setCreateRoleInput] = useState("");
+  const [deleteRoleInput, setDeleteRoleInput] = useState("");
 
   const versions = window.configuration?.packageVersions;
   const latestVersions = window.configuration?.latestPackageVersions;
@@ -31,9 +33,9 @@ const CSSAPIPage = () => {
         headers: { Authorization: getAuthorizationHeaderValue() },
       });
 
-      if ([200, 201].includes(response.status))
-        return console.log(await response.json());
-      console.log(response.text());
+      const data = await response.json();
+      if (data) return console.log(data);
+      console.log(`Completed with status ${response.status}.`);
     } catch (error) {
       console.error(error);
     }
@@ -135,6 +137,68 @@ const CSSAPIPage = () => {
                     }}
                   >
                     Search
+                  </Button>
+                  <Txt size="s">Prints to console (async).</Txt>
+                </Stack>
+              </Stack>
+            </Card>
+          </Stack>
+          <Stack direction="row">
+            {/* CREATE ROLE */}
+            <Card>
+              <Stack>
+                <Stack direction="row">
+                  <Txt bold>createRole</Txt>
+                  <Txt>Create a new role.</Txt>
+                </Stack>
+                <hr />
+                <Stack direction="row" center>
+                  <input
+                    type="text"
+                    placeholder="Type a role name"
+                    onChange={(e) => setCreateRoleInput(e.target.value)}
+                  ></input>
+                  <Button
+                    size="s"
+                    onClick={() => {
+                      if (createRoleInput !== "")
+                        callAPI(
+                          `/cssAPI/createRole/${createRoleInput}`,
+                          "POST"
+                        );
+                    }}
+                  >
+                    Create
+                  </Button>
+                  <Txt size="s">Prints to console (async).</Txt>
+                </Stack>
+              </Stack>
+            </Card>
+            {/* DELETE ROLE */}
+            <Card>
+              <Stack>
+                <Stack direction="row">
+                  <Txt bold>deleteRole</Txt>
+                  <Txt>Remove a role.</Txt>
+                </Stack>
+                <hr />
+                <Stack direction="row" center>
+                  <input
+                    type="text"
+                    placeholder="Type a role name"
+                    onChange={(e) => setDeleteRoleInput(e.target.value)}
+                  ></input>
+                  <Button
+                    size="s"
+                    onClick={() => {
+                      if (deleteRoleInput !== "")
+                        callAPI(
+                          `/cssAPI/deleteRole/${deleteRoleInput}`,
+                          "DELETE"
+                        );
+                    }}
+                  >
+                    Remove
                   </Button>
                   <Txt size="s">Prints to console (async).</Txt>
                 </Stack>

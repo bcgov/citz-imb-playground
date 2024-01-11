@@ -6,7 +6,13 @@
   "scripts": {
     "dev": "nodemon -L --exec ts-node index.ts",
     "build": "tsc",
-    "test": "node --import tsx --test src/**/*.test.*"
+    "test": "node --import tsx --test src/**/*.test.*",
+    "typeorm": "ts-node ./node_modules/typeorm/cli.js ",
+    "migration:generate": "npm run typeorm -- migration:generate -d dataSource.ts",
+    "migration:run": "npm run build && npm run typeorm -- migration:run -d dataSource.ts",
+    "migration:run:no-build": "npm run typeorm -- migration:run -d dataSource.ts",
+    "migration:revert": "npm run typeorm -- migration:revert -d dataSource.ts",
+    "migration:create": "npm run typeorm -- migration:create"
   },
   "dependencies": {
     "@bcgov/citz-imb-kc-css-api": "https://github.com/bcgov/citz-imb-kc-css-api/releases/download/v1.2.0/bcgov-citz-imb-kc-css-api-1.2.0.tgz",

@@ -68,6 +68,7 @@ const RichTextEditorPage = () => {
       <Card>
         <RichTextEditor content={richText} setContent={setRichText} />
       </Card>
+      <Card height="300px">{richText}</Card>
     </>
   );
 };

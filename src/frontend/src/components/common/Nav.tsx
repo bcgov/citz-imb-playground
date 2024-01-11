@@ -3,7 +3,7 @@ import React from "react";
 import { useKeycloak } from "@bcgov/citz-imb-kc-react";
 import { Button } from "./Button";
 import { Stack } from "./Stack";
-import { GearsIcon, KeyIcon } from "components/icons";
+import { GearsIcon, KeyIcon, TextIcon } from "components/icons";
 import { useNavigate } from "react-router-dom";
 import { Txt } from "./Txt";
 
@@ -27,6 +27,12 @@ export const Nav = () => {
             <Stack direction="row" gap="10px">
               <GearsIcon />
               <p>CSS API</p>
+            </Stack>
+          </Button>
+          <Button color="blue" onClick={() => navigate("/richtext")}>
+            <Stack direction="row" gap="10px">
+              <TextIcon />
+              <p>RichTextEditor</p>
             </Stack>
           </Button>
         </Stack>

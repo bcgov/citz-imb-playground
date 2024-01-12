@@ -1,0 +1,129 @@
+name: NPM Dependency Reports
+
+# NEW - Now runs all reports at once and parses to json before creating output text.
+
+on:
+  schedule:
+    - cron: '0 15 1-7 * 2' # First Tuesday of the month at 7:00-8:00am Pacific Time.
+  workflow_dispatch:
+
+# START HERE! v
+
+# ADD REQUIRED FILES:
+# - .github/helpers/parse-npm-deps.js
+# - .github/helpers/create-npm-dep-report.js
+# - .github/helpers/create-npm-dep-report-issues.js
+# - .github/helpers/github-api/github-api-requests.js
+# - .github/helpers/github-api/create-and-close-existing-issue.js
+# - .github/config/dep-report.json5
+
+# EDIT .github/config/dep-report.json5
+# DO NOT Edit below env variables.
+env:
+  packageJsonPaths: ''
+  GITHUB_REPOSITORY: ${{ github.repository }}
+
+jobs:
+  # Parse ENV Vars from config.
+  parse-json5-config:
+      runs-on: ubuntu-22.04
+
+      steps:
+        # Checkout branch.
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+
+        # Install json5 npm package for parsing config.
+        - name: Install Dependencies
+          run: npm install json5
+
+        # Run script to convert json5 config to ENV Vars.
+        - name: Run Script
+          run: node .github/helpers/parse-json5-config .github/config/dep-report.json5
+
+  # Check package versions for updates.
+  parse-package-versions:
+    runs-on: ubuntu-22.04
+    container:
+      # Lightweight NodeJS Image
+      image: node:21.5-bullseye-slim
+
+    steps:
+      # Checkout branch.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Run NodeJS script to check for latest npm dependency versions and capture output.
+      - name: Run NPM DEP Check Node.js script
+        id: check_versions
+        run: |
+          node .github/helpers/parse-npm-deps.js > outdatedDeps.json
+
+      # Upload the output as an artifact.
+      - name: Upload output
+        uses: actions/upload-artifact@v3
+        with:
+          name: outdatedDeps
+          path: outdatedDeps.json
+
+  # Write the output text for the GitHub Issue.
+  write-output:
+    needs: parse-package-versions
+    runs-on: ubuntu-22.04
+    container:
+      # Lightweight NodeJS Image
+      image: node:21.5-bullseye-slim
+    
+    steps:
+      # Download the output artifact from parse-package-versions.
+      - name: Download output
+        uses: actions/download-artifact@v3
+        with:
+          name: outdatedDeps
+          path: .
+
+      # Checkout branch.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Run NodeJS script to create GitHub Issue body.
+      - name: Run NPM DEP Check Node.js script
+        id: check_versions
+        run: |
+          node .github/helpers/create-npm-dep-report.js > outputText.json
+
+      # Upload the output as an artifact.
+      - name: Upload output
+        uses: actions/upload-artifact@v3
+        with:
+          name: outputText
+          path: outputText.json
+
+  # Create the GitHub Issues.
+  create-issues:
+    needs: write-output
+    runs-on: ubuntu-22.04
+    container:
+      # Lightweight NodeJS Image
+      image: node:21.5-bullseye-slim
+
+    steps:
+      # Download the output artifact.
+      - name: Download output
+        uses: actions/download-artifact@v3
+        with:
+          name: outputText
+          path: .
+
+      # Checkout branch.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Install @octokit/rest npm package for making GitHub rest API requests.
+      - name: Install @octokit/rest npm
+        run: npm i @octokit/rest
+
+      # Run Node Script to Create GitHub Issue.
+      - name: Create GitHub Issues
+        run: |
+          node .github/helpers/github-api/create-npm-dep-report-issues

@@ -1,0 +1,4 @@
+{
+  // Check package.json files for dependency updates.
+  packageJsonPaths: ["src/frontend", "src/backend"],
+}

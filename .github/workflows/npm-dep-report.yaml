@@ -59,6 +59,8 @@ jobs:
         run: |
           node .github/helpers/parse-npm-deps.js > outdatedDeps.json
 
+      - run: echo "${{ env.packageJsonPaths }}"
+
       # Upload the output as an artifact.
       - name: Upload output
         uses: actions/upload-artifact@v3

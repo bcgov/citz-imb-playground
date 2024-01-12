@@ -41,6 +41,8 @@ jobs:
         - name: Run Script
           run: node .github/helpers/parse-json5-config .github/config/dep-report.json5
 
+        - run: echo "${{ env.packageJsonPaths }}"
+
   # Check package versions for updates.
   parse-package-versions:
     runs-on: ubuntu-22.04
@@ -58,8 +60,6 @@ jobs:
         id: check_versions
         run: |
           node .github/helpers/parse-npm-deps.js > outdatedDeps.json
-
-      - run: echo "${{ env.packageJsonPaths }}"
 
       # Upload the output as an artifact.
       - name: Upload output

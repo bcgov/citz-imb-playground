@@ -6,7 +6,15 @@ import {
   getKCRoles,
   createKCRole,
   deleteKCRole,
+  getKCIntegration,
 } from "./controller";
+
+/**
+ * @method GET
+ * @route /cssAPI/getIntegration
+ * @protected Requires "playground-admin"
+ */
+router.get("/getIntegration", getKCIntegration);
 
 /**
  * @method GET

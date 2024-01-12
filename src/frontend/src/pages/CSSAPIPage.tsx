@@ -16,6 +16,8 @@ const CSSAPIPage = () => {
   const [createRoleInput, setCreateRoleInput] = useState("");
   const [deleteRoleInput, setDeleteRoleInput] = useState("");
 
+  const [integrationDetails, setIntegrationDetails] = useState<any>(undefined);
+
   const versions = window.configuration?.packageVersions;
   const latestVersions = window.configuration?.latestPackageVersions;
 
@@ -41,10 +43,43 @@ const CSSAPIPage = () => {
     }
   };
 
+  const formatDateString = (isoDateString: string) => {
+    const date = new Date(isoDateString);
+
+    const formatter = new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true,
+    });
+
+    return formatter.format(date);
+  };
+
   // Redirect if not logged in.
   useEffect(() => {
     if (!isAuthenticated) setTimeout(() => (window.location.href = "/"), 1000);
   }, [isAuthenticated]);
+
+  // Update integration details.
+  useEffect(() => {
+    try {
+      (async () => {
+        const response = await fetch(`/api/cssAPI/getIntegration`, {
+          method: "GET",
+          headers: { Authorization: getAuthorizationHeaderValue() },
+        });
+
+        const data = await response.json();
+        if (data) setIntegrationDetails(data);
+      })();
+    } catch (error) {
+      console.error(error);
+    }
+  }, [window.location.origin]);
 
   return (
     <>
@@ -91,9 +126,62 @@ const CSSAPIPage = () => {
       </Card>
       {hasRole(["playground-admin"]) ? (
         <>
+          {/* INTEGRATION */}
+          <Card paddingY="10px">
+            <Stack>
+              <h4>Integration Details</h4>
+              <hr />
+              {integrationDetails ? (
+                <Stack direction="row" gap="40px">
+                  <Stack direction="row" center>
+                    <Txt size="s" bold>
+                      ID:
+                    </Txt>
+                    <Txt size="s">{integrationDetails?.id}</Txt>
+                  </Stack>
+                  <Stack direction="row" center>
+                    <Txt size="s" bold>
+                      Project Name:
+                    </Txt>
+                    <Txt size="s">{integrationDetails?.projectName}</Txt>
+                  </Stack>
+                  <Stack direction="row" center>
+                    <Txt size="s" bold>
+                      Auth Type:
+                    </Txt>
+                    <Txt size="s">{integrationDetails?.authType}</Txt>
+                  </Stack>
+                  <Stack direction="row" center>
+                    <Txt size="s" bold>
+                      Status:
+                    </Txt>
+                    <Txt size="s">{integrationDetails?.status}</Txt>
+                  </Stack>
+                  <Stack direction="row" center>
+                    <Txt size="s" bold>
+                      Environments:
+                    </Txt>
+                    <Txt size="s">
+                      {JSON.stringify(integrationDetails?.environments)}
+                    </Txt>
+                  </Stack>
+                  <Stack direction="row" center>
+                    <Txt size="s" bold>
+                      Created:
+                    </Txt>
+                    <Txt size="s">
+                      {formatDateString(integrationDetails?.createdAt)}
+                    </Txt>
+                  </Stack>
+                </Stack>
+              ) : (
+                <Txt>Searching for details...</Txt>
+              )}
+            </Stack>
+          </Card>
           <Stack direction="row">
             {/* GET ROLES */}
-            <Card>
+            <Card paddingY="10px">
               <Stack>
                 <Stack direction="row">
                   <Txt bold>getRoles</Txt>
@@ -112,7 +200,7 @@ const CSSAPIPage = () => {
               </Stack>
             </Card>
             {/* GET ROLE */}
-            <Card>
+            <Card paddingY="10px">
               <Stack>
                 <Stack direction="row">
                   <Txt bold>getRole</Txt>
@@ -145,7 +233,7 @@ const CSSAPIPage = () => {
           </Stack>
           <Stack direction="row">
             {/* CREATE ROLE */}
-            <Card>
+            <Card paddingY="10px">
               <Stack>
                 <Stack direction="row">
                   <Txt bold>createRole</Txt>
@@ -175,7 +263,7 @@ const CSSAPIPage = () => {
               </Stack>
             </Card>
             {/* DELETE ROLE */}
-            <Card>
+            <Card paddingY="10px">
               <Stack>
                 <Stack direction="row">
                   <Txt bold>deleteRole</Txt>

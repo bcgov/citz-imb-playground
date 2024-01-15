@@ -66,7 +66,7 @@ const getFormattedDate = () => {
 };
 
 // Messages.
-const title = `NPM Dependency Report ${getFormattedDate()}`;
+const title = `NPM Dependency Report - ${getFormattedDate()}`;
 const subTitle =
   "Versions of npm packages have been checked against their latest versions from the npm registry.";
 const upToDateMsg = "dependencies are all up-to-date.";
@@ -100,7 +100,9 @@ const outputDepsByVersionChange = (
   results[packagePath] += `\n${line(`![${headerTag}]`)}\n`;
 
   // List dependency updates.
-  for (const { dependency, version, latestVersion } in dependencies) {
+  for (const key in dependencies) {
+    const { dependency, version, latestVersion } = dependencies[key];
+
     results[packagePath] += `${line(
       `- [ ] \`${dependency}\` Update from version \`${version}\` to \`${latestVersion}\` by running`
     )}`;
@@ -125,12 +127,12 @@ const outputDeps = (dependenciesObj, packagePath, isDevDep) => {
   results[packagePath] += `${lineBreak()}`;
   if (isDevDep)
     results[packagePath] += `${heading(
-      "Development Dependencies to Update:\n",
+      "Development Dependencies to Update:\n\n",
       3
     )}`;
   else
     results[packagePath] += `${heading(
-      "Production Dependencies to Update:\n",
+      "Production Dependencies to Update:\n\n",
       3
     )}`;
 
@@ -163,8 +165,7 @@ const escapeForGitHubActions = (str) =>
 
     // Output title.
     results[packagePath] += `${heading(title, 2)}`;
-    results[packagePath] += `${line(subTitle)}`;
-    results[packagePath] += `${lineBreak()}`;
+    results[packagePath] += `${line(subTitle)}\n`;
 
     // Get percentage of packages up to date.
     const percentageUpToDate = calculateUpToDatePercentage(
@@ -178,9 +179,9 @@ const escapeForGitHubActions = (str) =>
     else if (percentageUpToDate <= 90) percentageColor = yellow;
 
     // Output percentage.
-    results[packagePath] += `${line("![COVERAGE_PERCENTAGE]")}`;
+    results[packagePath] += `${line("![COVERAGE_PERCENTAGE]\n")}`;
     results[packagePath] += `${line(
-      `\n[COVERAGE_PERCENTAGE]: https://img.shields.io/badge/percentage_of_dependencies_up_to_date-${percentageUpToDate}-${percentageColor}?style=for-the-badge \n`
+      `\n[COVERAGE_PERCENTAGE]: https://img.shields.io/badge/percentage_of_dependencies_up_to_date-${percentageUpToDate}-${percentageColor}?style=for-the-badge \n\n`
     )}`;
 
     // Output summary.

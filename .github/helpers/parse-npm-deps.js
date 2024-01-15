@@ -142,7 +142,7 @@ const checkVersions = async (dependencyList, packagePath, isDevDep) => {
   const promises = packageJsonPaths.map(async (packagePath) => {
     const packageJson = require(path.resolve(
       __dirname,
-      `${packagePath}/package.json`
+      `../../${packagePath}/package.json`
     ));
     results[packagePath] = {
       deps: { total: 0, outdated: 0, major: [], minor: [], patch: [] },

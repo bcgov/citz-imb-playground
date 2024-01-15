@@ -1,5 +1,8 @@
 const path = require("path");
-const outdatedDeps = require(path.resolve(__dirname, `outdatedDeps.json`));
+const outdatedDeps = require(path.resolve(
+  __dirname,
+  `../../outdatedDeps.json`
+));
 
 /**
  * THIS FILE DOES NOT REQUIRE ANY EDITING.

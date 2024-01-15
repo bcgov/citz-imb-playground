@@ -21,6 +21,7 @@ on:
 # DO NOT Edit below env variables.
 env:
   GITHUB_REPOSITORY: ${{ github.repository }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   # Parse ENV Vars from config.

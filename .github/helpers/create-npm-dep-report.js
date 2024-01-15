@@ -97,7 +97,7 @@ const outputDepsByVersionChange = (
       : green;
 
   // Output header.
-  results[packagePath] += `\n${line(`![${headerTag}]`)}\n`;
+  results[packagePath] += `${line(`![${headerTag}]`)}\n`;
 
   // List dependency updates.
   for (const key in dependencies) {
@@ -124,22 +124,22 @@ const outputDeps = (dependenciesObj, packagePath, isDevDep) => {
   if (dependenciesObj.outdated <= 0) return;
 
   // Output title.
-  results[packagePath] += `${lineBreak()}`;
+  results[packagePath] += `${lineBreak()}\n`;
   if (isDevDep)
     results[packagePath] += `${heading(
-      "Development Dependencies to Update:\n\n",
+      "Development Dependencies to Update:",
       3
     )}`;
   else
     results[packagePath] += `${heading(
-      "Production Dependencies to Update:\n\n",
+      "Production Dependencies to Update:",
       3
     )}`;
 
   // Get arrays of dependencies.
-  const major = Object.entries(dependenciesObj.major);
-  const minor = Object.entries(dependenciesObj.minor);
-  const patch = Object.entries(dependenciesObj.patch);
+  const major = dependenciesObj.major;
+  const minor = dependenciesObj.minor;
+  const patch = dependenciesObj.patch;
 
   // Output depedencies to update.
   if (major.length > 0)

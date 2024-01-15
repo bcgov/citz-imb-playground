@@ -14,14 +14,16 @@ if (process.argv.length < 3) {
 const filePath = process.argv[2];
 
 /**
- * Read a Json5 file and parse out its values to a github workflow as env vars.
+ * Read a Json5 file and parse out its values to a github workflow as output vars.
  *
  * Usage in GitHub Workflow:
  *
  * jobs:
- *  # Parse ENV Vars from config.
+ *  # Parse Output Vars from config.
  *  parse-json5-config:
  *      runs-on: ubuntu-22.04
+ *      outputs:
+        varFromConfig: ${{ steps.parse_config.outputs.varFromConfig }}
  *
  *      steps:
  *        # Checkout branch.
@@ -32,9 +34,18 @@ const filePath = process.argv[2];
  *        - name: Install Dependencies
  *          run: npm install json5
  *
- *        # Run script to convert json5 config to ENV Vars.
+ *        # Run script to convert json5 config to output vars.
  *        - name: Run Script
+ *          id: parse_config
  *          run: node .github/helpers/parse-json5-config <path-to-json5-file>
+ *
+ *   # Another job...
+ *   another-job:
+ *     runs-on: ubuntu-22.04
+ *     needs: parse-json5-config
+ *     env:
+ *       varFromConfig: ${{ needs.parse-json5-config.outputs.varFromConfig }}
+ *
  */
 fs.readFile(filePath, "utf8", (err, data) => {
   if (err) {
@@ -51,7 +62,9 @@ fs.readFile(filePath, "utf8", (err, data) => {
       // Serialize arrays and objects to JSON strings
       const envValue =
         typeof value === "object" ? JSON.stringify(value) : value;
-      fs.appendFileSync(process.env.GITHUB_ENV, `${key}=${envValue}\n`);
+
+      // Output each key-value pair for GitHub Actions
+      console.log(`::set-output name=${key}::${envValue}`);
     }
   } catch (parseError) {
     console.error("Error parsing JSON5:", parseError);

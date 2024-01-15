@@ -20,13 +20,14 @@ on:
 # EDIT .github/config/dep-report.json5
 # DO NOT Edit below env variables.
 env:
-  packageJsonPaths: ''
   GITHUB_REPOSITORY: ${{ github.repository }}
 
 jobs:
   # Parse ENV Vars from config.
   parse-json5-config:
       runs-on: ubuntu-22.04
+      outputs:
+        packageJsonPaths: ${{ steps.parse_config.outputs.packageJsonPaths }}
 
       steps:
         # Checkout branch.
@@ -39,12 +40,15 @@ jobs:
 
         # Run script to convert json5 config to ENV Vars.
         - name: Run Script
+          id: parse_config
           run: node .github/helpers/parse-json5-config .github/config/dep-report.json5
 
   # Check package versions for updates.
   parse-package-versions:
     runs-on: ubuntu-22.04
     needs: parse-json5-config
+    env:
+      packageJsonPaths: ${{ needs.parse-json5-config.outputs.packageJsonPaths }}
     container:
       # Lightweight NodeJS Image
       image: node:21.5-bullseye-slim
@@ -69,8 +73,12 @@ jobs:
 
   # Write the output text for the GitHub Issue.
   write-output:
-    needs: parse-package-versions
+    needs: 
+      - parse-json5-config
+      - parse-package-versions
     runs-on: ubuntu-22.04
+    env:
+      packageJsonPaths: ${{ needs.parse-json5-config.outputs.packageJsonPaths }}
     container:
       # Lightweight NodeJS Image
       image: node:21.5-bullseye-slim
@@ -102,8 +110,12 @@ jobs:
 
   # Create the GitHub Issues.
   create-issues:
-    needs: write-output
+    needs: 
+      - parse-json5-config
+      - write-output
     runs-on: ubuntu-22.04
+    env:
+      packageJsonPaths: ${{ needs.parse-json5-config.outputs.packageJsonPaths }}
     container:
       # Lightweight NodeJS Image
       image: node:21.5-bullseye-slim

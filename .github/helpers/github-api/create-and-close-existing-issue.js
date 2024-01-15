@@ -9,10 +9,7 @@ const {
  * Place within .github/helpers/github-api/
  */
 
-export const createAndCloseExistingIssue = async (
-  packageJsonPath,
-  issueBody
-) => {
+const createAndCloseExistingIssue = async (packageJsonPath, issueBody) => {
   const issueTitle =
     packageJsonPath !== "."
       ? `${packageJsonPath} NPM Dependency Report`
@@ -29,3 +26,5 @@ export const createAndCloseExistingIssue = async (
   // Create new Issue.
   await createIssue(issueTitle, decodeURIComponent(issueBody));
 };
+
+module.exports = createAndCloseExistingIssue;

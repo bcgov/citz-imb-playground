@@ -1,7 +1,8 @@
-const {
-  createAndCloseExistingIssue,
-} = require("./github-api/createAndCloseExistingIssue");
 const path = require("path");
+const { createAndCloseExistingIssue } = require(path.resolve(
+  __dirname,
+  "./github-api/createAndCloseExistingIssue"
+));
 const outputText = require(path.resolve(__dirname, `../../outputText.json`));
 
 /**

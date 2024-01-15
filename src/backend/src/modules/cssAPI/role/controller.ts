@@ -1,35 +1,18 @@
 import { Request, Response } from "express";
-import { errorWrapper } from "../../utils";
+import { errorWrapper } from "../../../utils";
 import {
   getRole,
   getRoles,
   createRole,
   deleteRole,
-  getIntegration,
 } from "@bcgov/citz-imb-kc-css-api";
 
-import config from "../../../config";
+import config from "../../../../config";
 const { DEBUG } = config;
 
 /**
  * @method GET
- * @route /cssAPI/getIntegration
- * @protected Requires "playground-admin"
- */
-export const getKCIntegration = errorWrapper(
-  async (req: Request, res: Response) => {
-    if (DEBUG)
-      console.info(
-        "DEBUG: getKCIntegration controller in modules/cssAPI called."
-      );
-
-    res.json(await getIntegration());
-  }
-);
-
-/**
- * @method GET
- * @route /cssAPI/getRoles
+ * @route /cssAPI/role/roles
  * @protected Requires "playground-admin"
  */
 export const getKCRoles = errorWrapper(async (req: Request, res: Response) => {
@@ -42,7 +25,7 @@ export const getKCRoles = errorWrapper(async (req: Request, res: Response) => {
 /**
  * @method GET
  * @param role - The role name to search.
- * @route /cssAPI/getRole
+ * @route /cssAPI/role
  * @protected Requires "playground-admin"
  */
 export const getKCRole = errorWrapper(async (req: Request, res: Response) => {
@@ -61,7 +44,7 @@ export const getKCRole = errorWrapper(async (req: Request, res: Response) => {
 /**
  * @method POST
  * @param role - The role name to create.
- * @route /cssAPI/createRole/:role
+ * @route /cssAPI/role/:role
  * @protected Requires "playground-admin"
  */
 export const createKCRole = errorWrapper(
@@ -82,7 +65,7 @@ export const createKCRole = errorWrapper(
 /**
  * @method DELETE
  * @param role - The role name to delete.
- * @route /cssAPI/deleteRole/:role
+ * @route /cssAPI/role/:role
  * @protected Requires "playground-admin"
  */
 export const deleteKCRole = errorWrapper(

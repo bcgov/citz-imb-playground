@@ -68,7 +68,7 @@ const CSSAPIPage = () => {
   useEffect(() => {
     try {
       (async () => {
-        const response = await fetch(`/api/cssAPI/getIntegration`, {
+        const response = await fetch(`/api/cssAPI/integration`, {
           method: "GET",
           headers: { Authorization: getAuthorizationHeaderValue() },
         });
@@ -191,7 +191,7 @@ const CSSAPIPage = () => {
                 <Stack direction="row" center>
                   <Button
                     size="s"
-                    onClick={() => callAPI("/cssAPI/getRoles", "GET")}
+                    onClick={() => callAPI("/cssAPI/role/roles", "GET")}
                   >
                     Search
                   </Button>
@@ -217,11 +217,7 @@ const CSSAPIPage = () => {
                     size="s"
                     onClick={() => {
                       if (getRoleInput !== "")
-                        callAPI(
-                          "/cssAPI/getRole",
-                          "GET",
-                          `?role=${getRoleInput}`
-                        );
+                        callAPI("/cssAPI/role", "GET", `?role=${getRoleInput}`);
                     }}
                   >
                     Search
@@ -250,10 +246,7 @@ const CSSAPIPage = () => {
                     size="s"
                     onClick={() => {
                       if (createRoleInput !== "")
-                        callAPI(
-                          `/cssAPI/createRole/${createRoleInput}`,
-                          "POST"
-                        );
+                        callAPI(`/cssAPI/role/${createRoleInput}`, "POST");
                     }}
                   >
                     Create
@@ -280,10 +273,7 @@ const CSSAPIPage = () => {
                     size="s"
                     onClick={() => {
                       if (deleteRoleInput !== "")
-                        callAPI(
-                          `/cssAPI/deleteRole/${deleteRoleInput}`,
-                          "DELETE"
-                        );
+                        callAPI(`/cssAPI/role/${deleteRoleInput}`, "DELETE");
                     }}
                   >
                     Remove

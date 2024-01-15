@@ -1,50 +1,50 @@
 import express from "express";
 const router = express.Router();
 
+import { getKCIntegration } from "./integration/controller";
 import {
   getKCRole,
   getKCRoles,
   createKCRole,
   deleteKCRole,
-  getKCIntegration,
-} from "./controller";
+} from "./role/controller";
 
 /**
  * @method GET
- * @route /cssAPI/getIntegration
+ * @route /cssAPI/integration
  * @protected Requires "playground-admin"
  */
-router.get("/getIntegration", getKCIntegration);
+router.get("/integration", getKCIntegration);
 
 /**
  * @method GET
- * @route /cssAPI/getRoles
+ * @route /cssAPI/role/roles
  * @protected Requires "playground-admin"
  */
-router.get("/getRoles", getKCRoles);
+router.get("/role/roles", getKCRoles);
 
 /**
  * @method GET
  * @param role - The role name to search.
- * @route /cssAPI/getRole
+ * @route /cssAPI/role
  * @protected Requires "playground-admin"
  */
-router.get("/getRole", getKCRole);
+router.get("/role", getKCRole);
 
 /**
  * @method POST
  * @param role - The role name to create.
- * @route /cssAPI/createRole/:role
+ * @route /cssAPI/role/:role
  * @protected Requires "playground-admin"
  */
-router.post("/createRole/:role", createKCRole);
+router.post("/role/:role", createKCRole);
 
 /**
  * @method DELETE
  * @param role - The role name to delete.
- * @route /cssAPI/deleteRole/:role
+ * @route /cssAPI/role/:role
  * @protected Requires "playground-admin"
  */
-router.delete("/deleteRole/:role", deleteKCRole);
+router.delete("/role/:role", deleteKCRole);
 
 export default router;

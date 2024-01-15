@@ -93,9 +93,6 @@ jobs:
 
       - name: List files in the root directory
         run: ls -l /__w/citz-imb-playground/citz-imb-playground/
-      
-      - name: List files in the helpers directory
-        run: ls -l /__w/citz-imb-playground/citz-imb-playground/.github/helpers
 
       # Checkout branch.
       - name: Checkout repository

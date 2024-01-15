@@ -78,7 +78,7 @@ const calculateUpToDatePercentage = (total, outdated) => {
 
   const upToDatePackages = total - outdated;
   const percentage = (upToDatePackages / total) * 100;
-  return percentage.toFixed(2); // Rounds to two decimal places.
+  return Math.round(percentage);
 };
 
 // Output Dependencies in an array.
@@ -97,11 +97,10 @@ const outputDepsByVersionChange = (
       : green;
 
   // Output header.
-  results[packagePath] += `${lineBreak()}`;
-  results[packagePath] += `${line(`![${headerTag}]`)}`;
+  results[packagePath] += `\n${line(`![${headerTag}]`)}\n`;
 
   // List dependency updates.
-  for (let { dependency, version, latestVersion } of dependencies) {
+  for (const { dependency, version, latestVersion } in dependencies) {
     results[packagePath] += `${line(
       `- [ ] \`${dependency}\` Update from version \`${version}\` to \`${latestVersion}\` by running`
     )}`;
@@ -126,12 +125,12 @@ const outputDeps = (dependenciesObj, packagePath, isDevDep) => {
   results[packagePath] += `${lineBreak()}`;
   if (isDevDep)
     results[packagePath] += `${heading(
-      "Development Dependencies to Update:",
+      "Development Dependencies to Update:\n",
       3
     )}`;
   else
     results[packagePath] += `${heading(
-      "Production Dependencies to Update:",
+      "Production Dependencies to Update:\n",
       3
     )}`;
 
@@ -165,6 +164,7 @@ const escapeForGitHubActions = (str) =>
     // Output title.
     results[packagePath] += `${heading(title, 2)}`;
     results[packagePath] += `${line(subTitle)}`;
+    results[packagePath] += `${lineBreak()}`;
 
     // Get percentage of packages up to date.
     const percentageUpToDate = calculateUpToDatePercentage(

@@ -84,25 +84,16 @@ jobs:
       image: node:21.5-bullseye-slim
     
     steps:
+      # Checkout branch.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       # Download the output artifact from parse-package-versions.
       - name: Download output
         uses: actions/download-artifact@v3
         with:
           name: outdatedDeps
           path: .
-
-      - name: List files in the root directory
-        run: ls -l /__w/citz-imb-playground/citz-imb-playground/
-
-      # Checkout branch.
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: List files in the root directory
-        run: ls -l /__w/citz-imb-playground/citz-imb-playground/
-      
-      - name: List files in the helpers directory
-        run: ls -l /__w/citz-imb-playground/citz-imb-playground/.github/helpers
 
       # Run NodeJS script to create GitHub Issue body.
       - name: Run NPM DEP Check Node.js script
@@ -130,16 +121,16 @@ jobs:
       image: node:21.5-bullseye-slim
 
     steps:
+      # Checkout branch.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       # Download the output artifact.
       - name: Download output
         uses: actions/download-artifact@v3
         with:
           name: outputText
           path: .
-
-      # Checkout branch.
-      - name: Checkout repository
-        uses: actions/checkout@v4
 
       # Install @octokit/rest npm package for making GitHub rest API requests.
       - name: Install @octokit/rest npm

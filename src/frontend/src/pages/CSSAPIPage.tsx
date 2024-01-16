@@ -15,6 +15,8 @@ const CSSAPIPage = () => {
   const [getRoleInput, setGetRoleInput] = useState("");
   const [createRoleInput, setCreateRoleInput] = useState("");
   const [deleteRoleInput, setDeleteRoleInput] = useState("");
+  const [getUserInput, setGetUserInput] = useState("");
+  const [assignUserRoleInput, setAssignUserRoleInput] = useState("");
 
   const [integrationDetails, setIntegrationDetails] = useState<any>(undefined);
 
@@ -277,6 +279,69 @@ const CSSAPIPage = () => {
                     }}
                   >
                     Remove
+                  </Button>
+                  <Txt size="s">Prints to console (async).</Txt>
+                </Stack>
+              </Stack>
+            </Card>
+          </Stack>
+          <Stack>
+            {/* GET USER */}
+            <Card>
+              <Stack>
+                <Stack direction="row">
+                  <Txt bold>getKCUser</Txt>
+                  <Txt>Get user details.</Txt>
+                </Stack>
+                <hr />
+                <Stack direction="row" center>
+                  <input
+                    type="text"
+                    placeholder="Type a user's first name"
+                    onChange={(e) => setGetUserInput(e.target.value)}
+                  ></input>
+                  <Button
+                    size="s"
+                    onClick={() => {
+                      if (getUserInput !== "")
+                        callAPI(
+                          "/cssAPI/getKCUser",
+                          "GET",
+                          `?user=${getUserInput}`
+                        );
+                    }}
+                  >
+                    Search
+                  </Button>
+                  <Txt size="s">Prints to console (async).</Txt>
+                </Stack>
+              </Stack>
+            </Card>
+            {/* Assign ROLE */}
+            <Card>
+              <Stack>
+                <Stack direction="row">
+                  <Txt bold>assignUserRole</Txt>
+                  <Txt>Assign user new role.</Txt>
+                </Stack>
+                <hr />
+                <Stack direction="row" center>
+                  <input
+                    type="text"
+                    placeholder="Type a role name"
+                    onChange={(e) => setAssignUserRoleInput(e.target.value)}
+                  ></input>
+                  <Button
+                    size="s"
+                    onClick={() => {
+                      if (assignUserRoleInput !== "")
+                        callAPI(
+                          `/cssAPI/assignUserRole/${assignUserRoleInput}`,
+                          "POST"
+                        );
+                    }}
+                  >
+                    Assign
                   </Button>
                   <Txt size="s">Prints to console (async).</Txt>
                 </Stack>

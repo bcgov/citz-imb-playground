@@ -93,7 +93,8 @@ export const createKCRole = errorWrapper(
 /**
  * @method POST
  * @param role - The role name to assign.
- * @route /cssAPI/assignUserRoles/:role
+ * @param user - The user's GUID
+ * @route /cssAPI/assignUserRoles
  * @protected Requires "playground-admin"
  */
 export const assignUserRole = errorWrapper(

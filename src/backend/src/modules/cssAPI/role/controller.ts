@@ -98,19 +98,18 @@ export const createKCRole = errorWrapper(
  */
 export const assignUserRole = errorWrapper(
   async (req: Request, res: Response) => {
-    const user = req.user;
-    const userName = `${(user as KeycloakIdirUser)?.idir_user_guid}@idir`
+    const { role, user } = req.query;
+
     if (DEBUG)
       console.info("DEBUG: assignKCUserRole controller in modules/cssAPI called.");
 
-    const role = req.params.role;
     if (!role || role === "" || typeof role !== "string") {
       res.status(404).send("Missing 'role' in request param.");
       return;
     }
     const roleNames = [role];
 
-    res.json(await assignUserRoles(userName, roleNames));
+    res.json(await assignUserRoles(user as string, roleNames));
   }
 );
 

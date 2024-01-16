@@ -17,6 +17,7 @@ const CSSAPIPage = () => {
   const [deleteRoleInput, setDeleteRoleInput] = useState("");
   const [getUserInput, setGetUserInput] = useState("");
   const [assignUserRoleInput, setAssignUserRoleInput] = useState("");
+  const [userIDIRInput, setUserIDIRInput] = useState("");
 
   const [integrationDetails, setIntegrationDetails] = useState<any>(undefined);
 
@@ -285,9 +286,9 @@ const CSSAPIPage = () => {
               </Stack>
             </Card>
           </Stack>
-          <Stack>
+          <Stack direction="row">
             {/* GET USER */}
-            <Card>
+            <Card paddingY="10px">
               <Stack>
                 <Stack direction="row">
                   <Txt bold>getKCUser</Txt>
@@ -318,7 +319,7 @@ const CSSAPIPage = () => {
               </Stack>
             </Card>
             {/* Assign ROLE */}
-            <Card>
+            <Card paddingY="10px">
               <Stack>
                 <Stack direction="row">
                   <Txt bold>assignUserRole</Txt>
@@ -331,12 +332,23 @@ const CSSAPIPage = () => {
                     placeholder="Type a role name"
                     onChange={(e) => setAssignUserRoleInput(e.target.value)}
                   ></input>
+                  <Txt size="s">Prints to console (async).</Txt>
+                </Stack>
+              </Stack>
+              <Stack>
+                <hr />
+                <Stack direction="row" center>
+                  <input
+                    type="text"
+                    placeholder="Type a user GUID@idir"
+                    onChange={(e) => setUserIDIRInput(e.target.value)}
+                  ></input>
                   <Button
                     size="s"
                     onClick={() => {
-                      if (assignUserRoleInput !== "")
+                      if (userIDIRInput !== "")
                         callAPI(
-                          `/cssAPI/assignUserRole/${assignUserRoleInput}`,
+                          `/cssAPI/assignUserRole?role=${assignUserRoleInput}&user=${userIDIRInput}`,
                           "POST"
                         );
                     }}

@@ -55,7 +55,7 @@ router.post("/role/:role", createKCRole);
  * @route /cssAPI/assignUserRoles/:role
  * @protected Requires "playground-admin"
  */
-router.post("/assignUserRole/:role", assignUserRole);
+router.post("/assignUserRole", assignUserRole);
 
 /**
  * @method DELETE

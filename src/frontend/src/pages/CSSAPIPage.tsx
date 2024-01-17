@@ -3,10 +3,12 @@ import React, { useEffect, useState } from "react";
 import { Stack } from "components/common/Stack";
 import { Card } from "components/common/Card";
 import { Txt } from "components/common/Txt";
-import { Link } from "components/common/Link";
 import { useKeycloak } from "@bcgov/citz-imb-kc-react";
 import { DeniedIcon } from "components/icons";
 import { Button } from "components/common/Button";
+import { PackagesCard } from "components/pages/CSSAPI/PackagesCard";
+import { IntegrationDetailsCard } from "components/pages/CSSAPI/IntegrationDetailsCard";
+import { APIRoutes } from "../utils";
 
 const CSSAPIPage = () => {
   const { hasRole, getAuthorizationHeaderValue, isAuthenticated } =
@@ -15,11 +17,6 @@ const CSSAPIPage = () => {
   const [getRoleInput, setGetRoleInput] = useState("");
   const [createRoleInput, setCreateRoleInput] = useState("");
   const [deleteRoleInput, setDeleteRoleInput] = useState("");
-
-  const [integrationDetails, setIntegrationDetails] = useState<any>(undefined);
-
-  const versions = window.configuration?.packageVersions;
-  const latestVersions = window.configuration?.latestPackageVersions;
 
   type RequestMethod = "GET" | "PUT" | "POST" | "DELETE";
 
@@ -36,27 +33,11 @@ const CSSAPIPage = () => {
       });
 
       const data = await response.json();
-      if (data) return console.log(data);
+      if (data) return data;
       console.log(`Completed with status ${response.status}.`);
     } catch (error) {
       console.error(error);
     }
-  };
-
-  const formatDateString = (isoDateString: string) => {
-    const date = new Date(isoDateString);
-
-    const formatter = new Intl.DateTimeFormat("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: true,
-    });
-
-    return formatter.format(date);
   };
 
   // Redirect if not logged in.
@@ -64,121 +45,12 @@ const CSSAPIPage = () => {
     if (!isAuthenticated) setTimeout(() => (window.location.href = "/"), 1000);
   }, [isAuthenticated]);
 
-  // Update integration details.
-  useEffect(() => {
-    try {
-      (async () => {
-        const response = await fetch(`/api/cssAPI/integration`, {
-          method: "GET",
-          headers: { Authorization: getAuthorizationHeaderValue() },
-        });
-
-        const data = await response.json();
-        if (data) setIntegrationDetails(data);
-      })();
-    } catch (error) {
-      console.error(error);
-    }
-  }, [window.location.origin]);
-
   return (
     <>
-      <Card>
-        <Stack>
-          <h4>Packages</h4>
-          <hr />
-          <Stack direction="row" gap="30px" center>
-            <Txt>@bcgov/citz-imb-kc-css-api</Txt>
-            <Stack direction="row">
-              <Txt size="s" bold>
-                Latest Version:
-              </Txt>
-              <Txt size="s">
-                {latestVersions &&
-                latestVersions.hasOwnProperty(
-                  "https://github.com/bcgov/citz-imb-kc-css-api"
-                )
-                  ? latestVersions[
-                      "https://github.com/bcgov/citz-imb-kc-css-api"
-                    ]
-                  : "-"}
-              </Txt>
-            </Stack>
-            <Stack direction="row">
-              <Txt size="s" bold>
-                Current Version:
-              </Txt>
-              <Txt size="s">
-                {versions &&
-                versions.hasOwnProperty("@bcgov/citz-imb-kc-css-api")
-                  ? versions["@bcgov/citz-imb-kc-css-api"]
-                  : "-"}
-              </Txt>
-            </Stack>
-            <Stack direction="row">
-              <Txt size="s" bold>
-                Repo:
-              </Txt>
-              <Link size="s">https://github.com/bcgov/citz-imb-kc-css-api</Link>
-            </Stack>
-          </Stack>
-        </Stack>
-      </Card>
+      <PackagesCard />
       {hasRole(["playground-admin"]) ? (
         <>
-          {/* INTEGRATION */}
-          <Card paddingY="10px">
-            <Stack>
-              <h4>Integration Details</h4>
-              <hr />
-              {integrationDetails ? (
-                <Stack direction="row" gap="40px">
-                  <Stack direction="row" center>
-                    <Txt size="s" bold>
-                      ID:
-                    </Txt>
-                    <Txt size="s">{integrationDetails?.id}</Txt>
-                  </Stack>
-                  <Stack direction="row" center>
-                    <Txt size="s" bold>
-                      Project Name:
-                    </Txt>
-                    <Txt size="s">{integrationDetails?.projectName}</Txt>
-                  </Stack>
-                  <Stack direction="row" center>
-                    <Txt size="s" bold>
-                      Auth Type:
-                    </Txt>
-                    <Txt size="s">{integrationDetails?.authType}</Txt>
-                  </Stack>
-                  <Stack direction="row" center>
-                    <Txt size="s" bold>
-                      Status:
-                    </Txt>
-                    <Txt size="s">{integrationDetails?.status}</Txt>
-                  </Stack>
-                  <Stack direction="row" center>
-                    <Txt size="s" bold>
-                      Environments:
-                    </Txt>
-                    <Txt size="s">
-                      {JSON.stringify(integrationDetails?.environments)}
-                    </Txt>
-                  </Stack>
-                  <Stack direction="row" center>
-                    <Txt size="s" bold>
-                      Created:
-                    </Txt>
-                    <Txt size="s">
-                      {formatDateString(integrationDetails?.createdAt)}
-                    </Txt>
-                  </Stack>
-                </Stack>
-              ) : (
-                <Txt>Searching for details...</Txt>
-              )}
-            </Stack>
-          </Card>
+          <IntegrationDetailsCard />
           <Stack direction="row">
             {/* GET ROLES */}
             <Card paddingY="10px">
@@ -191,7 +63,7 @@ const CSSAPIPage = () => {
                 <Stack direction="row" center>
                   <Button
                     size="s"
-                    onClick={() => callAPI("/cssAPI/role/roles", "GET")}
+                    onClick={() => callAPI(APIRoutes.getRoles, "GET")}
                   >
                     Search
                   </Button>
@@ -217,7 +89,7 @@ const CSSAPIPage = () => {
                     size="s"
                     onClick={() => {
                       if (getRoleInput !== "")
-                        callAPI(`/cssAPI/role/${getRoleInput}`, "GET");
+                        callAPI(APIRoutes.getRole(getRoleInput), "GET");
                     }}
                   >
                     Search
@@ -246,7 +118,7 @@ const CSSAPIPage = () => {
                     size="s"
                     onClick={() => {
                       if (createRoleInput !== "")
-                        callAPI(`/cssAPI/role/${createRoleInput}`, "POST");
+                        callAPI(APIRoutes.createRole(createRoleInput), "POST");
                     }}
                   >
                     Create
@@ -273,7 +145,10 @@ const CSSAPIPage = () => {
                     size="s"
                     onClick={() => {
                       if (deleteRoleInput !== "")
-                        callAPI(`/cssAPI/role/${deleteRoleInput}`, "DELETE");
+                        callAPI(
+                          APIRoutes.deleteRole(deleteRoleInput),
+                          "DELETE"
+                        );
                     }}
                   >
                     Remove

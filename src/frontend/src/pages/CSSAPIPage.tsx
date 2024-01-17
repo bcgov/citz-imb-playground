@@ -53,7 +53,7 @@ const CSSAPIPage = () => {
           <IntegrationDetailsCard />
           <Stack direction="row">
             {/* GET ROLES */}
-            <Card paddingY="10px">
+            <Card paddingY="10px" color={`var(--bcgov_lighter-blue4)`}>
               <Stack>
                 <Stack direction="row">
                   <Txt bold>getRoles</Txt>
@@ -72,7 +72,7 @@ const CSSAPIPage = () => {
               </Stack>
             </Card>
             {/* GET ROLE */}
-            <Card paddingY="10px">
+            <Card paddingY="10px" color={`var(--bcgov_lighter-blue4)`}>
               <Stack>
                 <Stack direction="row">
                   <Txt bold>getRole</Txt>
@@ -101,7 +101,7 @@ const CSSAPIPage = () => {
           </Stack>
           <Stack direction="row">
             {/* CREATE ROLE */}
-            <Card paddingY="10px">
+            <Card paddingY="10px" color={`var(--bcgov_lighter-blue4)`}>
               <Stack>
                 <Stack direction="row">
                   <Txt bold>createRole</Txt>
@@ -128,7 +128,7 @@ const CSSAPIPage = () => {
               </Stack>
             </Card>
             {/* DELETE ROLE */}
-            <Card paddingY="10px">
+            <Card paddingY="10px" color={`var(--bcgov_lighter-blue4)`}>
               <Stack>
                 <Stack direction="row">
                   <Txt bold>deleteRole</Txt>

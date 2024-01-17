@@ -8,6 +8,7 @@
   --bcgov_lighter-blue: #38598a;
   --bcgov_lighter-blue2: #1a5a96;
   --bcgov_lighter-blue3: #146dc1;
+  --bcgov_lighter-blue4: #c4ddf5;
 
   /**
     * Shades
@@ -16,6 +17,7 @@
   --grey: #7e7e7e;
   --light-grey: #f1f1f1;
   --dark-grey: #313132;
+  --black: #000;
 
   /**
     * Font Properties

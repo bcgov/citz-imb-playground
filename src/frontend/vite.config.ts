@@ -1,22 +1,22 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import viteTsconfigPaths from "vite-tsconfig-paths";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import viteTsconfigPaths from 'vite-tsconfig-paths';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/",
+  base: '/',
   plugins: [react(), viteTsconfigPaths()],
   build: {
-    outDir: "build",
+    outDir: 'build',
   },
   server: {
     host: true,
     port: 6500,
     proxy: {
-      "/api": {
-        target: "http://playground-express-api:6600/",
+      '/api': {
+        target: 'http://playground-express-api:6600/',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
+        rewrite: (path) => path.replace(/^\/api/, ''),
       },
     },
   },

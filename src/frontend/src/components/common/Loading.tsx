@@ -1,5 +1,5 @@
-import "./Loading.css";
-import React from "react";
+import './Loading.css';
+import React from 'react';
 
 export const Loading = () => {
   return (

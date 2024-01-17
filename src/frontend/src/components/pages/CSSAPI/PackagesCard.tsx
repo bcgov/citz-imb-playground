@@ -1,8 +1,8 @@
-import React from "react";
-import { Stack } from "components/common/Stack";
-import { Card } from "components/common/Card";
-import { Txt } from "components/common/Txt";
-import { Link } from "components/common/Link";
+import React from 'react';
+import { Stack } from 'components/common/Stack';
+import { Card } from 'components/common/Card';
+import { Txt } from 'components/common/Txt';
+import { Link } from 'components/common/Link';
 
 export const PackagesCard = () => {
   const versions = window.configuration?.packageVersions;
@@ -21,11 +21,9 @@ export const PackagesCard = () => {
             </Txt>
             <Txt size="s">
               {latestVersions &&
-              latestVersions.hasOwnProperty(
-                "https://github.com/bcgov/citz-imb-kc-css-api"
-              )
-                ? latestVersions["https://github.com/bcgov/citz-imb-kc-css-api"]
-                : "-"}
+              latestVersions.hasOwnProperty('https://github.com/bcgov/citz-imb-kc-css-api')
+                ? latestVersions['https://github.com/bcgov/citz-imb-kc-css-api']
+                : '-'}
             </Txt>
           </Stack>
           <Stack direction="row">
@@ -33,9 +31,9 @@ export const PackagesCard = () => {
               Current Version:
             </Txt>
             <Txt size="s">
-              {versions && versions.hasOwnProperty("@bcgov/citz-imb-kc-css-api")
-                ? versions["@bcgov/citz-imb-kc-css-api"]
-                : "-"}
+              {versions && versions.hasOwnProperty('@bcgov/citz-imb-kc-css-api')
+                ? versions['@bcgov/citz-imb-kc-css-api']
+                : '-'}
             </Txt>
           </Stack>
           <Stack direction="row">

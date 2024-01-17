@@ -1,5 +1,5 @@
-import "./Card.css";
-import React, { ReactNode } from "react";
+import './Card.css';
+import React, { ReactNode } from 'react';
 
 type CardProps = {
   children: ReactNode;
@@ -15,14 +15,14 @@ export const Card = (props: CardProps) => {
   return (
     <div
       style={{
-        paddingLeft: paddingX ?? "",
-        paddingRight: paddingX ?? "",
-        paddingTop: paddingY ?? "",
-        paddingBottom: paddingY ?? "",
-        height: height ?? "",
-        backgroundColor: color ?? "",
+        paddingLeft: paddingX ?? '',
+        paddingRight: paddingX ?? '',
+        paddingTop: paddingY ?? '',
+        paddingBottom: paddingY ?? '',
+        height: height ?? '',
+        backgroundColor: color ?? '',
       }}
-      className={`card ${center ? "justifyCenter" : ""}`}
+      className={`card ${center ? 'justifyCenter' : ''}`}
     >
       {children}
     </div>

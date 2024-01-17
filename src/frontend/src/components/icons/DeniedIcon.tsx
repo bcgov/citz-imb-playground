@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export const DeniedIcon = () => {
   return (
@@ -7,7 +7,7 @@ export const DeniedIcon = () => {
       viewBox="0 0 744.09448819 1052.3622047"
       width="250px"
       height="250px"
-      style={{ margin: "-65px" }}
+      style={{ margin: '-65px' }}
     >
       <path d="m189.19186 322.13822h399.93808v400h-399.93808z" fill="none" />
       <path

@@ -1,10 +1,10 @@
-import "./Pages.css";
-import React from "react";
-import { Card } from "components/common/Card";
-import { Txt } from "components/common/Txt";
-import { Stack } from "components/common/Stack";
-import { LeftArrowIcon } from "components/icons";
-import { useKeycloak } from "@bcgov/citz-imb-kc-react";
+import './Pages.css';
+import React from 'react';
+import { Card } from 'components/common/Card';
+import { Txt } from 'components/common/Txt';
+import { Stack } from 'components/common/Stack';
+import { LeftArrowIcon } from 'components/icons';
+import { useKeycloak } from '@bcgov/citz-imb-kc-react';
 
 const LandingPage = () => {
   const { isAuthenticated } = useKeycloak();

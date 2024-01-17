@@ -1,24 +1,23 @@
-import "./Pages.css";
-import React, { useEffect, useState } from "react";
-import { Stack } from "components/common/Stack";
-import { Card } from "components/common/Card";
-import { KeycloakIdirUser, useKeycloak } from "@bcgov/citz-imb-kc-react";
-import { Txt } from "components/common/Txt";
-import { Link } from "components/common/Link";
-import { Button } from "components/common/Button";
+import './Pages.css';
+import React, { useEffect, useState } from 'react';
+import { Stack } from 'components/common/Stack';
+import { Card } from 'components/common/Card';
+import { KeycloakIdirUser, useKeycloak } from '@bcgov/citz-imb-kc-react';
+import { Txt } from 'components/common/Txt';
+import { Link } from 'components/common/Link';
+import { Button } from 'components/common/Button';
 
 const KeycloakPage = () => {
-  const { state, user, hasRole, isAuthenticated, getAuthorizationHeaderValue } =
-    useKeycloak();
+  const { state, user, hasRole, isAuthenticated, getAuthorizationHeaderValue } = useKeycloak();
 
-  const [hasRoleInput, setHasRoleInput] = useState("");
+  const [hasRoleInput, setHasRoleInput] = useState('');
 
   const versions = window.configuration?.packageVersions;
   const latestVersions = window.configuration?.latestPackageVersions;
 
   // Redirect if not logged in.
   useEffect(() => {
-    if (!isAuthenticated) setTimeout(() => (window.location.href = "/"), 1000);
+    if (!isAuthenticated) setTimeout(() => (window.location.href = '/'), 1000);
   }, [isAuthenticated]);
 
   return (
@@ -35,11 +34,9 @@ const KeycloakPage = () => {
               </Txt>
               <Txt size="s">
                 {latestVersions &&
-                latestVersions.hasOwnProperty(
-                  "https://github.com/bcgov/citz-imb-kc-react"
-                )
-                  ? latestVersions["https://github.com/bcgov/citz-imb-kc-react"]
-                  : "-"}
+                latestVersions.hasOwnProperty('https://github.com/bcgov/citz-imb-kc-react')
+                  ? latestVersions['https://github.com/bcgov/citz-imb-kc-react']
+                  : '-'}
               </Txt>
             </Stack>
             <Stack direction="row">
@@ -47,9 +44,9 @@ const KeycloakPage = () => {
                 Current Version:
               </Txt>
               <Txt size="s">
-                {versions && versions.hasOwnProperty("@bcgov/citz-imb-kc-react")
-                  ? versions["@bcgov/citz-imb-kc-react"]
-                  : "-"}
+                {versions && versions.hasOwnProperty('@bcgov/citz-imb-kc-react')
+                  ? versions['@bcgov/citz-imb-kc-react']
+                  : '-'}
               </Txt>
             </Stack>
             <Stack direction="row">
@@ -67,13 +64,9 @@ const KeycloakPage = () => {
               </Txt>
               <Txt size="s">
                 {latestVersions &&
-                latestVersions.hasOwnProperty(
-                  "https://github.com/bcgov/citz-imb-kc-express"
-                )
-                  ? latestVersions[
-                      "https://github.com/bcgov/citz-imb-kc-express"
-                    ]
-                  : "-"}
+                latestVersions.hasOwnProperty('https://github.com/bcgov/citz-imb-kc-express')
+                  ? latestVersions['https://github.com/bcgov/citz-imb-kc-express']
+                  : '-'}
               </Txt>
             </Stack>
             <Stack direction="row">
@@ -81,10 +74,9 @@ const KeycloakPage = () => {
                 Current Version:
               </Txt>
               <Txt size="s">
-                {versions &&
-                versions.hasOwnProperty("@bcgov/citz-imb-kc-express")
-                  ? versions["@bcgov/citz-imb-kc-express"]
-                  : "-"}
+                {versions && versions.hasOwnProperty('@bcgov/citz-imb-kc-express')
+                  ? versions['@bcgov/citz-imb-kc-express']
+                  : '-'}
               </Txt>
             </Stack>
             <Stack direction="row">
@@ -150,11 +142,9 @@ const KeycloakPage = () => {
               <Txt size="s" bold>
                 Roles:
               </Txt>
-              <Txt size="s">
-                {user?.client_roles ? JSON.stringify(user.client_roles) : "[]"}
-              </Txt>
+              <Txt size="s">{user?.client_roles ? JSON.stringify(user.client_roles) : '[]'}</Txt>
             </Stack>
-            {user?.identity_provider === "idir" && (
+            {user?.identity_provider === 'idir' && (
               <>
                 {/* GUID */}
                 <Stack direction="row" gap="10px">
@@ -213,10 +203,7 @@ const KeycloakPage = () => {
               <Txt size="s" bold>
                 getAuthorizationHeaderValue:
               </Txt>
-              <Button
-                size="s"
-                onClick={() => console.log(getAuthorizationHeaderValue())}
-              >
+              <Button size="s" onClick={() => console.log(getAuthorizationHeaderValue())}>
                 Click to Console Log Value
               </Button>
             </Stack>
@@ -231,9 +218,7 @@ const KeycloakPage = () => {
                 onChange={(e) => setHasRoleInput(e.target.value)}
               ></input>
               <Txt size="s">
-                {hasRole([hasRoleInput])
-                  ? "User HAS role."
-                  : "User does NOT have role."}
+                {hasRole([hasRoleInput]) ? 'User HAS role.' : 'User does NOT have role.'}
               </Txt>
             </Stack>
           </Stack>

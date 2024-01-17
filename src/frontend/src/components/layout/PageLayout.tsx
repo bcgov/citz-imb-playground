@@ -1,6 +1,6 @@
-import { Nav } from "components/common/Nav";
-import "./PageLayout.css";
-import React, { ReactNode } from "react";
+import { Nav } from 'components/common/Nav';
+import './PageLayout.css';
+import React, { ReactNode } from 'react';
 
 type PageLayoutProps = {
   children: ReactNode;

@@ -1,33 +1,28 @@
-import "./Pages.css";
-import React, { useEffect, useState } from "react";
-import { Stack } from "components/common/Stack";
-import { Card } from "components/common/Card";
-import { Txt } from "components/common/Txt";
-import { useKeycloak } from "@bcgov/citz-imb-kc-react";
-import { DeniedIcon } from "components/icons";
-import { Button } from "components/common/Button";
-import { PackagesCard } from "components/pages/CSSAPI/PackagesCard";
-import { IntegrationDetailsCard } from "components/pages/CSSAPI/IntegrationDetailsCard";
-import { APIRoutes } from "../utils";
+import './Pages.css';
+import React, { useEffect, useState } from 'react';
+import { Stack } from 'components/common/Stack';
+import { Card } from 'components/common/Card';
+import { Txt } from 'components/common/Txt';
+import { useKeycloak } from '@bcgov/citz-imb-kc-react';
+import { DeniedIcon } from 'components/icons';
+import { Button } from 'components/common/Button';
+import { PackagesCard } from 'components/pages/CSSAPI/PackagesCard';
+import { IntegrationDetailsCard } from 'components/pages/CSSAPI/IntegrationDetailsCard';
+import { APIRoutes } from '../utils';
 
 const CSSAPIPage = () => {
-  const { hasRole, getAuthorizationHeaderValue, isAuthenticated } =
-    useKeycloak();
+  const { hasRole, getAuthorizationHeaderValue, isAuthenticated } = useKeycloak();
 
-  const [getRoleInput, setGetRoleInput] = useState("");
-  const [createRoleInput, setCreateRoleInput] = useState("");
-  const [deleteRoleInput, setDeleteRoleInput] = useState("");
+  const [getRoleInput, setGetRoleInput] = useState('');
+  const [createRoleInput, setCreateRoleInput] = useState('');
+  const [deleteRoleInput, setDeleteRoleInput] = useState('');
 
-  type RequestMethod = "GET" | "PUT" | "POST" | "DELETE";
+  type RequestMethod = 'GET' | 'PUT' | 'POST' | 'DELETE';
 
-  const callAPI = async (
-    endpoint: string,
-    method: RequestMethod,
-    query?: string
-  ) => {
+  const callAPI = async (endpoint: string, method: RequestMethod, query?: string) => {
     try {
-      console.log("Calling API...");
-      const response = await fetch(`/api${endpoint}${query ?? ""}`, {
+      console.log('Calling API...');
+      const response = await fetch(`/api${endpoint}${query ?? ''}`, {
         method,
         headers: { Authorization: getAuthorizationHeaderValue() },
       });
@@ -42,13 +37,13 @@ const CSSAPIPage = () => {
 
   // Redirect if not logged in.
   useEffect(() => {
-    if (!isAuthenticated) setTimeout(() => (window.location.href = "/"), 1000);
+    if (!isAuthenticated) setTimeout(() => (window.location.href = '/'), 1000);
   }, [isAuthenticated]);
 
   return (
     <>
       <PackagesCard />
-      {hasRole(["playground-admin"]) ? (
+      {hasRole(['playground-admin']) ? (
         <>
           <IntegrationDetailsCard />
           <Stack direction="row">
@@ -61,10 +56,7 @@ const CSSAPIPage = () => {
                 </Stack>
                 <hr />
                 <Stack direction="row" center>
-                  <Button
-                    size="s"
-                    onClick={() => callAPI(APIRoutes.getRoles, "GET")}
-                  >
+                  <Button size="s" onClick={() => callAPI(APIRoutes.getRoles, 'GET')}>
                     Search
                   </Button>
                   <Txt size="s">Prints to console (async).</Txt>
@@ -88,8 +80,7 @@ const CSSAPIPage = () => {
                   <Button
                     size="s"
                     onClick={() => {
-                      if (getRoleInput !== "")
-                        callAPI(APIRoutes.getRole(getRoleInput), "GET");
+                      if (getRoleInput !== '') callAPI(APIRoutes.getRole(getRoleInput), 'GET');
                     }}
                   >
                     Search
@@ -117,8 +108,8 @@ const CSSAPIPage = () => {
                   <Button
                     size="s"
                     onClick={() => {
-                      if (createRoleInput !== "")
-                        callAPI(APIRoutes.createRole(createRoleInput), "POST");
+                      if (createRoleInput !== '')
+                        callAPI(APIRoutes.createRole(createRoleInput), 'POST');
                     }}
                   >
                     Create
@@ -144,11 +135,8 @@ const CSSAPIPage = () => {
                   <Button
                     size="s"
                     onClick={() => {
-                      if (deleteRoleInput !== "")
-                        callAPI(
-                          APIRoutes.deleteRole(deleteRoleInput),
-                          "DELETE"
-                        );
+                      if (deleteRoleInput !== '')
+                        callAPI(APIRoutes.deleteRole(deleteRoleInput), 'DELETE');
                     }}
                   >
                     Remove
@@ -164,8 +152,7 @@ const CSSAPIPage = () => {
           <Stack center>
             <DeniedIcon />
             <Txt size="l">
-              You must have the role `<b>playground-admin</b>` to use these
-              functions.
+              You must have the role `<b>playground-admin</b>` to use these functions.
             </Txt>
           </Stack>
         </Card>

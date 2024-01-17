@@ -1,23 +1,23 @@
-import "./Pages.css";
-import React, { useEffect, useState } from "react";
-import { Stack } from "components/common/Stack";
-import { Card } from "components/common/Card";
-import { Txt } from "components/common/Txt";
-import { Link } from "components/common/Link";
-import { RichTextEditor } from "@bcgov/citz-imb-richtexteditor";
-import { useKeycloak } from "@bcgov/citz-imb-kc-react";
+import './Pages.css';
+import React, { useEffect, useState } from 'react';
+import { Stack } from 'components/common/Stack';
+import { Card } from 'components/common/Card';
+import { Txt } from 'components/common/Txt';
+import { Link } from 'components/common/Link';
+import { RichTextEditor } from '@bcgov/citz-imb-richtexteditor';
+import { useKeycloak } from '@bcgov/citz-imb-kc-react';
 
 const RichTextEditorPage = () => {
   const { isAuthenticated } = useKeycloak();
 
-  const [richText, setRichText] = useState("");
+  const [richText, setRichText] = useState('');
 
   const versions = window.configuration?.packageVersions;
   const latestVersions = window.configuration?.latestPackageVersions;
 
   // Redirect if not logged in.
   useEffect(() => {
-    if (!isAuthenticated) setTimeout(() => (window.location.href = "/"), 1000);
+    if (!isAuthenticated) setTimeout(() => (window.location.href = '/'), 1000);
   }, [isAuthenticated]);
 
   return (
@@ -34,13 +34,9 @@ const RichTextEditorPage = () => {
               </Txt>
               <Txt size="s">
                 {latestVersions &&
-                latestVersions.hasOwnProperty(
-                  "https://github.com/bcgov/citz-imb-richtexteditor"
-                )
-                  ? latestVersions[
-                      "https://github.com/bcgov/citz-imb-richtexteditor"
-                    ]
-                  : "-"}
+                latestVersions.hasOwnProperty('https://github.com/bcgov/citz-imb-richtexteditor')
+                  ? latestVersions['https://github.com/bcgov/citz-imb-richtexteditor']
+                  : '-'}
               </Txt>
             </Stack>
             <Stack direction="row">
@@ -48,19 +44,16 @@ const RichTextEditorPage = () => {
                 Current Version:
               </Txt>
               <Txt size="s">
-                {versions &&
-                versions.hasOwnProperty("@bcgov/citz-imb-richtexteditor")
-                  ? versions["@bcgov/citz-imb-richtexteditor"]
-                  : "-"}
+                {versions && versions.hasOwnProperty('@bcgov/citz-imb-richtexteditor')
+                  ? versions['@bcgov/citz-imb-richtexteditor']
+                  : '-'}
               </Txt>
             </Stack>
             <Stack direction="row">
               <Txt size="s" bold>
                 Repo:
               </Txt>
-              <Link size="s">
-                https://github.com/bcgov/citz-imb-richtexteditor
-              </Link>
+              <Link size="s">https://github.com/bcgov/citz-imb-richtexteditor</Link>
             </Stack>
           </Stack>
         </Stack>

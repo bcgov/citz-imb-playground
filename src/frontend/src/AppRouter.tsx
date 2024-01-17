@@ -1,13 +1,13 @@
-import { ErrorBoundary, Loading } from "components/common";
-import { PageLayout } from "components/layout/PageLayout";
-import React, { lazy, Suspense, useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { ErrorBoundary, Loading } from 'components/common';
+import { PageLayout } from 'components/layout/PageLayout';
+import React, { lazy, Suspense, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 // Lazy loaded components.
-const LandingPage = lazy(() => import("pages/LandingPage"));
-const KeycloakPage = lazy(() => import("pages/KeycloakPage"));
-const CSSAPIPage = lazy(() => import("pages/CSSAPIPage"));
-const RichTextEditorPage = lazy(() => import("pages/RichTextEditorPage"));
+const LandingPage = lazy(() => import('pages/LandingPage'));
+const KeycloakPage = lazy(() => import('pages/KeycloakPage'));
+const CSSAPIPage = lazy(() => import('pages/CSSAPIPage'));
+const RichTextEditorPage = lazy(() => import('pages/RichTextEditorPage'));
 
 const AppRouter = () => {
   // Load config when origin changes.

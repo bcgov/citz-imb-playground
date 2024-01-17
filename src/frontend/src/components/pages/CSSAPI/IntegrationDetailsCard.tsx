@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Stack } from "components/common/Stack";
-import { Card } from "components/common/Card";
-import { Txt } from "components/common/Txt";
-import { useKeycloak } from "@bcgov/citz-imb-kc-react";
-import { APIRoutes, formatDateString } from "../../../utils";
+import React, { useEffect, useState } from 'react';
+import { Stack } from 'components/common/Stack';
+import { Card } from 'components/common/Card';
+import { Txt } from 'components/common/Txt';
+import { useKeycloak } from '@bcgov/citz-imb-kc-react';
+import { APIRoutes, formatDateString } from '../../../utils';
 
 export const IntegrationDetailsCard = () => {
   const { getAuthorizationHeaderValue } = useKeycloak();
@@ -14,7 +14,7 @@ export const IntegrationDetailsCard = () => {
     try {
       (async () => {
         const response = await fetch(APIRoutes.getIntegration, {
-          method: "GET",
+          method: 'GET',
           headers: { Authorization: getAuthorizationHeaderValue() },
         });
 
@@ -61,17 +61,13 @@ export const IntegrationDetailsCard = () => {
               <Txt size="s" bold>
                 Environments:
               </Txt>
-              <Txt size="s">
-                {JSON.stringify(integrationDetails?.environments)}
-              </Txt>
+              <Txt size="s">{JSON.stringify(integrationDetails?.environments)}</Txt>
             </Stack>
             <Stack direction="row" center>
               <Txt size="s" bold>
                 Created:
               </Txt>
-              <Txt size="s">
-                {formatDateString(integrationDetails?.createdAt)}
-              </Txt>
+              <Txt size="s">{formatDateString(integrationDetails?.createdAt)}</Txt>
             </Stack>
           </Stack>
         ) : (

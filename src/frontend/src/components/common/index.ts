@@ -1,2 +1,2 @@
-export { ErrorBoundary } from "./ErrorBoundary";
-export { Loading } from "./Loading";
+export { ErrorBoundary } from './ErrorBoundary';
+export { Loading } from './Loading';

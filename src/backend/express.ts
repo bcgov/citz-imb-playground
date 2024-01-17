@@ -6,9 +6,7 @@ import swaggerUi from "swagger-ui-express";
 import swaggerJSDoc from "swagger-jsdoc";
 import { keycloak, protectedRoute } from "@bcgov/citz-imb-kc-express";
 
-import healthRouter from "./src/modules/health/router";
-import configRouter from "./src/modules/config/router";
-import cssAPIRouter from "./src/modules/cssAPI/router";
+import { configRouter, cssAPIRouter, healthRouter } from "./src/modules";
 
 import config from "./config";
 const { OPENAPI_OPTIONS, CORS_OPTIONS, RATE_LIMIT_OPTIONS, KEYCLOAK_OPTIONS } =

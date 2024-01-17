@@ -8,6 +8,6 @@ import { getConfig } from "./controller";
  * @method GET
  * @route /config
  */
-router.get("/", getConfig);
+router.route("/").get(getConfig);
 
 export default router;

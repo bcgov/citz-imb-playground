@@ -220,7 +220,7 @@ const CSSAPIPage = () => {
                     size="s"
                     onClick={() => {
                       if (getRoleInput !== "")
-                        callAPI("/cssAPI/role", "GET", `?role=${getRoleInput}`);
+                        callAPI(`/cssAPI/role/${getRoleInput}`, "GET");
                     }}
                   >
                     Search

@@ -8,8 +8,8 @@ import {
   createKCRole,
   deleteKCRole,
   assignUserRole,
-  getKCUser,
 } from "./role/controller";
+import { getKCIDIRUser } from "./user/controller";
 
 /**
  * @method GET
@@ -36,10 +36,10 @@ router.get("/role", getKCRole);
 /**
  * @method GET
  * @param user - The user's first name to search.
- * @route /cssAPI/getKCUser
+ * @route /cssAPI/user
  * @protected Requires "playground-admin"
  */
-router.get("/getKCUser", getKCUser);
+router.get("/user", getKCIDIRUser);
 
 /**
  * @method POST

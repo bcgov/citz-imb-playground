@@ -306,7 +306,7 @@ const CSSAPIPage = () => {
                     onClick={() => {
                       if (getUserInput !== "")
                         callAPI(
-                          "/cssAPI/getKCUser",
+                          "/cssAPI/user",
                           "GET",
                           `?user=${getUserInput}`
                         );

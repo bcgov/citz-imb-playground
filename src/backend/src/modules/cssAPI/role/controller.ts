@@ -6,12 +6,7 @@ import {
   createRole,
   deleteRole,
   assignUserRoles,
-  getAzureIDIRUsers,
-  getIDIRUsers,
-  IDIRUserQuery,
 } from "@bcgov/citz-imb-kc-css-api";
-
-import { KeycloakIdirUser } from "@bcgov/citz-imb-kc-express";
 
 import config from "../../../../config";
 const { DEBUG } = config;
@@ -47,32 +42,7 @@ export const getKCRole = errorWrapper(async (req: Request, res: Response) => {
   res.json(await getRole(role));
 });
 
-/**
- * @method GET
- * @param user - The user name to search.
- * @route /cssAPI/getUser
- * @protected Requires "playground-admin"
- */
-export const getKCUser = errorWrapper(async (req: Request, res: Response) => {
-  if (DEBUG)
-    console.info("DEBUG: getKCUser controller in modules/cssAPI called.");
 
-  const user: IDIRUserQuery = {
-    firstName: req.query.user as string,
-  };
-
-  if (!user.firstName || user.firstName === "" || typeof user.firstName !== "string") {
-    res.status(404).send("Missing 'role' in request query.");
-    return;
-  }
-
-  const response = {
-    azureIDIR: await getAzureIDIRUsers(user),
-    IDIR: await getIDIRUsers(user),
-  };
-
-  res.json(response);
-});
 
 /**
  * @method POST
@@ -94,7 +64,6 @@ export const createKCRole = errorWrapper(
     res.json(await createRole(role));
   }
 );
-
 
 /**
  * @method POST

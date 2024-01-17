@@ -11,14 +11,14 @@ import {
 
 /**
  * @method GET
- * @route /cssAPI/integration
+ * @route /cssapi/integration
  * @protected Requires "playground-admin"
  */
 router.route("/integration").get(getKCIntegration);
 
 /**
  * @method GET
- * @route /cssAPI/role/roles
+ * @route /cssapi/role/roles
  * @protected Requires "playground-admin"
  */
 router.route("/role/roles").get(getKCRoles);
@@ -28,7 +28,7 @@ router.route("/role/roles").get(getKCRoles);
  * @method POST
  * @method DELETE
  * @param role - The role name to search, create, or delete.
- * @route /cssAPI/role/:role
+ * @route /cssapi/role/:role
  * @protected Requires "playground-admin"
  */
 router

@@ -12,7 +12,7 @@ const { DEBUG } = config;
 
 /**
  * @method GET
- * @route /cssAPI/role/roles
+ * @route /cssapi/role/roles
  * @protected Requires "playground-admin"
  */
 export const getKCRoles = errorWrapper(async (req: Request, res: Response) => {
@@ -25,7 +25,7 @@ export const getKCRoles = errorWrapper(async (req: Request, res: Response) => {
 /**
  * @method GET
  * @param role - The role name to search.
- * @route /cssAPI/role/:role
+ * @route /cssapi/role/:role
  * @protected Requires "playground-admin"
  */
 export const getKCRole = errorWrapper(async (req: Request, res: Response) => {
@@ -44,7 +44,7 @@ export const getKCRole = errorWrapper(async (req: Request, res: Response) => {
 /**
  * @method POST
  * @param role - The role name to create.
- * @route /cssAPI/role/:role
+ * @route /cssapi/role/:role
  * @protected Requires "playground-admin"
  */
 export const createKCRole = errorWrapper(
@@ -65,7 +65,7 @@ export const createKCRole = errorWrapper(
 /**
  * @method DELETE
  * @param role - The role name to delete.
- * @route /cssAPI/role/:role
+ * @route /cssapi/role/:role
  * @protected Requires "playground-admin"
  */
 export const deleteKCRole = errorWrapper(

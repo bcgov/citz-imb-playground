@@ -41,20 +41,6 @@ const RATE_LIMIT_OPTIONS = {
   legacyHeaders: false,
 };
 
-// Swagger OpenAPI configuration.
-const OPENAPI_OPTIONS = {
-  definition: {
-    openapi: "3.0.0",
-    info: {
-      title: "Keycloak Demo",
-      version: "1.0.0",
-      description: "API documentation",
-    },
-    servers: [{ url: BACKEND_URL }],
-  },
-  apis: ["./src/**/*swagger.yaml"],
-};
-
 // Keycloak auth integration configuration.
 const KEYCLOAK_OPTIONS: KCOptions = {
   afterUserLogin: (user: KeycloakUser | null) => {
@@ -76,7 +62,6 @@ export default {
   BACKEND_URL,
   CORS_OPTIONS,
   RATE_LIMIT_OPTIONS,
-  OPENAPI_OPTIONS,
   KEYCLOAK_OPTIONS,
   PGHOST,
   PGUSER,

@@ -2,15 +2,12 @@ import express from "express";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
 import cookieParser from "cookie-parser";
-import swaggerUi from "swagger-ui-express";
-import swaggerJSDoc from "swagger-jsdoc";
 import { keycloak, protectedRoute } from "@bcgov/citz-imb-kc-express";
 
 import { configRouter, cssAPIRouter, healthRouter } from "./src/modules";
 
 import config from "./config";
-const { OPENAPI_OPTIONS, CORS_OPTIONS, RATE_LIMIT_OPTIONS, KEYCLOAK_OPTIONS } =
-  config;
+const { CORS_OPTIONS, RATE_LIMIT_OPTIONS, KEYCLOAK_OPTIONS } = config;
 
 // Define Express App
 const app = express();
@@ -20,13 +17,6 @@ app.set("trust proxy", 1);
 
 // Initialize keycloak integration.
 keycloak(app, KEYCLOAK_OPTIONS);
-
-// Swagger OpenAPI configuration.
-app.use(
-  "/docs",
-  swaggerUi.serve,
-  swaggerUi.setup(swaggerJSDoc(OPENAPI_OPTIONS))
-);
 
 /**
  * Middleware for parsing request bodies.
@@ -47,6 +37,6 @@ app.disable("x-powered-by");
 // Routing
 app.use("/health", healthRouter);
 app.use("/config", configRouter);
-app.use("/cssAPI", protectedRoute(["playground-admin"]), cssAPIRouter);
+app.use("/cssapi", protectedRoute(["playground-admin"]), cssAPIRouter);
 
 export default app;

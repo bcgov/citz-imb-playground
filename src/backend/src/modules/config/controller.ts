@@ -1,12 +1,12 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 import {
   errorWrapper,
   getLatestPackageVersions,
   getPackageVersions,
   debugController,
-} from "../../utils";
+} from '../../utils';
 
-import config from "../../config";
+import config from '../../config';
 const { ENVIRONMENT, DEBUG } = config;
 
 /**
@@ -15,7 +15,7 @@ const { ENVIRONMENT, DEBUG } = config;
  * @route /config
  */
 export const getConfig = errorWrapper(async (req: Request, res: Response) => {
-  debugController("getConfig", "config");
+  debugController('getConfig', 'config');
 
   const packageVersions = getPackageVersions();
   const latestPackageVersions = await getLatestPackageVersions();

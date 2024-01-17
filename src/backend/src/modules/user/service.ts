@@ -1,6 +1,6 @@
-import { User } from "./entity";
-import { UserRepository } from "./repository";
-import { KeycloakIdirUser, KeycloakUser } from "@bcgov/citz-imb-kc-express";
+import { User } from './entity';
+import { UserRepository } from './repository';
+import { KeycloakIdirUser, KeycloakUser } from '@bcgov/citz-imb-kc-express';
 
 /**
  * @author Brady Mitchell <braden.mitchell@gov.bc.ca | braden.jr.mitch@gmail.com>
@@ -21,7 +21,7 @@ export const UserService = () => {
 
   // Create user if they don't exist, or update an existing user.
   const activateKeycloakIdirUser = async (
-    userData: KeycloakUser & KeycloakIdirUser
+    userData: KeycloakUser & KeycloakIdirUser,
   ): Promise<User | undefined> => {
     // Find user if exists.
     if (!userData?.idir_user_guid) return;
@@ -59,7 +59,7 @@ export const UserService = () => {
     if (idirUser?.guid)
       return await userRepository.update(
         (idirUser?.guid ?? userData?.idir_user_guid) as string,
-        updatedUser
+        updatedUser,
       );
   };
 

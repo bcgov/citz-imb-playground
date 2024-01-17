@@ -1,11 +1,6 @@
-import { Request, Response } from "express";
-import { errorWrapper, debugController, httpStatusCode } from "../../../utils";
-import {
-  getRole,
-  getRoles,
-  createRole,
-  deleteRole,
-} from "@bcgov/citz-imb-kc-css-api";
+import { Request, Response } from 'express';
+import { errorWrapper, debugController, httpStatusCode } from '../../../utils';
+import { getRole, getRoles, createRole, deleteRole } from '@bcgov/citz-imb-kc-css-api';
 
 /**
  * @method GET
@@ -13,7 +8,7 @@ import {
  * @protected Requires "playground-admin"
  */
 export const getKCRoles = errorWrapper(async (req: Request, res: Response) => {
-  debugController("getKCRoles", "cssapi");
+  debugController('getKCRoles', 'cssapi');
 
   res.json(await getRoles());
 });
@@ -25,13 +20,11 @@ export const getKCRoles = errorWrapper(async (req: Request, res: Response) => {
  * @protected Requires "playground-admin"
  */
 export const getKCRole = errorWrapper(async (req: Request, res: Response) => {
-  debugController("getKCRole", "cssapi");
+  debugController('getKCRole', 'cssapi');
 
   const role = req.params.role;
   if (!role) {
-    res
-      .status(httpStatusCode.NOT_FOUND)
-      .send("Missing 'role' in request query.");
+    res.status(httpStatusCode.NOT_FOUND).send("Missing 'role' in request query.");
     return;
   }
 
@@ -44,21 +37,17 @@ export const getKCRole = errorWrapper(async (req: Request, res: Response) => {
  * @route /cssapi/role/:role
  * @protected Requires "playground-admin"
  */
-export const createKCRole = errorWrapper(
-  async (req: Request, res: Response) => {
-    debugController("createKCRole", "cssapi");
+export const createKCRole = errorWrapper(async (req: Request, res: Response) => {
+  debugController('createKCRole', 'cssapi');
 
-    const role = req.params.role;
-    if (!role) {
-      res
-        .status(httpStatusCode.NOT_FOUND)
-        .send("Missing 'role' in request param.");
-      return;
-    }
-
-    res.json(await createRole(role));
+  const role = req.params.role;
+  if (!role) {
+    res.status(httpStatusCode.NOT_FOUND).send("Missing 'role' in request param.");
+    return;
   }
-);
+
+  res.json(await createRole(role));
+});
 
 /**
  * @method DELETE
@@ -66,18 +55,14 @@ export const createKCRole = errorWrapper(
  * @route /cssapi/role/:role
  * @protected Requires "playground-admin"
  */
-export const deleteKCRole = errorWrapper(
-  async (req: Request, res: Response) => {
-    debugController("deleteKCRole", "cssapi");
+export const deleteKCRole = errorWrapper(async (req: Request, res: Response) => {
+  debugController('deleteKCRole', 'cssapi');
 
-    const role = req.params.role;
-    if (!role) {
-      res
-        .status(httpStatusCode.NOT_FOUND)
-        .send("Missing 'role' in request param.");
-      return;
-    }
-
-    res.json(await deleteRole(role));
+  const role = req.params.role;
+  if (!role) {
+    res.status(httpStatusCode.NOT_FOUND).send("Missing 'role' in request param.");
+    return;
   }
-);
+
+  res.json(await deleteRole(role));
+});

@@ -1,11 +1,11 @@
-import "reflect-metadata";
-import app from "./express";
-import dataSource from "./dataSource";
+import 'reflect-metadata';
+import app from './express';
+import dataSource from './dataSource';
 
-import config from "./config";
+import config from './config';
 const { PORT, DEBUG } = config;
 
-import { logMessages } from "./utils";
+import { logMessages } from './utils';
 const {
   SERVER_START,
   UTC_DATE_TIME,
@@ -30,9 +30,7 @@ dataSource
         console.info(UTC_DATE_TIME);
         console.info(PACIFIC_DATE_TIME);
         if (DEBUG)
-          console.info(
-            "DEBUG is enabled. Set environment variable to 'false' to disable."
-          );
+          console.info("DEBUG is enabled. Set environment variable to 'false' to disable.");
       } catch (error) {
         // Log any error that occurs during the server start.
         console.error(error);

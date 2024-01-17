@@ -1,12 +1,9 @@
-import { Request, Response, NextFunction } from "express";
-import { HttpError } from "./HttpError";
-import { httpStatusCode } from "./httpStatusCode";
+import { Request, Response, NextFunction } from 'express';
+import { HttpError } from './HttpError';
+import { httpStatusCode } from './httpStatusCode';
 
-type ExpressHandler = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => Promise<void>;
+// eslint-disable-next-line no-unused-vars
+type ExpressHandler = (req: Request, res: Response, next: NextFunction) => Promise<void>;
 
 /**
  * Wraps a route handler (controller) function with error handling logic.
@@ -21,7 +18,7 @@ export const errorWrapper = (handler: ExpressHandler) => {
     } catch (error: unknown) {
       const { method, originalUrl } = req;
       let statusCode = httpStatusCode.INTERNAL_SERVER_ERROR,
-        message = "An unexpected error occurred.";
+        message = 'An unexpected error occurred.';
 
       if (error instanceof HttpError) {
         statusCode = error.statusCode;

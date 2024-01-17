@@ -1,7 +1,7 @@
-import { getCurrentDateTime } from "./getCurrentDateTime";
-import * as c from "./colors";
+import { getCurrentDateTime } from './getCurrentDateTime';
+import * as c from './colors';
 
-import config from "../../config";
+import config from '../config';
 const { PORT, NODE_VERSION } = config;
 
 export const SERVER_START = `${c.LBlue}Express Server started on port ${c.Reset}${PORT}${c.LBlue}${c.Reset}.`;
@@ -10,15 +10,13 @@ export const DATABASE_CONNECTION = `${c.Lime}Database connection and initializat
 export const DATABASE_CONNECTION_ERROR = `${c.Pink}[ERROR] ${c.Reset}${c.Red}Connecting to the database:${c.Reset}`;
 
 // Current date time message in UTC.
-export const UTC_DATE_TIME = `${c.Yellow}[UTC]${
-  c.Reset
-} Current date and time: ${getCurrentDateTime().formattedDateUTC}, ${
-  getCurrentDateTime().formattedTimeUTC
-}`;
+export const UTC_DATE_TIME = `${c.Yellow}[UTC]${c.Reset} Current date and time: ${
+  getCurrentDateTime().formattedDateUTC
+}, ${getCurrentDateTime().formattedTimeUTC}`;
 
 // Current date time message in PT/PST.
-export const PACIFIC_DATE_TIME = `${c.Yellow}[${
-  getCurrentDateTime().pacificTimeZone
-}]${c.Reset} Current date and time: ${
-  getCurrentDateTime().formattedDatePacific
-}, ${getCurrentDateTime().formattedTimePacific}`;
+export const PACIFIC_DATE_TIME = `${c.Yellow}[${getCurrentDateTime().pacificTimeZone}]${
+  c.Reset
+} Current date and time: ${getCurrentDateTime().formattedDatePacific}, ${
+  getCurrentDateTime().formattedTimePacific
+}`;

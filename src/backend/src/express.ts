@@ -1,19 +1,19 @@
-import express from "express";
-import cors from "cors";
-import rateLimit from "express-rate-limit";
-import cookieParser from "cookie-parser";
-import { keycloak, protectedRoute } from "@bcgov/citz-imb-kc-express";
+import express from 'express';
+import cors from 'cors';
+import rateLimit from 'express-rate-limit';
+import cookieParser from 'cookie-parser';
+import { keycloak, protectedRoute } from '@bcgov/citz-imb-kc-express';
 
-import { configRouter, cssapiRouter, healthRouter } from "./modules";
+import { configRouter, cssapiRouter, healthRouter } from './modules';
 
-import config from "./config";
+import config from './config';
 const { CORS_OPTIONS, RATE_LIMIT_OPTIONS, KEYCLOAK_OPTIONS } = config;
 
 // Define Express App
 const app = express();
 
 // Allow frontend use of a proxy (Nginx).
-app.set("trust proxy", 1);
+app.set('trust proxy', 1);
 
 // Initialize keycloak integration.
 keycloak(app, KEYCLOAK_OPTIONS);
@@ -32,11 +32,11 @@ app.use(rateLimit(RATE_LIMIT_OPTIONS));
 app.use(cookieParser());
 
 // Disabled because it exposes information about the used framework to potential attackers.
-app.disable("x-powered-by");
+app.disable('x-powered-by');
 
 // Routing
-app.use("/health", healthRouter);
-app.use("/config", configRouter);
-app.use("/cssapi", protectedRoute(["playground-admin"]), cssapiRouter);
+app.use('/health', healthRouter);
+app.use('/config', configRouter);
+app.use('/cssapi', protectedRoute(['playground-admin']), cssapiRouter);
 
 export default app;

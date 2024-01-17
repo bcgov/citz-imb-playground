@@ -1,5 +1,5 @@
-import { User } from "./entity";
-import dataSource from "../../dataSource";
+import { User } from './entity';
+import dataSource from '../../dataSource';
 
 /**
  * @returns An object with methods for performing CRUD operations on users.
@@ -19,10 +19,7 @@ export const UserRepository = () => {
   };
 
   // Updates an existing user.
-  const update = async (
-    guid: string,
-    userData: Partial<User>
-  ): Promise<User | undefined> => {
+  const update = async (guid: string, userData: Partial<User>): Promise<User | undefined> => {
     const user = await findUserWhere({ guid });
     if (!user) return undefined;
     Object.assign(user, userData);

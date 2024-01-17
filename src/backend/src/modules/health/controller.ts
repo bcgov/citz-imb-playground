@@ -1,6 +1,6 @@
-import { Request, Response } from "express";
-import { errorWrapper, debugController, httpStatusCode } from "../../utils";
-import dataSource from "../../dataSource";
+import { Request, Response } from 'express';
+import { errorWrapper, debugController, httpStatusCode } from '../../utils';
+import dataSource from '../../dataSource';
 
 /**
  * Check if application is healthy.
@@ -8,9 +8,9 @@ import dataSource from "../../dataSource";
  * @route /health
  */
 export const isHealthy = errorWrapper(async (req: Request, res: Response) => {
-  debugController("isHealthy", "health");
+  debugController('isHealthy', 'health');
 
-  res.send("Application is healthy!");
+  res.send('Application is healthy!');
 });
 
 /**
@@ -19,15 +19,13 @@ export const isHealthy = errorWrapper(async (req: Request, res: Response) => {
  * @route /health/ready
  */
 export const isReady = errorWrapper(async (req: Request, res: Response) => {
-  debugController("isReady", "health");
+  debugController('isReady', 'health');
 
   // Indicates if DataSource was initialized and initial connection was established or not.
   const isInitialized = dataSource.isInitialized;
   if (!isInitialized) {
-    res
-      .status(httpStatusCode.SERVICE_UNAVAIBLABLE)
-      .send("Database connection is unavailable.");
+    res.status(httpStatusCode.SERVICE_UNAVAIBLABLE).send('Database connection is unavailable.');
     return;
   }
-  res.send("Application and Database are ready!");
+  res.send('Application and Database are ready!');
 });

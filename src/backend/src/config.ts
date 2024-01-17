@@ -1,5 +1,5 @@
-import { KCOptions, KeycloakUser } from "@bcgov/citz-imb-kc-express";
-import { activateUser } from "./utils";
+import { KCOptions, KeycloakUser } from '@bcgov/citz-imb-kc-express';
+import { activateUser } from './utils';
 
 // Environment variables set in compose file.
 const {
@@ -47,7 +47,7 @@ const KEYCLOAK_OPTIONS: KCOptions = {
     if (user) activateUser(user);
   },
   afterUserLogout: (user: KeycloakUser | null) => {
-    console.log(`${user?.display_name ?? "Unknown"} has logged out.`);
+    console.log(`${user?.display_name ?? 'Unknown'} has logged out.`);
   },
 };
 
@@ -56,7 +56,7 @@ export default {
   PORT: PORT ?? 3600,
   NODE_VERSION: process.version,
   NODE_ENV,
-  DEBUG: DEBUG === "true",
+  DEBUG: DEBUG === 'true',
   ENVIRONMENT,
   FRONTEND_URL,
   BACKEND_URL,

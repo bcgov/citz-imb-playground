@@ -1,7 +1,7 @@
-import https from "https";
-import { colors as c } from "./src/utils";
+import https from 'https';
+import { colors as c } from './src/utils';
 
-import config from "./config";
+import config from './config';
 const { BACKEND_URL } = config;
 
 const healthUrl = `${BACKEND_URL}/health`;
@@ -15,7 +15,7 @@ const req = https.request(healthUrl, (res) => {
   process.exitCode = res.statusCode === 200 ? 0 : 1;
 });
 
-req.on("error", (error) => {
+req.on('error', (error) => {
   console.error(`${c.Pink}Healthcheck failed with error: ${c.Reset}${error}`);
   process.exit(1);
 });

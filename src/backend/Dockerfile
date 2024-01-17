@@ -38,9 +38,14 @@ FROM prod-build as prod
 
 WORKDIR /app
 
-COPY --from=prod-build /app/build/ .
-
 ENV NODE_ENV=production
 
+# Install packages (omits dev dependencies when NODE_ENV=production).
+COPY --from=base /app/package.json .
+COPY --from=base frontendPackage.json .
+RUN npm i
+
+COPY --from=prod-build /app/build/ .
+
 # Node Entrypoint.
-CMD ["node","index.js"]
+CMD ["node","src/index.js"]

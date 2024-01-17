@@ -348,7 +348,7 @@ const CSSAPIPage = () => {
                     onClick={() => {
                       if (userIDIRInput !== "")
                         callAPI(
-                          `/cssAPI/assignUserRole?role=${assignUserRoleInput}&user=${userIDIRInput}`,
+                          `/cssAPI/role/assign/${userIDIRInput}?role=${assignUserRoleInput}`,
                           "POST"
                         );
                     }}

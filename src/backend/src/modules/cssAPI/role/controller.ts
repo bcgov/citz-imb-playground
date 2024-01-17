@@ -69,12 +69,13 @@ export const createKCRole = errorWrapper(
  * @method POST
  * @param role - The role name to assign.
  * @param user - The user's GUID
- * @route /cssAPI/assignUserRoles
+ * @route /cssAPI/role/assign/:guid
  * @protected Requires "playground-admin"
  */
 export const assignUserRole = errorWrapper(
   async (req: Request, res: Response) => {
-    const { role, user } = req.query;
+    const { guid } = req.params;
+    const { role } = req.query;
 
     if (DEBUG)
       console.info("DEBUG: assignKCUserRole controller in modules/cssAPI called.");
@@ -85,7 +86,7 @@ export const assignUserRole = errorWrapper(
     }
     const roleNames = [role];
 
-    res.json(await assignUserRoles(user as string, roleNames));
+    res.json(await assignUserRoles(guid, roleNames));
   }
 );
 

@@ -53,10 +53,10 @@ router.post("/role/:role", createKCRole);
  * @method POST
  * @param role - The role name to create.
  * @param user - The user's GUID
- * @route /cssAPI/assignUserRoles
+ * @route /cssAPI/role/assign/:guid
  * @protected Requires "playground-admin"
  */
-router.post("/assignUserRole", assignUserRole);
+router.post("/role/assign/:guid", assignUserRole);
 
 /**
  * @method POST

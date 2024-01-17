@@ -7,6 +7,7 @@ import {
   deleteRole,
   assignUserRoles,
   getAzureIDIRUsers,
+  getIDIRUsers,
   IDIRUserQuery,
 } from "@bcgov/citz-imb-kc-css-api";
 
@@ -65,7 +66,12 @@ export const getKCUser = errorWrapper(async (req: Request, res: Response) => {
     return;
   }
 
-  res.json(await getAzureIDIRUsers(user));
+  const response = {
+    azureIDIR: await getAzureIDIRUsers(user),
+    IDIR: await getIDIRUsers(user),
+  };
+
+  res.json(response);
 });
 
 /**

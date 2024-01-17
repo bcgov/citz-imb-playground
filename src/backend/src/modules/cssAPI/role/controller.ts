@@ -25,14 +25,14 @@ export const getKCRoles = errorWrapper(async (req: Request, res: Response) => {
 /**
  * @method GET
  * @param role - The role name to search.
- * @route /cssAPI/role
+ * @route /cssAPI/role/:role
  * @protected Requires "playground-admin"
  */
 export const getKCRole = errorWrapper(async (req: Request, res: Response) => {
   if (DEBUG)
     console.info("DEBUG: getKCRole controller in modules/cssAPI called.");
 
-  const role = req.query.role;
+  const role = req.params.role;
   if (!role || role === "" || typeof role !== "string") {
     res.status(404).send("Missing 'role' in request query.");
     return;

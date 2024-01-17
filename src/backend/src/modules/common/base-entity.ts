@@ -5,9 +5,9 @@ export class BaseEntity {
   @PrimaryGeneratedColumn({ type: "integer" })
   id!: number;
 
-  @Column({ type: "timestamp", nullable: true, default: () => "NOW()" })
-  createdOn!: Date | null;
+  @Column({ type: "timestamp", nullable: false, default: () => "NOW()" })
+  createdOn!: Date;
 
-  @Column({ type: "timestamp", nullable: true, default: () => "NOW()" })
-  lastUpdated!: Date | null;
+  @Column({ type: "timestamp", nullable: false, default: () => "NOW()" })
+  lastUpdated!: Date;
 }

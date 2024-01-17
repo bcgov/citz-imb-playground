@@ -4,7 +4,7 @@ import rateLimit from "express-rate-limit";
 import cookieParser from "cookie-parser";
 import { keycloak, protectedRoute } from "@bcgov/citz-imb-kc-express";
 
-import { configRouter, cssAPIRouter, healthRouter } from "./src/modules";
+import { configRouter, cssapiRouter, healthRouter } from "./modules";
 
 import config from "./config";
 const { CORS_OPTIONS, RATE_LIMIT_OPTIONS, KEYCLOAK_OPTIONS } = config;
@@ -37,6 +37,6 @@ app.disable("x-powered-by");
 // Routing
 app.use("/health", healthRouter);
 app.use("/config", configRouter);
-app.use("/cssapi", protectedRoute(["playground-admin"]), cssAPIRouter);
+app.use("/cssapi", protectedRoute(["playground-admin"]), cssapiRouter);
 
 export default app;

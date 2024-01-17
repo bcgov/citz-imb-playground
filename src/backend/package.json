@@ -2,16 +2,17 @@
   "name": "playground-express",
   "version": "1.0.0",
   "license": "Apache-2.0",
-  "main": "index.ts",
+  "main": "src/index.ts",
   "scripts": {
-    "dev": "nodemon -L --exec ts-node index.ts",
+    "dev": "nodemon -L --exec ts-node src/index.ts",
+    "prod": "node ./build/src/index.ts",
     "build": "tsc",
     "test": "node --import tsx --test src/**/*.test.*",
     "typeorm": "ts-node ./node_modules/typeorm/cli.js ",
-    "migration:generate": "npm run typeorm -- migration:generate -d dataSource.ts",
-    "migration:run": "npm run build && npm run typeorm -- migration:run -d dataSource.ts",
-    "migration:run:no-build": "npm run typeorm -- migration:run -d dataSource.ts",
-    "migration:revert": "npm run typeorm -- migration:revert -d dataSource.ts",
+    "migration:generate": "npm run typeorm -- migration:generate -d src/dataSource.ts",
+    "migration:run": "npm run build && npm run typeorm -- migration:run -d src/dataSource.ts",
+    "migration:run:no-build": "npm run typeorm -- migration:run -d src/dataSource.ts",
+    "migration:revert": "npm run typeorm -- migration:revert -d src/dataSource.ts",
     "migration:create": "npm run typeorm -- migration:create"
   },
   "dependencies": {

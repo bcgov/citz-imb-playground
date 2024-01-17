@@ -3,9 +3,10 @@ import {
   errorWrapper,
   getLatestPackageVersions,
   getPackageVersions,
+  debugController,
 } from "../../utils";
 
-import config from "../../../config";
+import config from "../../config";
 const { ENVIRONMENT, DEBUG } = config;
 
 /**
@@ -14,8 +15,7 @@ const { ENVIRONMENT, DEBUG } = config;
  * @route /config
  */
 export const getConfig = errorWrapper(async (req: Request, res: Response) => {
-  if (DEBUG)
-    console.info("DEBUG: getConfig controller in modules/config called.");
+  debugController("getConfig", "config");
 
   const packageVersions = getPackageVersions();
   const latestPackageVersions = await getLatestPackageVersions();

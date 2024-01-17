@@ -1,5 +1,5 @@
 import { User } from "./entity";
-import dataSource from "../../../dataSource";
+import dataSource from "../../dataSource";
 
 /**
  * @returns An object with methods for performing CRUD operations on users.

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { errorWrapper } from "../../../utils";
+import { errorWrapper, debugController, httpStatusCode } from "../../../utils";
 import {
   getRole,
   getRoles,
@@ -7,17 +7,13 @@ import {
   deleteRole,
 } from "@bcgov/citz-imb-kc-css-api";
 
-import config from "../../../../config";
-const { DEBUG } = config;
-
 /**
  * @method GET
  * @route /cssapi/role/roles
  * @protected Requires "playground-admin"
  */
 export const getKCRoles = errorWrapper(async (req: Request, res: Response) => {
-  if (DEBUG)
-    console.info("DEBUG: getKCRoles controller in modules/cssAPI called.");
+  debugController("getKCRoles", "cssapi");
 
   res.json(await getRoles());
 });
@@ -29,12 +25,13 @@ export const getKCRoles = errorWrapper(async (req: Request, res: Response) => {
  * @protected Requires "playground-admin"
  */
 export const getKCRole = errorWrapper(async (req: Request, res: Response) => {
-  if (DEBUG)
-    console.info("DEBUG: getKCRole controller in modules/cssAPI called.");
+  debugController("getKCRole", "cssapi");
 
   const role = req.params.role;
-  if (!role || role === "" || typeof role !== "string") {
-    res.status(404).send("Missing 'role' in request query.");
+  if (!role) {
+    res
+      .status(httpStatusCode.NOT_FOUND)
+      .send("Missing 'role' in request query.");
     return;
   }
 
@@ -49,12 +46,13 @@ export const getKCRole = errorWrapper(async (req: Request, res: Response) => {
  */
 export const createKCRole = errorWrapper(
   async (req: Request, res: Response) => {
-    if (DEBUG)
-      console.info("DEBUG: createKCRole controller in modules/cssAPI called.");
+    debugController("createKCRole", "cssapi");
 
     const role = req.params.role;
-    if (!role || role === "" || typeof role !== "string") {
-      res.status(404).send("Missing 'role' in request param.");
+    if (!role) {
+      res
+        .status(httpStatusCode.NOT_FOUND)
+        .send("Missing 'role' in request param.");
       return;
     }
 
@@ -70,12 +68,13 @@ export const createKCRole = errorWrapper(
  */
 export const deleteKCRole = errorWrapper(
   async (req: Request, res: Response) => {
-    if (DEBUG)
-      console.info("DEBUG: deleteKCRole controller in modules/cssAPI called.");
+    debugController("deleteKCRole", "cssapi");
 
     const role = req.params.role;
-    if (!role || role === "" || typeof role !== "string") {
-      res.status(404).send("Missing 'role' in request param.");
+    if (!role) {
+      res
+        .status(httpStatusCode.NOT_FOUND)
+        .send("Missing 'role' in request param.");
       return;
     }
 

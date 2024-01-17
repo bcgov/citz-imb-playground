@@ -5,7 +5,7 @@ import dataSource from "./dataSource";
 import config from "./config";
 const { PORT, DEBUG } = config;
 
-import { logMessages } from "./src/utils";
+import { logMessages } from "./utils";
 const {
   SERVER_START,
   UTC_DATE_TIME,

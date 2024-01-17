@@ -1,5 +1,5 @@
 import { KCOptions, KeycloakUser } from "@bcgov/citz-imb-kc-express";
-import { activateUser } from "./src/utils/activateUser";
+import { activateUser } from "./utils";
 
 // Environment variables set in compose file.
 const {

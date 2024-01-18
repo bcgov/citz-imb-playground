@@ -16,6 +16,10 @@ const CSSAPIPage = () => {
   const [getRoleInput, setGetRoleInput] = useState('');
   const [createRoleInput, setCreateRoleInput] = useState('');
   const [deleteRoleInput, setDeleteRoleInput] = useState('');
+  const [assignUserRoleInput, setAssignUserRoleInput] = useState('');
+  const [userIDIRInputs, setUserIDIRInputs] = useState({firstName: '', lastName: '', email: '', guid: ''});
+  const [userAzureIDIRInputs, setUserAzureIDIRInputs] = useState({firstName: '', lastName: '', email: '', guid: ''});
+  const [IDIRInput, setIDIRInput] = useState("");
 
   type RequestMethod = 'GET' | 'PUT' | 'POST' | 'DELETE';
 
@@ -28,11 +32,22 @@ const CSSAPIPage = () => {
       });
 
       const data = await response.json();
-      if (data) return data;
+      if (data) console.log(data);
       console.log(`Completed with status ${response.status}.`);
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const checkEmptyInputs = (inputObject: any) => {
+    for (const key in inputObject) {
+      if (Object.prototype.hasOwnProperty.call(inputObject, key)) {
+        if (inputObject[key] !== "") {
+          return false;
+        }
+      }
+    }
+    return true;
   };
 
   // Redirect if not logged in.
@@ -140,6 +155,139 @@ const CSSAPIPage = () => {
                     }}
                   >
                     Remove
+                  </Button>
+                  <Txt size="s">Prints to console (async).</Txt>
+                </Stack>
+              </Stack>
+            </Card>
+          </Stack>
+          <Stack direction="row">
+            {/* GET IDIR USER */}
+            <Card paddingY="10px" color={`var(--bcgov_lighter-blue4)`}>
+              <Stack>
+                <Stack direction="row">
+                  <Txt bold>getIDIRUsers</Txt>
+                  <Txt>Get user details.</Txt>
+                </Stack>
+                <hr />
+                <Stack>
+                  <input
+                    type="text"
+                    placeholder="Type a user's first name"
+                    onChange={(e) => setUserIDIRInputs({...userIDIRInputs, firstName: e.target.value})}
+                  ></input>
+                  <input
+                    type="text"
+                    placeholder="Type a user's last name"
+                    onChange={(e) => setUserIDIRInputs({...userIDIRInputs, lastName: e.target.value})}
+                  ></input>
+                  <input
+                    type="text"
+                    placeholder="Type a user's email"
+                    onChange={(e) => setUserIDIRInputs({...userIDIRInputs, email: e.target.value})}
+                  ></input>
+                  <Stack direction="row" center>
+                    <Button
+                      size="s"
+                      onClick={() => {
+                          callAPI(
+                            "/cssapi/user/idir-user",
+                            "GET",
+                            `?firstName=${userIDIRInputs.firstName}&lastName=${userIDIRInputs.lastName}&email=${userIDIRInputs.email}`,
+                          );
+                      }}
+                      disabled={checkEmptyInputs(userIDIRInputs)}
+                      >
+                      Search
+                    </Button>
+                    <Txt size="s">Prints to console (async).</Txt>
+                  </Stack>
+                </Stack>
+              </Stack>
+            </Card>
+            {/* GET AZURE IDIR USER */}
+            <Card paddingY="10px" color={`var(--bcgov_lighter-blue4)`}>
+              <Stack>
+                <Stack direction="row">
+                  <Txt bold>getAzureIDIRUsers</Txt>
+                  <Txt>Get user details.</Txt>
+                </Stack>
+                <hr />
+                <Stack>
+                  <Stack>
+                    <input
+                      type="text"
+                      placeholder="Type a user's first name"
+                      onChange={(e) => setUserAzureIDIRInputs({...userAzureIDIRInputs, firstName: e.target.value})}
+                    ></input>
+                    <input
+                      type="text"
+                      placeholder="Type a user's last name"
+                      onChange={(e) => setUserAzureIDIRInputs({...userAzureIDIRInputs, lastName: e.target.value})}
+                    ></input>
+                    <input
+                      type="text"
+                      placeholder="Type a user's email"
+                      onChange={(e) => setUserAzureIDIRInputs({...userAzureIDIRInputs, email: e.target.value})}
+                    ></input>
+                    <Stack direction='row'>
+                      <Button
+                        size="s"
+                        onClick={() => {
+                            callAPI(
+                              "/cssapi/user/azure-user",
+                              "GET",
+                              `?firstName=${userAzureIDIRInputs.firstName}&lastName=${userAzureIDIRInputs.lastName}&email=${userAzureIDIRInputs.email}`,
+                            );
+                        }}
+                        disabled={checkEmptyInputs(userAzureIDIRInputs)}
+                      >
+                        Search
+                      </Button>
+                      <Txt size="s">Prints to console (async).</Txt>
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </Stack>
+            </Card>
+          </Stack>
+          <Stack direction="row">
+            {/* Assign ROLE */}
+            <Card paddingY="10px" color={`var(--bcgov_lighter-blue4)`}>
+              <Stack>
+                <Stack direction="row">
+                  <Txt bold>assignUserRole</Txt>
+                  <Txt>Assign user new role.</Txt>
+                </Stack>
+                <hr />
+                <Stack direction="row" center>
+                  <input
+                    type="text"
+                    placeholder="Type a role name"
+                    onChange={(e) => setAssignUserRoleInput(e.target.value)}
+                  ></input>
+                  <Txt size="s">Prints to console (async).</Txt>
+                </Stack>
+              </Stack>
+              <Stack>
+                <hr />
+                <Stack direction="row" center>
+                  <input
+                    type="text"
+                    placeholder="Type a username"
+                    onChange={(e) => setIDIRInput(e.target.value)}
+                  ></input>
+                  <Button
+                    size="s"
+                    onClick={() => {
+                      if (IDIRInput !== "")
+                        callAPI(
+                          `/cssapi/role/assign/${IDIRInput}?role=${assignUserRoleInput}`,
+                          "POST"
+                        );
+                    }}
+                  >
+                    Assign
                   </Button>
                   <Txt size="s">Prints to console (async).</Txt>
                 </Stack>

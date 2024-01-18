@@ -113,13 +113,13 @@ const outputDepsByVersionChange = (
       : green;
 
   // Output header.
-  results[packagePath] += `${line(`![${headerTag}]`)}\n`;
+  results[packagePath] += `${line(`![${headerTag}]`)}\n\n`;
 
   // Output start of spoiler.
   results[packagePath] += `${line(`<details>`)}\n`;
   results[packagePath] += `${line(`<summary>`)}`;
   results[packagePath] += `${line(
-    `Expand to see individual installs. <br /><br />`
+    `Expand to see individual installs. <br /><br />\n`
   )}`;
 
   // Output a command to install all dependencies in array.
@@ -142,7 +142,7 @@ const outputDepsByVersionChange = (
   }
 
   // Output end of spoiler.
-  results[packagePath] += `${line(`</details>`)}`;
+  results[packagePath] += `${line(`</details>\n`)}`;
 
   // Add Header text
   results[packagePath] += `${line(

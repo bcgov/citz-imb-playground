@@ -54,15 +54,11 @@ export const assignUserRole = errorWrapper(async (req: Request, res: Response) =
   const { guid } = req.params;
   const { role } = req.query;
 
-  if (!role || role === '' || typeof role !== 'string') {
-    res.status(404).send("Missing 'role' in request query.");
-    return;
-  }
+  if (!role || role === '' || typeof role !== 'string')
+    return res.status(404).send("Missing 'role' in request query.");
 
-  if (!guid || guid === '' || typeof role !== 'string') {
-    res.status(404).send("Missing 'guid' in request param.");
-    return;
-  }
+  if (!guid || guid === '' || typeof role !== 'string')
+    return res.status(404).send("Missing 'guid' in request param.");
 
   const roleNames = [role];
 

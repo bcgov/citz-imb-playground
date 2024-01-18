@@ -11,7 +11,7 @@ button:hover {
 
 button:disabled {
   color: var(--light-grey);
-  background-color: var(--dark-grey);
+  background-color: var(--light-grey2);
 }
 
 button:disabled:hover {

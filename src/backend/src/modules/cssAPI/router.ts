@@ -48,7 +48,7 @@ router.route('/user/azure-user').get(getKCAzureIDIRUser);
  * @route /cssapi/role/assign/:guid
  * @protected Requires "playground-admin"
  */
-router.route('/role/assign/:guid').get(assignUserRole);
+router.route('/role/assign/:guid').post(assignUserRole);
 
 /**
  * @method GET

@@ -2,7 +2,14 @@ import express from 'express';
 const router = express.Router();
 
 import { getKCIntegration } from './integration/controller';
-import { getKCRole, getKCRoles, createKCRole, deleteKCRole } from './role/controller';
+import {
+  getKCRole,
+  getKCRoles,
+  createKCRole,
+  deleteKCRole,
+  assignUserRole,
+} from './role/controller';
+import { getKCAzureIDIRUser, getKCIDIRUser } from './user/controller';
 
 /**
  * @method GET
@@ -17,6 +24,31 @@ router.route('/integration').get(getKCIntegration);
  * @protected Requires "playground-admin"
  */
 router.route('/role/roles').get(getKCRoles);
+
+/**
+ * @method GET
+ * @param user - The user's first name to search.
+ * @route /cssAPI/idir-user
+ * @protected Requires "playground-admin"
+ */
+router.route('/idir-user').get(getKCIDIRUser);
+
+/**
+ * @method GET
+ * @param user - The user's first name to search.
+ * @route /cssAPI/azure-user
+ * @protected Requires "playground-admin"
+ */
+router.route('/azure-user').get(getKCAzureIDIRUser);
+
+/**
+ * @method POST
+ * @param guid - The user's GUID
+ * @query role - The role to assign
+ * @route /cssAPI/role/assign/:guid
+ * @protected Requires "playground-admin"
+ */
+router.route('/role/assign/:guid').get(assignUserRole);
 
 /**
  * @method GET

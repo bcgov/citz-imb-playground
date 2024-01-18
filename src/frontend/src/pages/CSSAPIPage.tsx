@@ -16,6 +16,10 @@ const CSSAPIPage = () => {
   const [getRoleInput, setGetRoleInput] = useState('');
   const [createRoleInput, setCreateRoleInput] = useState('');
   const [deleteRoleInput, setDeleteRoleInput] = useState('');
+  const [assignUserRoleInput, setAssignUserRoleInput] = useState('');
+  const [userIDIRInputs, setUserIDIRInputs] = useState({firstName: '', lastName: '', email: '', guid: ''});
+  const [userAzureIDIRInputs, setUserAzureIDIRInputs] = useState({firstName: '', lastName: '', email: '', guid: ''});
+  const [IDIRInput, setIDIRInput] = useState("");
 
   type RequestMethod = 'GET' | 'PUT' | 'POST' | 'DELETE';
 
@@ -140,6 +144,115 @@ const CSSAPIPage = () => {
                     }}
                   >
                     Remove
+                  </Button>
+                  <Txt size="s">Prints to console (async).</Txt>
+                </Stack>
+              </Stack>
+            </Card>
+          </Stack>
+          <Stack direction="row">
+            {/* GET IDIR USER */}
+            <Card paddingY="10px">
+              <Stack>
+                <Stack direction="row">
+                  <Txt bold>getIDIRUsers</Txt>
+                  <Txt>Get user details.</Txt>
+                </Stack>
+                <hr />
+                  <Stack>
+                    <input
+                      type="text"
+                      placeholder="Type a user's first name"
+                      onChange={(e) => setUserIDIRInputs({...userIDIRInputs, firstName: e.target.value})}
+                    ></input>
+                  <Stack direction="row" center>
+                    <Button
+                    size="s"
+                    onClick={() => {
+                      if (userIDIRInputs.firstName !== "")
+                        callAPI(
+                          "/cssAPI/idir-user",
+                          "GET",
+                          `?firstName=${userIDIRInputs.firstName}`,
+                        );
+                    }}
+                  >
+                    Search
+                  </Button>
+                  <Txt size="s">Prints to console (async).</Txt>
+                  </Stack>
+                </Stack>
+              </Stack>
+            </Card>
+            {/* GET AZURE IDIR USER */}
+            <Card paddingY="10px">
+              <Stack>
+                <Stack direction="row">
+                  <Txt bold>getAzureIDIRUsers</Txt>
+                  <Txt>Get user details.</Txt>
+                </Stack>
+                <hr />
+                <Stack direction="row" center>
+                  <input
+                    type="text"
+                    placeholder="Type a user's first name"
+                    onChange={(e) => setUserAzureIDIRInputs({...userIDIRInputs, firstName: e.target.value})}
+                  ></input>
+                  <Button
+                    size="s"
+                    onClick={() => {
+                      if (userAzureIDIRInputs.firstName !== "")
+                        callAPI(
+                          "/cssAPI/azure-user",
+                          "GET",
+                          `?firstName=${userIDIRInputs.firstName}`,
+                        );
+                    }}
+                  >
+                    Search
+                  </Button>
+                  <Txt size="s">Prints to console (async).</Txt>
+                </Stack>
+              </Stack>
+            </Card>
+          </Stack>
+          <Stack direction="row">
+            {/* Assign ROLE */}
+            <Card paddingY="10px">
+              <Stack>
+                <Stack direction="row">
+                  <Txt bold>assignUserRole</Txt>
+                  <Txt>Assign user new role.</Txt>
+                </Stack>
+                <hr />
+                <Stack direction="row" center>
+                  <input
+                    type="text"
+                    placeholder="Type a role name"
+                    onChange={(e) => setAssignUserRoleInput(e.target.value)}
+                  ></input>
+                  <Txt size="s">Prints to console (async).</Txt>
+                </Stack>
+              </Stack>
+              <Stack>
+                <hr />
+                <Stack direction="row" center>
+                  <input
+                    type="text"
+                    placeholder="Type a user GUID@idir"
+                    onChange={(e) => setIDIRInput(e.target.value)}
+                  ></input>
+                  <Button
+                    size="s"
+                    onClick={() => {
+                      if (IDIRInput !== "")
+                        callAPI(
+                          `/cssAPI/role/assign/${IDIRInput}?role=${assignUserRoleInput}`,
+                          "POST"
+                        );
+                    }}
+                  >
+                    Assign
                   </Button>
                   <Txt size="s">Prints to console (async).</Txt>
                 </Stack>

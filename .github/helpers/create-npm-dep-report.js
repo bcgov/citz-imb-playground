@@ -86,6 +86,19 @@ const calculateUpToDatePercentage = (total, outdated) => {
   return Math.round(percentage);
 };
 
+// Output a command to install all dependencies in array.
+const outputMultiPackageInstallCmd = (dependencies, packagePath, isDevDep) => {
+  results[packagePath] += `${line(`Update all by running`)}`;
+
+  let installCmd = `npm install${isDevDep ? " -D" : ""} `;
+  installCmd += dependencies
+    .map((obj) => `${obj.dependency}@${obj.latestVersion}`)
+    .join(" ");
+
+  results[packagePath] += `${codeBlock(installCmd, "")}`;
+  results[packagePath] += `${lineBreak()}\n`;
+};
+
 // Output Dependencies in an array.
 const outputDepsByVersionChange = (
   dependencies,
@@ -104,6 +117,9 @@ const outputDepsByVersionChange = (
   // Output header.
   results[packagePath] += `${line(`![${headerTag}]`)}\n`;
 
+  // Output a command to install all dependencies in array.
+  outputMultiPackageInstallCmd(dependencies, packagePath, isDevDep);
+
   // List dependency updates.
   for (const key in dependencies) {
     const { dependency, version, latestVersion } = dependencies[key];
@@ -121,19 +137,6 @@ const outputDepsByVersionChange = (
   results[packagePath] += `${line(
     `[${headerTag}]: https://img.shields.io/badge/${versionChange}_updates_(${dependencies.length})-${badgeColor}?style=for-the-badge \n`
   )}`;
-};
-
-// Output a command to install all dependencies in array.
-const outputMultiPackageInstallCmd = (dependencies, packagePath, isDevDep) => {
-  results[packagePath] += `${line(`Update all by running`)}`;
-
-  let installCmd = `npm install${isDevDep ? " -D" : ""} `;
-  installCmd += dependencies
-    .map((obj) => `${obj.dependency}@${obj.latestVersion}`)
-    .join(" ");
-
-  results[packagePath] += `${codeBlock(installCmd, "")}`;
-  results[packagePath] += `${lineBreak()}\n`;
 };
 
 // Output dependencies that need updating.
@@ -156,24 +159,18 @@ const outputDeps = (dependenciesObj, packagePath, isDevDep) => {
 
   // Output MAJOR depedencies to update.
   const major = dependenciesObj.major;
-  if (major.length > 0) {
-    outputMultiPackageInstallCmd(major, packagePath, isDevDep);
+  if (major.length > 0)
     outputDepsByVersionChange(major, "major", packagePath, isDevDep);
-  }
 
   // Output MINOR depedencies to update.
   const minor = dependenciesObj.minor;
-  if (minor.length > 0) {
-    outputMultiPackageInstallCmd(minor, packagePath, isDevDep);
+  if (minor.length > 0)
     outputDepsByVersionChange(minor, "minor", packagePath, isDevDep);
-  }
 
   // Output PATCH depedencies to update.
   const patch = dependenciesObj.patch;
-  if (patch.length > 0) {
-    outputMultiPackageInstallCmd(patch, packagePath, isDevDep);
+  if (patch.length > 0)
     outputDepsByVersionChange(patch, "patch", packagePath, isDevDep);
-  }
 };
 
 // Escape special characters for GitHub Actions.

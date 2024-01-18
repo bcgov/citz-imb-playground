@@ -1,18 +1,24 @@
 const https = require("https");
 const path = require("path");
 
+const LOCAL_TEST = false;
+const TEST_PACKAGEJSON_PATHS = ["../../src/frontend", "../../src/backend"];
+
 /**
  * THIS FILE DOES NOT REQUIRE ANY EDITING.
  * Place within .github/helpers/
  *
  * To test this file locally,
- * - Set packageJsonPaths variable to ["../../src/frontend", "../../src/backend"]
+ * - Set LOCAL_TEST variable to true.
+ * - Edit TEST_PACKAGEJSON_PATHS if necessary.
  * - From root, run "node .github/helpers/parse-npm-deps > outdatedDeps.json"
  * - Check the outdatedDeps.json file, then delete it.
  */
 
 // Get package.json paths from env.
-const packageJsonPaths = JSON.parse(process.env.packageJsonPaths);
+const packageJsonPaths = LOCAL_TEST
+  ? TEST_PACKAGEJSON_PATHS
+  : JSON.parse(process.env.packageJsonPaths);
 
 // Save results to json.
 let results = {};

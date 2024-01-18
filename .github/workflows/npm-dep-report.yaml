@@ -1,7 +1,5 @@
 name: NPM Dependency Reports
 
-# NEW - Now runs all reports at once and parses to json before creating output text.
-
 on:
   schedule:
     - cron: '0 15 1-7 * 2' # First Tuesday of the month at 7:00-8:00am Pacific Time.
@@ -24,7 +22,7 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
-  # Parse ENV Vars from config.
+  # Parse Vars from config.
   parse-json5-config:
       runs-on: ubuntu-22.04
       outputs:
@@ -39,7 +37,7 @@ jobs:
         - name: Install Dependencies
           run: npm install json5
 
-        # Run script to convert json5 config to ENV Vars.
+        # Run script to convert json5 config to Output Vars.
         - name: Run Script
           id: parse_config
           run: node .github/helpers/parse-json5-config .github/config/dep-report.json5

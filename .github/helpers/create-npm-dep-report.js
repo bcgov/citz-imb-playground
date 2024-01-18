@@ -4,20 +4,25 @@ const outdatedDeps = require(path.resolve(
   `../../outdatedDeps.json`
 ));
 
+const LOCAL_TEST = false;
+const TEST_PACKAGEJSON_PATHS = ["../../src/frontend", "../../src/backend"];
+
 /**
  * THIS FILE DOES NOT REQUIRE ANY EDITING.
  * Place within .github/helpers/
  *
  * To test this file locally,
  * - Generate output from parse-npm-deps.js
- * - Change "outdatedDeps.json" to "../../outdatedDeps.json" on line 2.
- * - Set packageJsonPaths variable to ["../../src/frontend", "../../src/backend"]
+ * - Set LOCAL_TEST variable to true.
+ * - Edit TEST_PACKAGEJSON_PATHS if necessary.
  * - From root, run "node .github/helpers/create-npm-dep-report > outputText.json"
  * - Check the outputText.json file, then delete it.
  */
 
 // Get package.json paths from env.
-const packageJsonPaths = JSON.parse(process.env.packageJsonPaths);
+const packageJsonPaths = LOCAL_TEST
+  ? TEST_PACKAGEJSON_PATHS
+  : JSON.parse(process.env.packageJsonPaths);
 
 // Save results to json.
 let results = {};
@@ -118,6 +123,19 @@ const outputDepsByVersionChange = (
   )}`;
 };
 
+// Output a command to install all dependencies in array.
+const outputMultiPackageInstallCmd = (dependencies, isDevDep) => {
+  results[packagePath] += `${line(`Update all by running`)}`;
+
+  let installCmd = `npm install${isDevDep ? " -D" : ""} `;
+  installCmd += dependencies
+    .map((obj) => `${obj.dependency}@${obj.latestVersion}`)
+    .join(" ");
+
+  results[packagePath] += `${codeBlock(installCmd, "")}`;
+  results[packagePath] += `${lineBreak()}\n`;
+};
+
 // Output dependencies that need updating.
 const outputDeps = (dependenciesObj, packagePath, isDevDep) => {
   // Return if no dependencies to update.
@@ -136,18 +154,26 @@ const outputDeps = (dependenciesObj, packagePath, isDevDep) => {
       3
     )}`;
 
-  // Get arrays of dependencies.
+  // Output MAJOR depedencies to update.
   const major = dependenciesObj.major;
-  const minor = dependenciesObj.minor;
-  const patch = dependenciesObj.patch;
-
-  // Output depedencies to update.
-  if (major.length > 0)
+  if (major.length > 0) {
+    outputMultiPackageInstallCmd(major, isDevDep);
     outputDepsByVersionChange(major, "major", packagePath, isDevDep);
-  if (minor.length > 0)
+  }
+
+  // Output MINOR depedencies to update.
+  const minor = dependenciesObj.minor;
+  if (minor.length > 0) {
+    outputMultiPackageInstallCmd(minor, isDevDep);
     outputDepsByVersionChange(minor, "minor", packagePath, isDevDep);
-  if (patch.length > 0)
+  }
+
+  // Output PATCH depedencies to update.
+  const patch = dependenciesObj.patch;
+  if (patch.length > 0) {
+    outputMultiPackageInstallCmd(patch, isDevDep);
     outputDepsByVersionChange(patch, "patch", packagePath, isDevDep);
+  }
 };
 
 // Escape special characters for GitHub Actions.

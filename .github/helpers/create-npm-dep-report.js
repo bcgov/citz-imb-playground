@@ -93,8 +93,7 @@ const outputMultiPackageInstallCmd = (dependencies, packagePath, isDevDep) => {
     .map((obj) => `${obj.dependency}@${obj.latestVersion}`)
     .join(" ");
 
-  results[packagePath] += `${codeBlock(installCmd, "")}`;
-  results[packagePath] += `${lineBreak()}\n`;
+  results[packagePath] += `${codeBlock(installCmd, "")}\n`;
 };
 
 // Output Dependencies in an array.
@@ -126,7 +125,7 @@ const outputDepsByVersionChange = (
   outputMultiPackageInstallCmd(dependencies, packagePath, isDevDep);
 
   // Output end of spoiler summary.
-  results[packagePath] += `${line(`</summary>`)}`;
+  results[packagePath] += `${line(`</summary>\n`)}`;
 
   // List dependency updates.
   for (const key in dependencies) {

@@ -170,37 +170,37 @@ const CSSAPIPage = () => {
                   <Txt>Get user details.</Txt>
                 </Stack>
                 <hr />
-                  <Stack>
-                    <input
-                      type="text"
-                      placeholder="Type a user's first name"
-                      onChange={(e) => setUserIDIRInputs({...userIDIRInputs, firstName: e.target.value})}
-                    ></input>
-                    <input
-                      type="text"
-                      placeholder="Type a user's last name"
-                      onChange={(e) => setUserIDIRInputs({...userIDIRInputs, lastName: e.target.value})}
-                    ></input>
-                    <input
-                      type="text"
-                      placeholder="Type a user's email"
-                      onChange={(e) => setUserIDIRInputs({...userIDIRInputs, email: e.target.value})}
-                    ></input>
+                <Stack>
+                  <input
+                    type="text"
+                    placeholder="Type a user's first name"
+                    onChange={(e) => setUserIDIRInputs({...userIDIRInputs, firstName: e.target.value})}
+                  ></input>
+                  <input
+                    type="text"
+                    placeholder="Type a user's last name"
+                    onChange={(e) => setUserIDIRInputs({...userIDIRInputs, lastName: e.target.value})}
+                  ></input>
+                  <input
+                    type="text"
+                    placeholder="Type a user's email"
+                    onChange={(e) => setUserIDIRInputs({...userIDIRInputs, email: e.target.value})}
+                  ></input>
                   <Stack direction="row" center>
                     <Button
-                    size="s"
-                    onClick={() => {
-                        callAPI(
-                          "/cssapi/user/idir-user",
-                          "GET",
-                          `?firstName=${userIDIRInputs.firstName}`,
-                        );
-                    }}
-                    disabled={areAllValuesEmpty(userIDIRInputs)}
-                  >
-                    Search
-                  </Button>
-                  <Txt size="s">Prints to console (async).</Txt>
+                      size="s"
+                      onClick={() => {
+                          callAPI(
+                            "/cssapi/user/idir-user",
+                            "GET",
+                            `?firstName=${userIDIRInputs.firstName}`,
+                          );
+                      }}
+                      disabled={areAllValuesEmpty(userIDIRInputs)}
+                      >
+                      Search
+                    </Button>
+                    <Txt size="s">Prints to console (async).</Txt>
                   </Stack>
                 </Stack>
               </Stack>
@@ -213,25 +213,40 @@ const CSSAPIPage = () => {
                   <Txt>Get user details.</Txt>
                 </Stack>
                 <hr />
-                <Stack direction="row" center>
-                  <input
-                    type="text"
-                    placeholder="Type a user's first name"
-                    onChange={(e) => setUserAzureIDIRInputs({...userAzureIDIRInputs, firstName: e.target.value})}
-                  ></input>
-                  <Button
-                    size="s"
-                    onClick={() => {
-                        callAPI(
-                          "/cssapi/user/azure-user",
-                          "GET",
-                          `?firstName=${userAzureIDIRInputs.firstName}`,
-                        );
-                    }}
-                  >
-                    Search
-                  </Button>
-                  <Txt size="s">Prints to console (async).</Txt>
+                <Stack>
+                  <Stack>
+                    <input
+                      type="text"
+                      placeholder="Type a user's first name"
+                      onChange={(e) => setUserAzureIDIRInputs({...userAzureIDIRInputs, firstName: e.target.value})}
+                    ></input>
+                    <input
+                      type="text"
+                      placeholder="Type a user's last name"
+                      onChange={(e) => setUserAzureIDIRInputs({...userAzureIDIRInputs, lastName: e.target.value})}
+                    ></input>
+                    <input
+                      type="text"
+                      placeholder="Type a user's email"
+                      onChange={(e) => setUserAzureIDIRInputs({...userAzureIDIRInputs, email: e.target.value})}
+                    ></input>
+                    <Stack direction='row'>
+                      <Button
+                        size="s"
+                        onClick={() => {
+                            callAPI(
+                              "/cssapi/user/azure-user",
+                              "GET",
+                              `?firstName=${userAzureIDIRInputs.firstName}`,
+                            );
+                        }}
+                        disabled={areAllValuesEmpty(userAzureIDIRInputs)}
+                      >
+                        Search
+                      </Button>
+                      <Txt size="s">Prints to console (async).</Txt>
+                    </Stack>
+                  </Stack>
                 </Stack>
               </Stack>
             </Card>

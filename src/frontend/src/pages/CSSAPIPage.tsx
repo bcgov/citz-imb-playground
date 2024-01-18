@@ -31,14 +31,12 @@ const CSSAPIPage = () => {
     endpoint: string,
     method: RequestMethod,
     query?: string,
-    body?: any,
   ) => {
     try {
       console.log("Calling API...");
       const response = await fetch(`/api${endpoint}${query ?? ""}`, {
         method,
         headers: { Authorization: getAuthorizationHeaderValue() },
-        body,
       });
 
       const data = await response.json();
@@ -298,27 +296,33 @@ const CSSAPIPage = () => {
                   <Txt>Get user details.</Txt>
                 </Stack>
                 <hr />
-                <Stack direction="row" center>
-                  <input
-                    type="text"
-                    placeholder="Type a user's first name"
-                    onChange={(e) => setUserIDIRInputs({...userIDIRInputs, firstName: e.target.value})}
-                  ></input>
-                  <Button
+                  <Stack>
+                    <input
+                      type="text"
+                      placeholder="Type a user's first name"
+                      onChange={(e) => setUserIDIRInputs({...userIDIRInputs, firstName: e.target.value})}
+                    ></input>
+                    <input
+                      type="text"
+                      placeholder="Type a user's first name"
+                      onChange={(e) => setUserIDIRInputs({...userIDIRInputs, firstName: e.target.value})}
+                    ></input>
+                                  <Stack direction="row" center>
+                    <Button
                     size="s"
                     onClick={() => {
                       if (userIDIRInputs.firstName !== "")
                         callAPI(
                           "/cssAPI/idir-user",
-                          "POST",
-                          "",
-                          userIDIRInputs
+                          "GET",
+                          `?firstName=${userIDIRInputs.firstName}`,
                         );
                     }}
                   >
                     Search
                   </Button>
                   <Txt size="s">Prints to console (async).</Txt>
+                  </Stack>
                 </Stack>
               </Stack>
             </Card>
@@ -342,9 +346,8 @@ const CSSAPIPage = () => {
                       if (userAzureIDIRInputs.firstName !== "")
                         callAPI(
                           "/cssAPI/azure-user",
-                          "POST",
-                          "",
-                          userAzureIDIRInputs
+                          "GET",
+                          `?firstName=${userIDIRInputs.firstName}`,
                         );
                     }}
                   >

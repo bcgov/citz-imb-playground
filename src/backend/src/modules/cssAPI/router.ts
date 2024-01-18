@@ -31,7 +31,7 @@ router.route("/role/roles").get(getKCRoles);
  * @route /cssAPI/idir-user
  * @protected Requires "playground-admin"
  */
-router.route("/idir-user").post(getKCIDIRUser);
+router.route("/idir-user").get(getKCIDIRUser);
 
 /**
  * @method GET
@@ -39,7 +39,7 @@ router.route("/idir-user").post(getKCIDIRUser);
  * @route /cssAPI/azure-user
  * @protected Requires "playground-admin"
  */
-router.route("/azure-user").post(getKCAzureIDIRUser);
+router.route("/azure-user").get(getKCAzureIDIRUser);
 
 /**
  * @method POST
@@ -48,7 +48,7 @@ router.route("/azure-user").post(getKCAzureIDIRUser);
  * @route /cssAPI/role/assign/:guid
  * @protected Requires "playground-admin"
  */
-router.route("/role/assign/:guid").post(assignUserRole);
+router.route("/role/assign/:guid").get(assignUserRole);
 
 /**
  * @method POST

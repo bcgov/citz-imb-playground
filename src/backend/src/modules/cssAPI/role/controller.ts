@@ -47,7 +47,7 @@ export const createKCRole = errorWrapper(async (req: Request, res: Response) => 
  * @method POST
  * @param guid - The user's GUID
  * @query role - The role to assign
- * @route /cssAPI/role/assign/:guid
+ * @route /cssapi/role/assign/:guid
  * @protected Requires "playground-admin"
  */
 export const assignUserRole = errorWrapper(async (req: Request, res: Response) => {

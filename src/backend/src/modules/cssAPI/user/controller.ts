@@ -5,7 +5,7 @@ import { getAzureIDIRUsers, getIDIRUsers, IDIRUserQuery } from '@bcgov/citz-imb-
 /**
  * @method GET
  * @param user - The user info to query.
- * @route /cssAPI/idir-user
+ * @route /cssapi/idir-user
  * @protected Requires "playground-admin"
  */
 export const getKCIDIRUser = errorWrapper(async (req: Request, res: Response) => {
@@ -24,7 +24,7 @@ export const getKCIDIRUser = errorWrapper(async (req: Request, res: Response) =>
 /**
  * @method GET
  * @param user - The user info to query.
- * @route /cssAPI/azure-user
+ * @route /cssapi/azure-user
  * @protected Requires "playground-admin"
  */
 export const getKCAzureIDIRUser = errorWrapper(async (req: Request, res: Response) => {

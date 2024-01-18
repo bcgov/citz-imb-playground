@@ -9,6 +9,16 @@ button:hover {
   box-shadow: 4px 2px var(--white);
 }
 
+button:disabled {
+  color: var(--light-grey);
+  background-color: var(--dark-grey);
+}
+
+button:disabled:hover {
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
 .textSmall:is(button) {
   padding: 5px;
 }

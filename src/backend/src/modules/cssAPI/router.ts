@@ -28,7 +28,7 @@ router.route('/role/roles').get(getKCRoles);
 /**
  * @method GET
  * @param user - The user's first name to search.
- * @route /cssAPI/idir-user
+ * @route /cssapi/idir-user
  * @protected Requires "playground-admin"
  */
 router.route('/user/idir-user').get(getKCIDIRUser);
@@ -36,7 +36,7 @@ router.route('/user/idir-user').get(getKCIDIRUser);
 /**
  * @method GET
  * @param user - The user's first name to search.
- * @route /cssAPI/azure-user
+ * @route /cssapi/azure-user
  * @protected Requires "playground-admin"
  */
 router.route('/user/azure-user').get(getKCAzureIDIRUser);
@@ -45,7 +45,7 @@ router.route('/user/azure-user').get(getKCAzureIDIRUser);
  * @method POST
  * @param guid - The user's GUID
  * @query role - The role to assign
- * @route /cssAPI/role/assign/:guid
+ * @route /cssapi/role/assign/:guid
  * @protected Requires "playground-admin"
  */
 router.route('/role/assign/:guid').get(assignUserRole);

@@ -88,8 +88,6 @@ const calculateUpToDatePercentage = (total, outdated) => {
 
 // Output a command to install all dependencies in array.
 const outputMultiPackageInstallCmd = (dependencies, packagePath, isDevDep) => {
-  results[packagePath] += `${line(`Update all by running`)}`;
-
   let installCmd = `npm install${isDevDep ? " -D" : ""} `;
   installCmd += dependencies
     .map((obj) => `${obj.dependency}@${obj.latestVersion}`)
@@ -117,15 +115,25 @@ const outputDepsByVersionChange = (
   // Output header.
   results[packagePath] += `${line(`![${headerTag}]`)}\n`;
 
+  // Output start of spoiler.
+  results[packagePath] += `${line(`<details>`)}\n`;
+  results[packagePath] += `${line(`<summary>`)}`;
+  results[packagePath] += `${line(
+    `Expand to see individual installs. <br /><br />`
+  )}`;
+
   // Output a command to install all dependencies in array.
   outputMultiPackageInstallCmd(dependencies, packagePath, isDevDep);
+
+  // Output end of spoiler summary.
+  results[packagePath] += `${line(`</summary>`)}`;
 
   // List dependency updates.
   for (const key in dependencies) {
     const { dependency, version, latestVersion } = dependencies[key];
 
     results[packagePath] += `${line(
-      `- [ ] \`${dependency}\` Update from version \`${version}\` to \`${latestVersion}\` by running`
+      `- [ ] \`${dependency}\` Update from version \`${version}\` to \`${latestVersion}\` by running...`
     )}`;
     results[packagePath] += `${codeBlock(
       `npm install${isDevDep ? " -D" : ""} ${dependency}@${latestVersion}`,
@@ -133,10 +141,15 @@ const outputDepsByVersionChange = (
     )}`;
   }
 
+  // Output end of spoiler.
+  results[packagePath] += `${line(`</details>`)}`;
+
   // Add Header text
   results[packagePath] += `${line(
     `[${headerTag}]: https://img.shields.io/badge/${versionChange}_updates_(${dependencies.length})-${badgeColor}?style=for-the-badge \n`
   )}`;
+
+  results[packagePath] += `${lineBreak()}\n`;
 };
 
 // Output dependencies that need updating.

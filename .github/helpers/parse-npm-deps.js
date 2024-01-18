@@ -2,10 +2,10 @@ const https = require("https");
 const path = require("path");
 
 const LOCAL_TEST = false;
-const TEST_PACKAGEJSON_PATHS = ["../../src/frontend", "../../src/backend"];
+const TEST_PACKAGEJSON_PATHS = ["src/frontend", "src/backend"];
 const TEST_IGNORE_PACKAGES = {
-  "../../src/frontend": [],
-  "../../src/backend": [],
+  "src/frontend": [],
+  "src/backend": [],
 };
 
 /**
@@ -55,6 +55,7 @@ const saveDependencyResults = (
     dependency,
     version,
     latestVersion,
+    data,
   };
 
   if (isDevDep)
@@ -70,7 +71,11 @@ const checkVersions = async (dependencyList, packagePath, isDevDep) => {
     const url = `https://registry.npmjs.org/${dependency}/latest`;
 
     // Skip dependency if in ignorePackages array.
-    if (ignorePackages[packagePath].includes(dependency)) continue;
+    if (
+      ignorePackages.hasOwnProperty(packagePath) &&
+      ignorePackages[packagePath].includes(dependency)
+    )
+      continue;
 
     // Add to total.
     if (isDevDep) ++results[packagePath].devDeps.total;

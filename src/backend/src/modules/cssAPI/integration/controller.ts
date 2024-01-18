@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { errorWrapper, debugController } from '../../../utils';
+import { errorWrapper } from '../../../utils';
 import { getIntegration } from '@bcgov/citz-imb-kc-css-api';
 
 /**
@@ -8,7 +8,5 @@ import { getIntegration } from '@bcgov/citz-imb-kc-css-api';
  * @protected Requires "playground-admin"
  */
 export const getKCIntegration = errorWrapper(async (req: Request, res: Response) => {
-  debugController('getKCIntegration', 'cssapi');
-
   res.json(await getIntegration());
 });

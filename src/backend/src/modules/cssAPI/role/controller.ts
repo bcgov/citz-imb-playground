@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { errorWrapper, debugController, httpStatusCode } from '../../../utils';
+import { errorWrapper, httpStatusCode } from '../../../utils';
 import { getRole, getRoles, createRole, deleteRole } from '@bcgov/citz-imb-kc-css-api';
 
 /**
@@ -8,8 +8,6 @@ import { getRole, getRoles, createRole, deleteRole } from '@bcgov/citz-imb-kc-cs
  * @protected Requires "playground-admin"
  */
 export const getKCRoles = errorWrapper(async (req: Request, res: Response) => {
-  debugController('getKCRoles', 'cssapi');
-
   res.json(await getRoles());
 });
 
@@ -20,8 +18,6 @@ export const getKCRoles = errorWrapper(async (req: Request, res: Response) => {
  * @protected Requires "playground-admin"
  */
 export const getKCRole = errorWrapper(async (req: Request, res: Response) => {
-  debugController('getKCRole', 'cssapi');
-
   const role = req.params.role;
   if (!role) {
     res.status(httpStatusCode.NOT_FOUND).send("Missing 'role' in request query.");
@@ -38,8 +34,6 @@ export const getKCRole = errorWrapper(async (req: Request, res: Response) => {
  * @protected Requires "playground-admin"
  */
 export const createKCRole = errorWrapper(async (req: Request, res: Response) => {
-  debugController('createKCRole', 'cssapi');
-
   const role = req.params.role;
   if (!role) {
     res.status(httpStatusCode.NOT_FOUND).send("Missing 'role' in request param.");
@@ -56,8 +50,6 @@ export const createKCRole = errorWrapper(async (req: Request, res: Response) => 
  * @protected Requires "playground-admin"
  */
 export const deleteKCRole = errorWrapper(async (req: Request, res: Response) => {
-  debugController('deleteKCRole', 'cssapi');
-
   const role = req.params.role;
   if (!role) {
     res.status(httpStatusCode.NOT_FOUND).send("Missing 'role' in request param.");

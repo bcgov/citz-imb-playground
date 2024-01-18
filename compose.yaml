@@ -19,6 +19,7 @@ services:
     environment:
       - ENVIRONMENT=${ENVIRONMENT:-local}
       - DEBUG=${DEBUG:-true}
+      - VERBOSE_DEBUG=${VERBOSE_DEBUG:-false}
       - PORT=${BACKEND_PORT:-6600}
       - FRONTEND_URL=${FRONTEND_URL:-'http://localhost:6500'}
       - BACKEND_URL=${BACKEND_URL:-'http://localhost:6600'}

@@ -171,7 +171,7 @@ const CSSAPIPage = () => {
                     onClick={() => {
                       if (userIDIRInputs.firstName !== "")
                         callAPI(
-                          "/cssAPI/idir-user",
+                          "/cssAPI/user/idir-user",
                           "GET",
                           `?firstName=${userIDIRInputs.firstName}`,
                         );
@@ -203,7 +203,7 @@ const CSSAPIPage = () => {
                     onClick={() => {
                       if (userAzureIDIRInputs.firstName !== "")
                         callAPI(
-                          "/cssAPI/azure-user",
+                          "/cssAPI/user/azure-user",
                           "GET",
                           `?firstName=${userIDIRInputs.firstName}`,
                         );

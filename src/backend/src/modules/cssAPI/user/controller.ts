@@ -5,18 +5,19 @@ import { getAzureIDIRUsers, getIDIRUsers, IDIRUserQuery } from '@bcgov/citz-imb-
 /**
  * @method GET
  * @param user - The user info to query.
- * @route /cssapi/idir-user
+ * @route /cssapi/user/idir-user
  * @protected Requires "playground-admin"
  */
 export const getKCIDIRUser = errorWrapper(async (req: Request, res: Response) => {
   const user: IDIRUserQuery = {
     firstName: req.query.firstName as string,
+    lastName: req.query.lastName as string,
+    email: req.query.email as string,
   };
 
-  if (!user.firstName || user.firstName === '' || typeof user.firstName !== 'string') {
-    res.status(404).send("Missing 'role' in request query.");
-    return;
-  }
+  if (user.firstName === '') delete user.firstName;
+  if (user.lastName === '') delete user.lastName;
+  if (user.email === '') delete user.email;
 
   res.json(await getIDIRUsers(user));
 });
@@ -24,18 +25,19 @@ export const getKCIDIRUser = errorWrapper(async (req: Request, res: Response) =>
 /**
  * @method GET
  * @param user - The user info to query.
- * @route /cssapi/azure-user
+ * @route /cssapi/user/azure-user
  * @protected Requires "playground-admin"
  */
 export const getKCAzureIDIRUser = errorWrapper(async (req: Request, res: Response) => {
   const user: IDIRUserQuery = {
     firstName: req.query.firstName as string,
+    lastName: req.query.lastName as string,
+    email: req.query.email as string,
   };
 
-  if (!user.firstName || user.firstName === '' || typeof user.firstName !== 'string') {
-    res.status(404).send("Missing 'role' in request query.");
-    return;
-  }
+  if (user.firstName === '') delete user.firstName;
+  if (user.lastName === '') delete user.lastName;
+  if (user.email === '') delete user.email;
 
   res.json(await getAzureIDIRUsers(user));
 });

@@ -28,7 +28,7 @@ router.route('/role/roles').get(getKCRoles);
 /**
  * @method GET
  * @param user - The user's first name to search.
- * @route /cssapi/idir-user
+ * @route /cssapi/user/idir-user
  * @protected Requires "playground-admin"
  */
 router.route('/user/idir-user').get(getKCIDIRUser);
@@ -36,7 +36,7 @@ router.route('/user/idir-user').get(getKCIDIRUser);
 /**
  * @method GET
  * @param user - The user's first name to search.
- * @route /cssapi/azure-user
+ * @route /cssapi/user/azure-user
  * @protected Requires "playground-admin"
  */
 router.route('/user/azure-user').get(getKCAzureIDIRUser);

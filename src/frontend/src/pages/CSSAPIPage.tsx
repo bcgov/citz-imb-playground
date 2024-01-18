@@ -39,10 +39,10 @@ const CSSAPIPage = () => {
     }
   };
 
-  const areAllValuesEmpty = (obj: any) => {
-    for (const key in obj) {
-      if (Object.prototype.hasOwnProperty.call(obj, key)) {
-        if (obj[key] !== "") {
+  const checkEmptyInputs = (inputObject: any) => {
+    for (const key in inputObject) {
+      if (Object.prototype.hasOwnProperty.call(inputObject, key)) {
+        if (inputObject[key] !== "") {
           return false;
         }
       }
@@ -193,10 +193,10 @@ const CSSAPIPage = () => {
                           callAPI(
                             "/cssapi/user/idir-user",
                             "GET",
-                            `?firstName=${userIDIRInputs.firstName}`,
+                            `?firstName=${userIDIRInputs.firstName}&lastName=${userIDIRInputs.lastName}&email=${userIDIRInputs.email}`,
                           );
                       }}
-                      disabled={areAllValuesEmpty(userIDIRInputs)}
+                      disabled={checkEmptyInputs(userIDIRInputs)}
                       >
                       Search
                     </Button>
@@ -237,10 +237,10 @@ const CSSAPIPage = () => {
                             callAPI(
                               "/cssapi/user/azure-user",
                               "GET",
-                              `?firstName=${userAzureIDIRInputs.firstName}`,
+                              `?firstName=${userAzureIDIRInputs.firstName}&lastName=${userAzureIDIRInputs.lastName}&email=${userAzureIDIRInputs.email}`,
                             );
                         }}
-                        disabled={areAllValuesEmpty(userAzureIDIRInputs)}
+                        disabled={checkEmptyInputs(userAzureIDIRInputs)}
                       >
                         Search
                       </Button>

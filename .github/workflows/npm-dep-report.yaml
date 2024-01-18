@@ -27,6 +27,7 @@ jobs:
       runs-on: ubuntu-22.04
       outputs:
         packageJsonPaths: ${{ steps.parse_config.outputs.packageJsonPaths }}
+        ignorePackages: ${{ steps.parse_config.outputs.ignorePackages }}
 
       steps:
         # Checkout branch.
@@ -48,6 +49,7 @@ jobs:
     needs: parse-json5-config
     env:
       packageJsonPaths: ${{ needs.parse-json5-config.outputs.packageJsonPaths }}
+      ignorePackages: ${{ needs.parse-json5-config.outputs.ignorePackages }}
     container:
       # Lightweight NodeJS Image
       image: node:21.5-bullseye-slim

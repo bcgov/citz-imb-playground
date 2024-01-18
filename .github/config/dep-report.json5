@@ -1,4 +1,11 @@
 {
   // Check package.json files for dependency updates.
   packageJsonPaths: ["src/frontend", "src/backend"],
+
+  // Do not report on the following packages.
+  ignorePackages: {
+    // Path to package.json file.
+    "src/frontend": [],
+    "src/backend": ["tsx"],
+  },
 }

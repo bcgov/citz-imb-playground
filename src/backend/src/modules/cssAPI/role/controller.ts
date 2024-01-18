@@ -19,10 +19,7 @@ export const getKCRoles = errorWrapper(async (req: Request, res: Response) => {
  */
 export const getKCRole = errorWrapper(async (req: Request, res: Response) => {
   const role = req.params.role;
-  if (!role) {
-    res.status(httpStatusCode.NOT_FOUND).send("Missing 'role' in request query.");
-    return;
-  }
+  if (!role) return res.status(httpStatusCode.NOT_FOUND).send("Missing 'role' in request query.");
 
   res.json(await getRole(role));
 });
@@ -35,10 +32,7 @@ export const getKCRole = errorWrapper(async (req: Request, res: Response) => {
  */
 export const createKCRole = errorWrapper(async (req: Request, res: Response) => {
   const role = req.params.role;
-  if (!role) {
-    res.status(httpStatusCode.NOT_FOUND).send("Missing 'role' in request param.");
-    return;
-  }
+  if (!role) return res.status(httpStatusCode.NOT_FOUND).send("Missing 'role' in request param.");
 
   res.json(await createRole(role));
 });
@@ -51,10 +45,7 @@ export const createKCRole = errorWrapper(async (req: Request, res: Response) => 
  */
 export const deleteKCRole = errorWrapper(async (req: Request, res: Response) => {
   const role = req.params.role;
-  if (!role) {
-    res.status(httpStatusCode.NOT_FOUND).send("Missing 'role' in request param.");
-    return;
-  }
+  if (!role) return res.status(httpStatusCode.NOT_FOUND).send("Missing 'role' in request param.");
 
   res.json(await deleteRole(role));
 });

@@ -1,6 +1,6 @@
 import { DataSourceOptions, DataSource } from 'typeorm';
 
-const { PGHOST, PGUSER, PGPASSWORD, PGDATABASE, ENVIRONMENT, NODE_ENV } = process.env;
+const { PGHOST, PGUSER, PGPASSWORD, PGDATABASE, DEBUG, NODE_ENV } = process.env;
 
 const fileExtensions = NODE_ENV === 'production' ? 'js' : 'ts';
 
@@ -13,7 +13,7 @@ const ormconfig: DataSourceOptions = {
   database: PGDATABASE ?? 'playground',
   synchronize: false,
   migrationsRun: true,
-  logging: ENVIRONMENT === 'local' ?? false,
+  logging: DEBUG === 'true' ?? false,
   entities: [`src/**/*entity.${fileExtensions}`],
   migrations: [`src/migrations/*.${fileExtensions}`],
 };

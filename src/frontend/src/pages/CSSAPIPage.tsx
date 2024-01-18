@@ -15,9 +15,10 @@ const CSSAPIPage = () => {
   const [getRoleInput, setGetRoleInput] = useState("");
   const [createRoleInput, setCreateRoleInput] = useState("");
   const [deleteRoleInput, setDeleteRoleInput] = useState("");
-  const [getUserInput, setGetUserInput] = useState("");
   const [assignUserRoleInput, setAssignUserRoleInput] = useState("");
-  const [userIDIRInput, setUserIDIRInput] = useState("");
+  const [userIDIRInputs, setUserIDIRInputs] = useState({firstName: "", lastName: "", email: "", guid: ""});
+  const [userAzureIDIRInputs, setUserAzureIDIRInputs] = useState({firstName: "", lastName: "", email: "", guid: ""});
+  const [IDIRInput, setIDIRInput] = useState("");
 
   const [integrationDetails, setIntegrationDetails] = useState<any>(undefined);
 
@@ -29,13 +30,15 @@ const CSSAPIPage = () => {
   const callAPI = async (
     endpoint: string,
     method: RequestMethod,
-    query?: string
+    query?: string,
+    body?: any,
   ) => {
     try {
       console.log("Calling API...");
       const response = await fetch(`/api${endpoint}${query ?? ""}`, {
         method,
         headers: { Authorization: getAuthorizationHeaderValue() },
+        body,
       });
 
       const data = await response.json();
@@ -287,11 +290,11 @@ const CSSAPIPage = () => {
             </Card>
           </Stack>
           <Stack direction="row">
-            {/* GET USER */}
+            {/* GET IDIR USER */}
             <Card paddingY="10px">
               <Stack>
                 <Stack direction="row">
-                  <Txt bold>getKCUser</Txt>
+                  <Txt bold>getIDIRUsers</Txt>
                   <Txt>Get user details.</Txt>
                 </Stack>
                 <hr />
@@ -299,16 +302,17 @@ const CSSAPIPage = () => {
                   <input
                     type="text"
                     placeholder="Type a user's first name"
-                    onChange={(e) => setGetUserInput(e.target.value)}
+                    onChange={(e) => setUserIDIRInputs({...userIDIRInputs, firstName: e.target.value})}
                   ></input>
                   <Button
                     size="s"
                     onClick={() => {
-                      if (getUserInput !== "")
+                      if (userIDIRInputs.firstName !== "")
                         callAPI(
-                          "/cssAPI/user",
-                          "GET",
-                          `?user=${getUserInput}`
+                          "/cssAPI/idir-user",
+                          "POST",
+                          "",
+                          userIDIRInputs
                         );
                     }}
                   >
@@ -318,6 +322,40 @@ const CSSAPIPage = () => {
                 </Stack>
               </Stack>
             </Card>
+            {/* GET AZURE IDIR USER */}
+            <Card paddingY="10px">
+              <Stack>
+                <Stack direction="row">
+                  <Txt bold>getAzureIDIRUsers</Txt>
+                  <Txt>Get user details.</Txt>
+                </Stack>
+                <hr />
+                <Stack direction="row" center>
+                  <input
+                    type="text"
+                    placeholder="Type a user's first name"
+                    onChange={(e) => setUserAzureIDIRInputs({...userIDIRInputs, firstName: e.target.value})}
+                  ></input>
+                  <Button
+                    size="s"
+                    onClick={() => {
+                      if (userAzureIDIRInputs.firstName !== "")
+                        callAPI(
+                          "/cssAPI/azure-user",
+                          "POST",
+                          "",
+                          userAzureIDIRInputs
+                        );
+                    }}
+                  >
+                    Search
+                  </Button>
+                  <Txt size="s">Prints to console (async).</Txt>
+                </Stack>
+              </Stack>
+            </Card>
+          </Stack>
+          <Stack direction="row">
             {/* Assign ROLE */}
             <Card paddingY="10px">
               <Stack>
@@ -341,14 +379,14 @@ const CSSAPIPage = () => {
                   <input
                     type="text"
                     placeholder="Type a user GUID@idir"
-                    onChange={(e) => setUserIDIRInput(e.target.value)}
+                    onChange={(e) => setIDIRInput(e.target.value)}
                   ></input>
                   <Button
                     size="s"
                     onClick={() => {
-                      if (userIDIRInput !== "")
+                      if (IDIRInput !== "")
                         callAPI(
-                          `/cssAPI/role/assign/${userIDIRInput}?role=${assignUserRoleInput}`,
+                          `/cssAPI/role/assign/${IDIRInput}?role=${assignUserRoleInput}`,
                           "POST"
                         );
                     }}

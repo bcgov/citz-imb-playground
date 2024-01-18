@@ -9,7 +9,7 @@ import {
   deleteKCRole,
   assignUserRole,
 } from "./role/controller";
-import { getKCIDIRUser } from "./user/controller";
+import { getKCIDIRUser, getKCAzureIDIRUser } from "./user/controller";
 
 /**
  * @method GET
@@ -27,36 +27,28 @@ router.route("/role/roles").get(getKCRoles);
 
 /**
  * @method GET
- * @param role - The role name to search.
- * @route /cssAPI/role
+ * @param user - The user's first name to search.
+ * @route /cssAPI/idir-user
  * @protected Requires "playground-admin"
  */
-router.get("/role", getKCRole);
+router.route("/idir-user").post(getKCIDIRUser);
 
 /**
  * @method GET
  * @param user - The user's first name to search.
- * @route /cssAPI/user
+ * @route /cssAPI/azure-user
  * @protected Requires "playground-admin"
  */
-router.get("/user", getKCIDIRUser);
+router.route("/azure-user").post(getKCAzureIDIRUser);
 
 /**
  * @method POST
- * @param role - The role name to create.
- * @route /cssAPI/role/:role
- * @protected Requires "playground-admin"
- */
-router.post("/role/:role", createKCRole);
-
-/**
- * @method POST
- * @param role - The role name to create.
- * @param user - The user's GUID
+ * @param guid - The user's GUID
+ * @query role - The role to assign
  * @route /cssAPI/role/assign/:guid
  * @protected Requires "playground-admin"
  */
-router.post("/role/assign/:guid", assignUserRole);
+router.route("/role/assign/:guid").post(assignUserRole);
 
 /**
  * @method POST

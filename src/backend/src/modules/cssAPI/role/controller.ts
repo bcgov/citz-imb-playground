@@ -67,8 +67,8 @@ export const createKCRole = errorWrapper(
 
 /**
  * @method POST
- * @param role - The role name to assign.
- * @param user - The user's GUID
+ * @param guid - The user's GUID
+ * @query role - The role to assign
  * @route /cssAPI/role/assign/:guid
  * @protected Requires "playground-admin"
  */
@@ -84,6 +84,7 @@ export const assignUserRole = errorWrapper(
       res.status(404).send("Missing 'role' in request param.");
       return;
     }
+    
     const roleNames = [role];
 
     res.json(await assignUserRoles(guid, roleNames));

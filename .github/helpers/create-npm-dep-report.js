@@ -124,7 +124,7 @@ const outputDepsByVersionChange = (
 };
 
 // Output a command to install all dependencies in array.
-const outputMultiPackageInstallCmd = (dependencies, isDevDep) => {
+const outputMultiPackageInstallCmd = (dependencies, packagePath, isDevDep) => {
   results[packagePath] += `${line(`Update all by running`)}`;
 
   let installCmd = `npm install${isDevDep ? " -D" : ""} `;
@@ -157,21 +157,21 @@ const outputDeps = (dependenciesObj, packagePath, isDevDep) => {
   // Output MAJOR depedencies to update.
   const major = dependenciesObj.major;
   if (major.length > 0) {
-    outputMultiPackageInstallCmd(major, isDevDep);
+    outputMultiPackageInstallCmd(major, packagePath, isDevDep);
     outputDepsByVersionChange(major, "major", packagePath, isDevDep);
   }
 
   // Output MINOR depedencies to update.
   const minor = dependenciesObj.minor;
   if (minor.length > 0) {
-    outputMultiPackageInstallCmd(minor, isDevDep);
+    outputMultiPackageInstallCmd(minor, packagePath, isDevDep);
     outputDepsByVersionChange(minor, "minor", packagePath, isDevDep);
   }
 
   // Output PATCH depedencies to update.
   const patch = dependenciesObj.patch;
   if (patch.length > 0) {
-    outputMultiPackageInstallCmd(patch, isDevDep);
+    outputMultiPackageInstallCmd(patch, packagePath, isDevDep);
     outputDepsByVersionChange(patch, "patch", packagePath, isDevDep);
   }
 };

@@ -55,7 +55,6 @@ const saveDependencyResults = (
     dependency,
     version,
     latestVersion,
-    data,
   };
 
   if (isDevDep)

@@ -12,6 +12,7 @@ import {
   GetIDIRUserCard,
   GetAzureIDIRUserCard,
   AssignUserRoleCard,
+  UnassignUserRoleCard,
 } from 'components/pages/CSSAPI';
 
 const CSSAPIPage = () => {
@@ -49,6 +50,8 @@ const CSSAPIPage = () => {
           <Stack direction="row">
             {/* Assign ROLE */}
             <AssignUserRoleCard />
+            {/*Unassign ROLE */}
+            <UnassignUserRoleCard />
           </Stack>
         </>
       ) : (

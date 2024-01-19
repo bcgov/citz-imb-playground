@@ -7,7 +7,8 @@ import {
   getKCRoles,
   createKCRole,
   deleteKCRole,
-  assignUserRole,
+  assignKCUserRole,
+  unassignKCUserRole,
 } from './role/controller';
 import { getKCAzureIDIRUser, getKCIDIRUser } from './user/controller';
 
@@ -48,7 +49,7 @@ router.route('/user/azure-user').get(getKCAzureIDIRUser);
  * @route /cssapi/role/assign/:guid
  * @protected Requires "playground-admin"
  */
-router.route('/role/assign/:guid').post(assignUserRole);
+router.route('/role/assign/:guid').post(assignKCUserRole).delete(unassignKCUserRole);
 
 /**
  * @method GET

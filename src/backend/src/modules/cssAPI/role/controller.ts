@@ -6,6 +6,7 @@ import {
   createRole,
   deleteRole,
   assignUserRoles,
+  unassignUserRole,
 } from '@bcgov/citz-imb-kc-css-api';
 
 /**
@@ -50,7 +51,7 @@ export const createKCRole = errorWrapper(async (req: Request, res: Response) => 
  * @route /cssapi/role/assign/:guid
  * @protected Requires "playground-admin"
  */
-export const assignUserRole = errorWrapper(async (req: Request, res: Response) => {
+export const assignKCUserRole = errorWrapper(async (req: Request, res: Response) => {
   const { guid } = req.params;
   const { role } = req.query;
 
@@ -63,6 +64,26 @@ export const assignUserRole = errorWrapper(async (req: Request, res: Response) =
   const roleNames = [role];
 
   res.json(await assignUserRoles(guid, roleNames));
+});
+
+/**
+ * @method DELETE
+ * @param guid - The user's GUID
+ * @query role - The role to unassign
+ * @route /cssapi/role/assign/:guid
+ * @protected Requires "playground-admin"
+ */
+export const unassignKCUserRole = errorWrapper(async (req: Request, res: Response) => {
+  const { guid } = req.params;
+  const { role } = req.query;
+
+  if (!role || role === '' || typeof role !== 'string')
+    return res.status(404).send("Missing 'role' in request query.");
+
+  if (!guid || guid === '' || typeof role !== 'string')
+    return res.status(404).send("Missing 'guid' in request param.");
+
+  res.json(await unassignUserRole(guid, role));
 });
 
 /**

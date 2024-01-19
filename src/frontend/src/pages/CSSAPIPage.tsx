@@ -9,9 +9,12 @@ import { Button } from 'components/common/Button';
 import { PackagesCard } from 'components/pages/CSSAPI/PackagesCard';
 import { IntegrationDetailsCard } from 'components/pages/CSSAPI/IntegrationDetailsCard';
 import { APIRoutes } from '../utils';
+import { useCallAPI } from '../hooks';
+import { checkEmptyInputs } from '../utils';
 
 const CSSAPIPage = () => {
-  const { hasRole, getAuthorizationHeaderValue, isAuthenticated } = useKeycloak();
+  const { hasRole, isAuthenticated } = useKeycloak();
+  const API = useCallAPI();
 
   const [getRoleInput, setGetRoleInput] = useState('');
   const [createRoleInput, setCreateRoleInput] = useState('');
@@ -19,36 +22,7 @@ const CSSAPIPage = () => {
   const [assignUserRoleInput, setAssignUserRoleInput] = useState('');
   const [userIDIRInputs, setUserIDIRInputs] = useState({firstName: '', lastName: '', email: '', guid: ''});
   const [userAzureIDIRInputs, setUserAzureIDIRInputs] = useState({firstName: '', lastName: '', email: '', guid: ''});
-  const [IDIRInput, setIDIRInput] = useState("");
-
-  type RequestMethod = 'GET' | 'PUT' | 'POST' | 'DELETE';
-
-  const callAPI = async (endpoint: string, method: RequestMethod, query?: string) => {
-    try {
-      console.log('Calling API...');
-      const response = await fetch(`/api${endpoint}${query ?? ''}`, {
-        method,
-        headers: { Authorization: getAuthorizationHeaderValue() },
-      });
-
-      const data = await response.json();
-      if (data) console.log(data);
-      console.log(`Completed with status ${response.status}.`);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const checkEmptyInputs = (inputObject: any) => {
-    for (const key in inputObject) {
-      if (Object.prototype.hasOwnProperty.call(inputObject, key)) {
-        if (inputObject[key] !== "") {
-          return false;
-        }
-      }
-    }
-    return true;
-  };
+  const [IDIRInput, setIDIRInput] = useState('');
 
   // Redirect if not logged in.
   useEffect(() => {
@@ -71,7 +45,7 @@ const CSSAPIPage = () => {
                 </Stack>
                 <hr />
                 <Stack direction="row" center>
-                  <Button size="s" onClick={() => callAPI(APIRoutes.getRoles, 'GET')}>
+                  <Button size="s" onClick={() => API.getMethod(APIRoutes.getRoles)}>
                     Search
                   </Button>
                   <Txt size="s">Prints to console (async).</Txt>
@@ -95,7 +69,7 @@ const CSSAPIPage = () => {
                   <Button
                     size="s"
                     onClick={() => {
-                      if (getRoleInput !== '') callAPI(APIRoutes.getRole(getRoleInput), 'GET');
+                      if (getRoleInput !== '') API.getMethod(APIRoutes.getRole(getRoleInput));
                     }}
                   >
                     Search
@@ -124,7 +98,7 @@ const CSSAPIPage = () => {
                     size="s"
                     onClick={() => {
                       if (createRoleInput !== '')
-                        callAPI(APIRoutes.createRole(createRoleInput), 'POST');
+                      API.postMethod(APIRoutes.createRole(createRoleInput));
                     }}
                   >
                     Create
@@ -151,7 +125,7 @@ const CSSAPIPage = () => {
                     size="s"
                     onClick={() => {
                       if (deleteRoleInput !== '')
-                        callAPI(APIRoutes.deleteRole(deleteRoleInput), 'DELETE');
+                      API.deleteMethod(APIRoutes.deleteRole(deleteRoleInput));
                     }}
                   >
                     Remove
@@ -190,9 +164,8 @@ const CSSAPIPage = () => {
                     <Button
                       size="s"
                       onClick={() => {
-                          callAPI(
+                        API.getMethod(
                             "/cssapi/user/idir-user",
-                            "GET",
                             `?firstName=${userIDIRInputs.firstName}&lastName=${userIDIRInputs.lastName}&email=${userIDIRInputs.email}`,
                           );
                       }}
@@ -234,9 +207,8 @@ const CSSAPIPage = () => {
                       <Button
                         size="s"
                         onClick={() => {
-                            callAPI(
+                          API.getMethod(
                               "/cssapi/user/azure-user",
-                              "GET",
                               `?firstName=${userAzureIDIRInputs.firstName}&lastName=${userAzureIDIRInputs.lastName}&email=${userAzureIDIRInputs.email}`,
                             );
                         }}
@@ -281,9 +253,8 @@ const CSSAPIPage = () => {
                     size="s"
                     onClick={() => {
                       if (IDIRInput !== "")
-                        callAPI(
+                      API.postMethod(
                           `/cssapi/role/assign/${IDIRInput}?role=${assignUserRoleInput}`,
-                          "POST"
                         );
                     }}
                   >

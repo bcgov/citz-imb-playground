@@ -4,6 +4,7 @@ import { PackagesCard } from "./PackagesCard";
 import { GetSingleRoleCard } from "./GetSingleRoleCard";
 import { CreateRoleCard } from "./CreateRoleCard";
 import { DeleteRoleCard } from "./DeleteRoleCard";
+import { GetIDIRUserCard } from "./GetIDIRUserCard";
 
 export {
     GetMultipleRolesCard,
@@ -12,4 +13,5 @@ export {
     GetSingleRoleCard,
     CreateRoleCard,
     DeleteRoleCard,
+    GetIDIRUserCard,
 };

@@ -4,4 +4,5 @@ export const APIRoutes = {
   createRole: (roleName: string) => `/cssapi/role/${roleName}`,
   deleteRole: (roleName: string) => `/cssapi/role/${roleName}`,
   getIntegration: '/api/cssapi/integration',
+  getIDIRUser: (firstName: string, lastName: string, email: string) => `/cssapi/user/idir-user?firstName=${firstName}&lastName=${lastName}&email=${email}`, 
 };

@@ -14,6 +14,7 @@ import {
   PackagesCard, GetSingleRoleCard,
   CreateRoleCard,
   DeleteRoleCard,
+  GetIDIRUserCard,
 } from 'components/pages/CSSAPI';
 
 const CSSAPIPage = () => {
@@ -21,7 +22,6 @@ const CSSAPIPage = () => {
   const API = useCallAPI();
 
   const [assignUserRoleInput, setAssignUserRoleInput] = useState('');
-  const [userIDIRInputs, setUserIDIRInputs] = useState({firstName: '', lastName: '', email: '', guid: ''});
   const [userAzureIDIRInputs, setUserAzureIDIRInputs] = useState({firstName: '', lastName: '', email: '', guid: ''});
   const [IDIRInput, setIDIRInput] = useState('');
 
@@ -50,47 +50,7 @@ const CSSAPIPage = () => {
           </Stack>
           <Stack direction="row">
             {/* GET IDIR USER */}
-            <Card paddingY="10px" color={`var(--bcgov_lighter-blue4)`}>
-              <Stack>
-                <Stack direction="row">
-                  <Txt bold>getIDIRUsers</Txt>
-                  <Txt>Get user details.</Txt>
-                </Stack>
-                <hr />
-                <Stack>
-                  <input
-                    type="text"
-                    placeholder="Type a user's first name"
-                    onChange={(e) => setUserIDIRInputs({...userIDIRInputs, firstName: e.target.value})}
-                  ></input>
-                  <input
-                    type="text"
-                    placeholder="Type a user's last name"
-                    onChange={(e) => setUserIDIRInputs({...userIDIRInputs, lastName: e.target.value})}
-                  ></input>
-                  <input
-                    type="text"
-                    placeholder="Type a user's email"
-                    onChange={(e) => setUserIDIRInputs({...userIDIRInputs, email: e.target.value})}
-                  ></input>
-                  <Stack direction="row" center>
-                    <Button
-                      size="s"
-                      onClick={() => {
-                        API.getMethod(
-                            "/cssapi/user/idir-user",
-                            `?firstName=${userIDIRInputs.firstName}&lastName=${userIDIRInputs.lastName}&email=${userIDIRInputs.email}`,
-                          );
-                      }}
-                      disabled={checkEmptyInputs(userIDIRInputs)}
-                      >
-                      Search
-                    </Button>
-                    <Txt size="s">Prints to console (async).</Txt>
-                  </Stack>
-                </Stack>
-              </Stack>
-            </Card>
+            <GetIDIRUserCard />
             {/* GET AZURE IDIR USER */}
             <Card paddingY="10px" color={`var(--bcgov_lighter-blue4)`}>
               <Stack>

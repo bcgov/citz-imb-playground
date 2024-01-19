@@ -1,12 +1,8 @@
 import './Pages.css';
-import { useEffect, useState } from 'react';
-import { Stack } from 'components/common/Stack';
-import { Card } from 'components/common/Card';
-import { Txt } from 'components/common/Txt';
+import { useEffect } from 'react';
+import { Stack, Card, Txt } from 'components/common';
 import { useKeycloak } from '@bcgov/citz-imb-kc-react';
 import { DeniedIcon } from 'components/icons';
-import { Button } from 'components/common/Button';
-import { useCallAPI } from '../hooks';
 import { 
   GetMultipleRolesCard,
   IntegrationDetailsCard,
@@ -15,14 +11,11 @@ import {
   DeleteRoleCard,
   GetIDIRUserCard,
   GetAzureIDIRUserCard,
+  AssignUserRoleCard,
 } from 'components/pages/CSSAPI';
 
 const CSSAPIPage = () => {
   const { hasRole, isAuthenticated } = useKeycloak();
-  const API = useCallAPI();
-
-  const [assignUserRoleInput, setAssignUserRoleInput] = useState('');
-  const [IDIRInput, setIDIRInput] = useState('');
 
   // Redirect if not logged in.
   useEffect(() => {
@@ -55,45 +48,7 @@ const CSSAPIPage = () => {
           </Stack>
           <Stack direction="row">
             {/* Assign ROLE */}
-            <Card paddingY="10px" color={`var(--bcgov_lighter-blue4)`}>
-              <Stack>
-                <Stack direction="row">
-                  <Txt bold>assignUserRole</Txt>
-                  <Txt>Assign user new role.</Txt>
-                </Stack>
-                <hr />
-                <Stack direction="row" center>
-                  <input
-                    type="text"
-                    placeholder="Type a role name"
-                    onChange={(e) => setAssignUserRoleInput(e.target.value)}
-                  ></input>
-                  <Txt size="s">Prints to console (async).</Txt>
-                </Stack>
-              </Stack>
-              <Stack>
-                <hr />
-                <Stack direction="row" center>
-                  <input
-                    type="text"
-                    placeholder="Type a username"
-                    onChange={(e) => setIDIRInput(e.target.value)}
-                  ></input>
-                  <Button
-                    size="s"
-                    onClick={() => {
-                      if (IDIRInput !== "")
-                      API.postMethod(
-                          `/cssapi/role/assign/${IDIRInput}?role=${assignUserRoleInput}`,
-                        );
-                    }}
-                  >
-                    Assign
-                  </Button>
-                  <Txt size="s">Prints to console (async).</Txt>
-                </Stack>
-              </Stack>
-            </Card>
+            <AssignUserRoleCard />
           </Stack>
         </>
       ) : (

@@ -6,6 +6,7 @@ import { CreateRoleCard } from "./CreateRoleCard";
 import { DeleteRoleCard } from "./DeleteRoleCard";
 import { GetIDIRUserCard } from "./GetIDIRUserCard";
 import { GetAzureIDIRUserCard } from "./GetAzureIDIRUserCard";
+import { AssignUserRoleCard } from "./AssignUserRoleCard";
 
 export {
     GetMultipleRolesCard,
@@ -16,4 +17,5 @@ export {
     DeleteRoleCard,
     GetIDIRUserCard,
     GetAzureIDIRUserCard,
+    AssignUserRoleCard,
 };

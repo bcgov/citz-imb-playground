@@ -2,10 +2,10 @@ import { useKeycloak } from '@bcgov/citz-imb-kc-react';
 
 export const useCallAPI = () => {
     const { getAuthorizationHeaderValue } = useKeycloak();
-    const getMethod = async (endpoint: string, query?: string) => {
+    const getMethod = async (endpoint: string) => {
       try {
         console.log('Calling API...');
-        const response = await fetch(`/api${endpoint}${query ?? ''}`, {
+        const response = await fetch(`/api${endpoint}`, {
           method: 'GET',
           headers: { Authorization: getAuthorizationHeaderValue() },
         });
@@ -17,10 +17,10 @@ export const useCallAPI = () => {
         console.error(error);
       }
     };
-    const postMethod = async (endpoint: string, query?: string) => {
+    const postMethod = async (endpoint: string) => {
       try {
         console.log('Calling API...');
-        const response = await fetch(`/api${endpoint}${query ?? ''}`, {
+        const response = await fetch(`/api${endpoint}`, {
           method: 'POST',
           headers: { Authorization: getAuthorizationHeaderValue() },
         });
@@ -32,10 +32,10 @@ export const useCallAPI = () => {
         console.error(error);
       }
     };
-    const putMethod = async (endpoint: string, query?: string) => {
+    const putMethod = async (endpoint: string) => {
       try {
         console.log('Calling API...');
-        const response = await fetch(`/api${endpoint}${query ?? ''}`, {
+        const response = await fetch(`/api${endpoint}`, {
           method: 'PUT',
           headers: { Authorization: getAuthorizationHeaderValue() },
         });
@@ -47,10 +47,10 @@ export const useCallAPI = () => {
         console.error(error);
       }
     };
-    const deleteMethod = async (endpoint: string, query?: string) => {
+    const deleteMethod = async (endpoint: string) => {
       try {
         console.log('Calling API...');
-        const response = await fetch(`/api${endpoint}${query ?? ''}`, {
+        const response = await fetch(`/api${endpoint}`, {
           method: 'DELETE',
           headers: { Authorization: getAuthorizationHeaderValue() },
         });

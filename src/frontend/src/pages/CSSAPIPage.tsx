@@ -9,13 +9,12 @@ import { Button } from 'components/common/Button';
 import { APIRoutes } from '../utils';
 import { useCallAPI } from '../hooks';
 import { checkEmptyInputs } from '../utils';
-import { GetMultipleRolesCard, IntegrationDetailsCard, PackagesCard } from 'components/pages/CSSAPI';
+import { GetMultipleRolesCard, IntegrationDetailsCard, PackagesCard, GetSingleRoleCard } from 'components/pages/CSSAPI';
 
 const CSSAPIPage = () => {
   const { hasRole, isAuthenticated } = useKeycloak();
   const API = useCallAPI();
 
-  const [getRoleInput, setGetRoleInput] = useState('');
   const [createRoleInput, setCreateRoleInput] = useState('');
   const [deleteRoleInput, setDeleteRoleInput] = useState('');
   const [assignUserRoleInput, setAssignUserRoleInput] = useState('');
@@ -38,31 +37,7 @@ const CSSAPIPage = () => {
             {/* GET ROLES */}
             <GetMultipleRolesCard />
             {/* GET ROLE */}
-            <Card paddingY="10px" color={`var(--bcgov_lighter-blue4)`}>
-              <Stack>
-                <Stack direction="row">
-                  <Txt bold>getRole</Txt>
-                  <Txt>Get role details.</Txt>
-                </Stack>
-                <hr />
-                <Stack direction="row" center>
-                  <input
-                    type="text"
-                    placeholder="Type a role name"
-                    onChange={(e) => setGetRoleInput(e.target.value)}
-                  ></input>
-                  <Button
-                    size="s"
-                    onClick={() => {
-                      if (getRoleInput !== '') API.getMethod(APIRoutes.getRole(getRoleInput));
-                    }}
-                  >
-                    Search
-                  </Button>
-                  <Txt size="s">Prints to console (async).</Txt>
-                </Stack>
-              </Stack>
-            </Card>
+            <GetSingleRoleCard />
           </Stack>
           <Stack direction="row">
             {/* CREATE ROLE */}

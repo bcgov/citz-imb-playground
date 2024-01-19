@@ -6,7 +6,6 @@ import { Txt } from 'components/common/Txt';
 import { useKeycloak } from '@bcgov/citz-imb-kc-react';
 import { DeniedIcon } from 'components/icons';
 import { Button } from 'components/common/Button';
-import { APIRoutes } from '../utils';
 import { useCallAPI } from '../hooks';
 import { checkEmptyInputs } from '../utils';
 import { 
@@ -14,13 +13,13 @@ import {
   IntegrationDetailsCard,
   PackagesCard, GetSingleRoleCard,
   CreateRoleCard,
+  DeleteRoleCard,
 } from 'components/pages/CSSAPI';
 
 const CSSAPIPage = () => {
   const { hasRole, isAuthenticated } = useKeycloak();
   const API = useCallAPI();
 
-  const [deleteRoleInput, setDeleteRoleInput] = useState('');
   const [assignUserRoleInput, setAssignUserRoleInput] = useState('');
   const [userIDIRInputs, setUserIDIRInputs] = useState({firstName: '', lastName: '', email: '', guid: ''});
   const [userAzureIDIRInputs, setUserAzureIDIRInputs] = useState({firstName: '', lastName: '', email: '', guid: ''});
@@ -47,32 +46,7 @@ const CSSAPIPage = () => {
             {/* CREATE ROLE */}
             <CreateRoleCard />
             {/* DELETE ROLE */}
-            <Card paddingY="10px" color={`var(--bcgov_lighter-blue4)`}>
-              <Stack>
-                <Stack direction="row">
-                  <Txt bold>deleteRole</Txt>
-                  <Txt>Remove a role.</Txt>
-                </Stack>
-                <hr />
-                <Stack direction="row" center>
-                  <input
-                    type="text"
-                    placeholder="Type a role name"
-                    onChange={(e) => setDeleteRoleInput(e.target.value)}
-                  ></input>
-                  <Button
-                    size="s"
-                    onClick={() => {
-                      if (deleteRoleInput !== '')
-                      API.deleteMethod(APIRoutes.deleteRole(deleteRoleInput));
-                    }}
-                  >
-                    Remove
-                  </Button>
-                  <Txt size="s">Prints to console (async).</Txt>
-                </Stack>
-              </Stack>
-            </Card>
+            <DeleteRoleCard />
           </Stack>
           <Stack direction="row">
             {/* GET IDIR USER */}

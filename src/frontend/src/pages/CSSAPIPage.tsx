@@ -9,13 +9,17 @@ import { Button } from 'components/common/Button';
 import { APIRoutes } from '../utils';
 import { useCallAPI } from '../hooks';
 import { checkEmptyInputs } from '../utils';
-import { GetMultipleRolesCard, IntegrationDetailsCard, PackagesCard, GetSingleRoleCard } from 'components/pages/CSSAPI';
+import { 
+  GetMultipleRolesCard,
+  IntegrationDetailsCard,
+  PackagesCard, GetSingleRoleCard,
+  CreateRoleCard,
+} from 'components/pages/CSSAPI';
 
 const CSSAPIPage = () => {
   const { hasRole, isAuthenticated } = useKeycloak();
   const API = useCallAPI();
 
-  const [createRoleInput, setCreateRoleInput] = useState('');
   const [deleteRoleInput, setDeleteRoleInput] = useState('');
   const [assignUserRoleInput, setAssignUserRoleInput] = useState('');
   const [userIDIRInputs, setUserIDIRInputs] = useState({firstName: '', lastName: '', email: '', guid: ''});
@@ -41,32 +45,7 @@ const CSSAPIPage = () => {
           </Stack>
           <Stack direction="row">
             {/* CREATE ROLE */}
-            <Card paddingY="10px" color={`var(--bcgov_lighter-blue4)`}>
-              <Stack>
-                <Stack direction="row">
-                  <Txt bold>createRole</Txt>
-                  <Txt>Create a new role.</Txt>
-                </Stack>
-                <hr />
-                <Stack direction="row" center>
-                  <input
-                    type="text"
-                    placeholder="Type a role name"
-                    onChange={(e) => setCreateRoleInput(e.target.value)}
-                  ></input>
-                  <Button
-                    size="s"
-                    onClick={() => {
-                      if (createRoleInput !== '')
-                      API.postMethod(APIRoutes.createRole(createRoleInput));
-                    }}
-                  >
-                    Create
-                  </Button>
-                  <Txt size="s">Prints to console (async).</Txt>
-                </Stack>
-              </Stack>
-            </Card>
+            <CreateRoleCard />
             {/* DELETE ROLE */}
             <Card paddingY="10px" color={`var(--bcgov_lighter-blue4)`}>
               <Stack>

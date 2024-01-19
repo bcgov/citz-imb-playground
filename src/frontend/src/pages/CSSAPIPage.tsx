@@ -1,16 +1,15 @@
 import './Pages.css';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Stack } from 'components/common/Stack';
 import { Card } from 'components/common/Card';
 import { Txt } from 'components/common/Txt';
 import { useKeycloak } from '@bcgov/citz-imb-kc-react';
 import { DeniedIcon } from 'components/icons';
 import { Button } from 'components/common/Button';
-import { PackagesCard } from 'components/pages/CSSAPI/PackagesCard';
-import { IntegrationDetailsCard } from 'components/pages/CSSAPI/IntegrationDetailsCard';
 import { APIRoutes } from '../utils';
 import { useCallAPI } from '../hooks';
 import { checkEmptyInputs } from '../utils';
+import { GetMultipleRolesCard, IntegrationDetailsCard, PackagesCard } from 'components/pages/CSSAPI';
 
 const CSSAPIPage = () => {
   const { hasRole, isAuthenticated } = useKeycloak();
@@ -37,21 +36,7 @@ const CSSAPIPage = () => {
           <IntegrationDetailsCard />
           <Stack direction="row">
             {/* GET ROLES */}
-            <Card paddingY="10px" color={`var(--bcgov_lighter-blue4)`}>
-              <Stack>
-                <Stack direction="row">
-                  <Txt bold>getRoles</Txt>
-                  <Txt>Get all roles from integration.</Txt>
-                </Stack>
-                <hr />
-                <Stack direction="row" center>
-                  <Button size="s" onClick={() => API.getMethod(APIRoutes.getRoles)}>
-                    Search
-                  </Button>
-                  <Txt size="s">Prints to console (async).</Txt>
-                </Stack>
-              </Stack>
-            </Card>
+            <GetMultipleRolesCard />
             {/* GET ROLE */}
             <Card paddingY="10px" color={`var(--bcgov_lighter-blue4)`}>
               <Stack>

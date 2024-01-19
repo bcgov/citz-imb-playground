@@ -6,7 +6,7 @@ import { checkEmptyInputs } from "utils";
 
 export const GetIDIRUserCard = () => {
   const API = useCallAPI();
-  const [userIDIRInputs, setUserIDIRInputs] = useState({firstName: '', lastName: '', email: '', guid: ''});
+  const [userInputs, setUserInputs] = useState({firstName: '', lastName: '', email: '', guid: ''});
 
   return (
     <Card paddingY="10px" color={`var(--bcgov_lighter-blue4)`}>
@@ -20,25 +20,25 @@ export const GetIDIRUserCard = () => {
           <input
             type="text"
             placeholder="Type a user's first name"
-            onChange={(e) => setUserIDIRInputs({...userIDIRInputs, firstName: e.target.value})}
+            onChange={(e) => setUserInputs({...userInputs, firstName: e.target.value})}
           ></input>
           <input
             type="text"
             placeholder="Type a user's last name"
-            onChange={(e) => setUserIDIRInputs({...userIDIRInputs, lastName: e.target.value})}
+            onChange={(e) => setUserInputs({...userInputs, lastName: e.target.value})}
           ></input>
           <input
             type="text"
             placeholder="Type a user's email"
-            onChange={(e) => setUserIDIRInputs({...userIDIRInputs, email: e.target.value})}
+            onChange={(e) => setUserInputs({...userInputs, email: e.target.value})}
           ></input>
           <Stack direction="row" center>
             <Button
               size="s"
               onClick={() => {
-                API.getMethod(APIRoutes.getIDIRUser(userIDIRInputs.firstName, userIDIRInputs.lastName, userIDIRInputs.email));
+                API.getMethod(APIRoutes.getIDIRUser(userInputs.firstName, userInputs.lastName, userInputs.email));
               }}
-              disabled={checkEmptyInputs(userIDIRInputs)}
+              disabled={checkEmptyInputs(userInputs)}
               >
               Search
             </Button>

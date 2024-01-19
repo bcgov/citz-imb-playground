@@ -7,7 +7,6 @@ import { useKeycloak } from '@bcgov/citz-imb-kc-react';
 import { DeniedIcon } from 'components/icons';
 import { Button } from 'components/common/Button';
 import { useCallAPI } from '../hooks';
-import { checkEmptyInputs } from '../utils';
 import { 
   GetMultipleRolesCard,
   IntegrationDetailsCard,
@@ -15,6 +14,7 @@ import {
   CreateRoleCard,
   DeleteRoleCard,
   GetIDIRUserCard,
+  GetAzureIDIRUserCard,
 } from 'components/pages/CSSAPI';
 
 const CSSAPIPage = () => {
@@ -22,7 +22,6 @@ const CSSAPIPage = () => {
   const API = useCallAPI();
 
   const [assignUserRoleInput, setAssignUserRoleInput] = useState('');
-  const [userAzureIDIRInputs, setUserAzureIDIRInputs] = useState({firstName: '', lastName: '', email: '', guid: ''});
   const [IDIRInput, setIDIRInput] = useState('');
 
   // Redirect if not logged in.
@@ -52,49 +51,7 @@ const CSSAPIPage = () => {
             {/* GET IDIR USER */}
             <GetIDIRUserCard />
             {/* GET AZURE IDIR USER */}
-            <Card paddingY="10px" color={`var(--bcgov_lighter-blue4)`}>
-              <Stack>
-                <Stack direction="row">
-                  <Txt bold>getAzureIDIRUsers</Txt>
-                  <Txt>Get user details.</Txt>
-                </Stack>
-                <hr />
-                <Stack>
-                  <Stack>
-                    <input
-                      type="text"
-                      placeholder="Type a user's first name"
-                      onChange={(e) => setUserAzureIDIRInputs({...userAzureIDIRInputs, firstName: e.target.value})}
-                    ></input>
-                    <input
-                      type="text"
-                      placeholder="Type a user's last name"
-                      onChange={(e) => setUserAzureIDIRInputs({...userAzureIDIRInputs, lastName: e.target.value})}
-                    ></input>
-                    <input
-                      type="text"
-                      placeholder="Type a user's email"
-                      onChange={(e) => setUserAzureIDIRInputs({...userAzureIDIRInputs, email: e.target.value})}
-                    ></input>
-                    <Stack direction='row'>
-                      <Button
-                        size="s"
-                        onClick={() => {
-                          API.getMethod(
-                              "/cssapi/user/azure-user",
-                              `?firstName=${userAzureIDIRInputs.firstName}&lastName=${userAzureIDIRInputs.lastName}&email=${userAzureIDIRInputs.email}`,
-                            );
-                        }}
-                        disabled={checkEmptyInputs(userAzureIDIRInputs)}
-                      >
-                        Search
-                      </Button>
-                      <Txt size="s">Prints to console (async).</Txt>
-                    </Stack>
-                  </Stack>
-                </Stack>
-              </Stack>
-            </Card>
+            <GetAzureIDIRUserCard />
           </Stack>
           <Stack direction="row">
             {/* Assign ROLE */}

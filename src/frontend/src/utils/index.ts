@@ -1,3 +1,3 @@
 export * from './APIRoutes';
 export * from './formatDateString';
-export * from './hasNonEmptyStringProperties';
+export * from './hasNoEmptyStringProperties';

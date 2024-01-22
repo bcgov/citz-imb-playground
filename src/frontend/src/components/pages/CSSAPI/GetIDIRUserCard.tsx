@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Stack, Card, Txt, Button } from "components/common";
 import { APIRoutes } from "utils";
 import { useCallAPI } from "hooks";
-import { hasNonEmptyStringProperties } from "utils";
+import { hasNoEmptyStringProperties } from "utils";
 
 export const GetIDIRUserCard = () => {
   const API = useCallAPI();
@@ -38,7 +38,7 @@ export const GetIDIRUserCard = () => {
               onClick={() => {
                 API.getMethod(APIRoutes.getIDIRUser(userInputs.firstName, userInputs.lastName, userInputs.email));
               }}
-              disabled={hasNonEmptyStringProperties(userInputs)}
+              disabled={hasNoEmptyStringProperties(userInputs)}
               >
               Search
             </Button>

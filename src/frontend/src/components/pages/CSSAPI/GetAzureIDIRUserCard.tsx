@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Stack, Card, Txt, Button } from "components/common";
 import { APIRoutes } from "utils";
 import { useCallAPI } from "hooks";
-import { hasNonEmptyStringProperties } from "utils";
+import { hasNoEmptyStringProperties } from "utils";
 
 export const GetAzureIDIRUserCard = () => {
   const API = useCallAPI();
@@ -39,7 +39,7 @@ export const GetAzureIDIRUserCard = () => {
                 onClick={() => {
                   API.getMethod(APIRoutes.getAzureIDIRUser(userInputs.firstName, userInputs.lastName, userInputs.email));
                 }}
-                disabled={hasNonEmptyStringProperties(userInputs)}
+                disabled={hasNoEmptyStringProperties(userInputs)}
               >
                 Search
               </Button>

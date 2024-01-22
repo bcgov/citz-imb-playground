@@ -8,3 +8,4 @@ export * from './GetSingleRoleCard';
 export * from './IntegrationDetailsCard';
 export * from './PackagesCard';
 export * from './UnassignUserRoleCard';
+export * from './BaseAPICallCard';

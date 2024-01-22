@@ -27,7 +27,7 @@ Set up by following the steps at [Basic Setup Guide](#basic-setup-guide).
 - [General Information](#general-information)
 - [Basic Setup Guide](#basic-setup-guide) - **Start Here!**
 - [Directory Structure](#directory-structure) - How the repo is designed.
-- [Scripts](#scripts) - Scripts for running and working on web app.
+- [Scripts](#scripts) - Scripts for running and working on the web app.
 - [Included Packages](#included-packages) - Which CITZ IMB node packages are being tested.
 
 ## General Information
@@ -53,6 +53,17 @@ Set up by following the steps at [Basic Setup Guide](#basic-setup-guide).
 
 ```
 .
+├── .github/
+|   ├── config/
+|   |   └── dep-report.json5                # Configure options for NPM Dep Report.
+|   ├── helpers/
+|   |   ├── github-api/                     # Functions to access the GitHub API.
+|   |   ├── create-npm-dep-report-issues.js # Creates GitHub Issues for Npm Dep Reports.
+|   |   ├── create-npm-dep-report.js        # Creates text bodies for Npm Dep Reports.
+|   |   ├── parse-json5-config.js           # Parses json5 files for GitHub actions output.
+|   |   └── parse-npm-deps.js               # Parses package.json files for changes to package versions.
+|   ├── workflows/
+|   |   └── npm-dep-report.yaml             # Reports on new package versions.
 ├── src/
 |   ├── backend/                            # Express API.
 |   |   ├── scripts/                        # Utility scripts used to run the server.

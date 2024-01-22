@@ -17,7 +17,7 @@ const RichTextEditorPage = () => {
 
   // Redirect if not logged in.
   useEffect(() => {
-    if (!isAuthenticated) setTimeout(() => (window.location.href = '/'), 1000);
+    if (!isAuthenticated) setTimeout(() => (window.location.href = '/'), 500);
   }, [isAuthenticated]);
 
   return (

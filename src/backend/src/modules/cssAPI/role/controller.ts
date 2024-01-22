@@ -80,8 +80,7 @@ export const unassignKCUserRole = errorWrapper(async (req: Request, res: Respons
   if (!role || role === '' || typeof role !== 'string')
     return res.status(404).send("Missing 'role' in request query.");
 
-  if (!guid || guid === '' || typeof role !== 'string')
-    return res.status(404).send("Missing 'guid' in request param.");
+  if (!guid) return res.status(404).send("Missing 'guid' in request param.");
 
   res.json(await unassignUserRole(guid, role));
 });

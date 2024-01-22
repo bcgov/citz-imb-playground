@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Stack, Card, Txt, Button } from "components/common";
+import { Stack, Card, Txt } from "components/common";
 
 type BaseAPICallCardProps = {
   title: string;

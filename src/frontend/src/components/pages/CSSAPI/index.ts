@@ -1,23 +1,10 @@
-import { GetMultipleRolesCard } from "./GetMultipleRolesCard";
-import { IntegrationDetailsCard } from "./IntegrationDetailsCard";
-import { PackagesCard } from "./PackagesCard";
-import { GetSingleRoleCard } from "./GetSingleRoleCard";
-import { CreateRoleCard } from "./CreateRoleCard";
-import { DeleteRoleCard } from "./DeleteRoleCard";
-import { GetIDIRUserCard } from "./GetIDIRUserCard";
-import { GetAzureIDIRUserCard } from "./GetAzureIDIRUserCard";
-import { AssignUserRoleCard } from "./AssignUserRoleCard";
-import { UnassignUserRoleCard } from "./UnassignUserRoleCard";
-
-export {
-    GetMultipleRolesCard,
-    IntegrationDetailsCard,
-    PackagesCard,
-    GetSingleRoleCard,
-    CreateRoleCard,
-    DeleteRoleCard,
-    GetIDIRUserCard,
-    GetAzureIDIRUserCard,
-    AssignUserRoleCard,
-    UnassignUserRoleCard,
-};
+export * from './AssignUserRoleCard';
+export * from './CreateRoleCard';
+export * from './DeleteRoleCard';
+export * from './GetAzureIDIRUserCard';
+export * from './GetIDIRUserCard';
+export * from './GetMultipleRolesCard';
+export * from './GetSingleRoleCard';
+export * from './IntegrationDetailsCard';
+export * from './PackagesCard';
+export * from './UnassignUserRoleCard';

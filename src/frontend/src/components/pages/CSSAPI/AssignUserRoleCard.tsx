@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Stack, Card, Txt, Button } from "components/common";
+import { Stack, Txt, Button } from "components/common";
 import { APIRoutes } from "utils";
 import { useCallAPI } from "hooks";
 import { BaseAPICallCard } from "./BaseAPICallCard";
@@ -12,7 +12,7 @@ export const AssignUserRoleCard = () => {
   return (
     <BaseAPICallCard 
         title='assignUserRole'
-        description='Assign user a new role'
+        description='Assign user a new role.'
     >
       <Stack direction="row" center>
         <input

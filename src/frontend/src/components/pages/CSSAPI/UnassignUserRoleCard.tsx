@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Stack, Card, Txt, Button } from "components/common";
+import { Stack, Txt, Button } from "components/common";
 import { APIRoutes } from "utils";
 import { useCallAPI } from "hooks";
+import { BaseAPICallCard } from "./BaseAPICallCard";
 
 export const UnassignUserRoleCard = () => {
   const API = useCallAPI();
@@ -9,21 +10,17 @@ export const UnassignUserRoleCard = () => {
   const [IDIRInput, setIDIRInput] = useState('');
 
   return (
-    <Card paddingY="10px" color={`var(--bcgov_lighter-blue4)`}>
-      <Stack>
-        <Stack direction="row">
-          <Txt bold>unassignUserRole</Txt>
-          <Txt>Unassign a user role.</Txt>
-        </Stack>
-        <hr />
-        <Stack direction="row" center>
-          <input
-            type="text"
-            placeholder="Type a role name"
-            onChange={(e) => setUserRoleInput(e.target.value)}
-          ></input>
-          <Txt size="s">Prints to console (async).</Txt>
-        </Stack>
+    <BaseAPICallCard
+      title='unassignUserRole'
+      description='Unassign a user role.'
+    >
+      <Stack direction="row" center>
+        <input
+          type="text"
+          placeholder="Type a role name"
+          onChange={(e) => setUserRoleInput(e.target.value)}
+        ></input>
+        <Txt size="s">Prints to console (async).</Txt>
       </Stack>
       <Stack>
         <hr />
@@ -45,6 +42,6 @@ export const UnassignUserRoleCard = () => {
           <Txt size="s">Prints to console (async).</Txt>
         </Stack>
       </Stack>
-    </Card>
+    </BaseAPICallCard>
   );
 };

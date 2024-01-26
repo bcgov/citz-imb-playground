@@ -27,6 +27,7 @@ Set up by following the steps at [Basic Setup Guide](#basic-setup-guide).
 - [General Information](#general-information)
 - [Basic Setup Guide](#basic-setup-guide) - **Start Here!**
 - [Directory Structure](#directory-structure) - How the repo is designed.
+- [Git Aliases](#git-aliases) - Available git aliases.
 - [Scripts](#scripts) - Scripts for running and working on the web app.
 - [Included Packages](#included-packages) - Which CITZ IMB node packages are being tested.
 
@@ -92,6 +93,34 @@ Set up by following the steps at [Basic Setup Guide](#basic-setup-guide).
 |   |   ├── nginx.conf                      # Configure proxy pass for prod build.
 |   |   ├── package.json                    # Configure packages.
 |   |   └── vite.config.ts                  # Configure vite server and proxy pass for dev build.
+```
+
+[Return to Top](#bcgov-citz-imb-playground)
+
+<br />
+
+## Git Aliases
+
+These aliases are available within the repository.
+
+```bash
+# List all available aliases.
+$ git aliases
+```
+
+```bash
+# Amend staged changes to the last commit without changing the commit message.
+$ git amend
+```
+
+```bash
+# Undo the last commit and bring it's changes back into the staging area.
+$ git undo-last-commit-soft
+```
+
+```bash
+# Undo the last commit and discard it's changes.
+$ git undo-last-commit-hard
 ```
 
 [Return to Top](#bcgov-citz-imb-playground)

@@ -1,4 +1,4 @@
-import './Card.css';
+import './styles.css';
 import React, { ReactNode } from 'react';
 
 type CardProps = {
@@ -8,10 +8,11 @@ type CardProps = {
   paddingX?: string;
   height?: string;
   color?: string;
+  className?: string;
 };
 
 export const Card = (props: CardProps) => {
-  const { children, center, paddingY, paddingX, height, color } = props;
+  const { children, className, center, paddingY, paddingX, height, color } = props;
   return (
     <div
       style={{
@@ -22,7 +23,7 @@ export const Card = (props: CardProps) => {
         height: height ?? '',
         backgroundColor: color ?? '',
       }}
-      className={`card ${center ? 'justifyCenter' : ''}`}
+      className={`${className ?? ''} card ${center ? 'justifyCenter' : ''}`}
     >
       {children}
     </div>

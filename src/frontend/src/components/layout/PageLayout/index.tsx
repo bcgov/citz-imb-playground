@@ -1,5 +1,5 @@
-import { Nav } from 'components/common/Nav';
-import './PageLayout.css';
+import './styles.css';
+import { Nav } from 'components/common';
 import React, { ReactNode } from 'react';
 
 type PageLayoutProps = {

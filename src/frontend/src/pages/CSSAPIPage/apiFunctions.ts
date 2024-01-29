@@ -1,0 +1,68 @@
+export const apiFunctions = [
+  {
+    function: 'getRoles',
+    description: 'Get all roles from integration.',
+    param: '',
+    query: undefined,
+    method: 'GET',
+  },
+  {
+    function: 'getRole',
+    description: 'Get role details.',
+    param: 'roleName',
+    query: undefined,
+    method: 'GET',
+  },
+  {
+    function: 'getAzureIDIRUsers',
+    description: 'Get user details.',
+    param: '',
+    query: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      guid: '',
+    },
+    method: 'GET',
+  },
+  {
+    function: 'getIDIRUsers',
+    description: 'Get user details.',
+    param: '',
+    query: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      guid: '',
+    },
+    method: 'GET',
+  },
+  {
+    function: 'createRole',
+    description: 'Create a new role.',
+    param: 'roleName',
+    query: undefined,
+    method: 'POST',
+  },
+  {
+    function: 'deleteRole',
+    description: 'Remove a role.',
+    param: 'roleName',
+    query: undefined,
+    method: 'DELETE',
+  },
+  {
+    function: 'assignUserRole',
+    description: 'Assign user a new role.',
+    param: 'username',
+    query: { role: '' },
+    method: 'POST',
+  },
+  {
+    function: 'unassignUserRole',
+    description: 'Unassign a user role.',
+    param: 'username',
+    query: { role: '' },
+    method: 'DELETE',
+  },
+];

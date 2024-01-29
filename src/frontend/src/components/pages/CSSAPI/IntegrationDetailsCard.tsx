@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { Stack } from 'components/common/Stack';
-import { Card } from 'components/common/Card';
-import { Txt } from 'components/common/Txt';
+import { Card, Txt, Stack } from 'components/common';
 import { useKeycloak } from '@bcgov/citz-imb-kc-react';
-import { APIRoutes, formatDateString } from '../../../utils';
+import { APIRoutes, formatDateString } from 'utils';
+
+type IntegrationDetails = {
+  id?: number;
+  projectName?: string;
+  authType?: string;
+  status?: string;
+  environments?: string[];
+  createdAt?: string;
+};
 
 export const IntegrationDetailsCard = () => {
   const { getAuthorizationHeaderValue } = useKeycloak();
-  const [integrationDetails, setIntegrationDetails] = useState<any>(undefined);
+  const [integrationDetails, setIntegrationDetails] = useState<IntegrationDetails>({});
 
   // Update integration details.
   useEffect(() => {
@@ -67,7 +74,11 @@ export const IntegrationDetailsCard = () => {
               <Txt size="s" bold>
                 Created:
               </Txt>
-              <Txt size="s">{formatDateString(integrationDetails?.createdAt)}</Txt>
+              <Txt size="s">
+                {integrationDetails?.createdAt
+                  ? formatDateString(integrationDetails?.createdAt)
+                  : ''}
+              </Txt>
             </Stack>
           </Stack>
         ) : (

@@ -9,12 +9,28 @@ body {
   font-family: 'BC Sans', 'Noto Sans', 'Verdana', 'Arial', 'sans-serif';
 }
 
+textarea {
+  background-color: var(--white);
+  border: 1px solid var(--grey);
+  border-radius: 3px;
+  padding: 2px;
+  color: var(--black);
+  min-height: 150px;
+  min-width: 100px;
+}
+
 input {
+  background-color: var(--white);
   border: 1px solid var(--grey);
   border-radius: 3px;
   padding: 2px;
   color: var(--black);
 }
+
+input::placeholder {
+  color: var(--light-grey2);
+}
+
 
 a {
   color: var(--bcgov_lighter-blue3);

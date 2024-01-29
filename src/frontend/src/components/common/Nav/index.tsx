@@ -1,11 +1,9 @@
-import './Nav.css';
+import './styles.css';
 import React from 'react';
 import { useKeycloak } from '@bcgov/citz-imb-kc-react';
-import { Button } from './Button';
-import { Stack } from './Stack';
+import { Button, Stack, Txt } from '../index';
 import { GearsIcon, KeyIcon, TextIcon } from 'components/icons';
 import { useNavigate } from 'react-router-dom';
-import { Txt } from './Txt';
 
 export const Nav = () => {
   const { isAuthenticated, user, login, logout } = useKeycloak();

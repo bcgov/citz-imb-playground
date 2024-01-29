@@ -1,8 +1,5 @@
 import React from 'react';
-import { Stack } from 'components/common/Stack';
-import { Card } from 'components/common/Card';
-import { Txt } from 'components/common/Txt';
-import { Link } from 'components/common/Link';
+import { Card, Link, Txt, Stack } from 'components/common';
 
 export const PackagesCard = () => {
   const versions = window.configuration?.packageVersions;

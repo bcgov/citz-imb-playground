@@ -1,11 +1,7 @@
 import './Pages.css';
 import React, { useEffect, useState } from 'react';
-import { Stack } from 'components/common/Stack';
-import { Card } from 'components/common/Card';
-import { KeycloakIdirUser, useKeycloak } from '@bcgov/citz-imb-kc-react';
-import { Txt } from 'components/common/Txt';
-import { Link } from 'components/common/Link';
-import { Button } from 'components/common/Button';
+import { Button, Card, Link, Txt, Stack } from 'components/common';
+import { useKeycloak } from '@bcgov/citz-imb-kc-react';
 
 const KeycloakPage = () => {
   const { state, user, hasRole, isAuthenticated, getAuthorizationHeaderValue } = useKeycloak();

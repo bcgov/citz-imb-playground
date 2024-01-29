@@ -1,0 +1,19 @@
+code {
+  font-size: 12px;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  margin: 0;
+  padding: 10px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  word-break: break-word;
+  word-wrap: break-word;
+  color: var(--white);
+  font-family: monospace;
+  font-weight: 600;
+}
+
+.codeCard {
+  max-height: 450px;
+  overflow-y: auto;
+}

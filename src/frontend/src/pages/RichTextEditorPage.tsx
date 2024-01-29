@@ -1,9 +1,6 @@
 import './Pages.css';
 import React, { useEffect, useState } from 'react';
-import { Stack } from 'components/common/Stack';
-import { Card } from 'components/common/Card';
-import { Txt } from 'components/common/Txt';
-import { Link } from 'components/common/Link';
+import { Card, Link, Txt, Stack } from 'components/common';
 import { RichTextEditor } from '@bcgov/citz-imb-richtexteditor';
 import { useKeycloak } from '@bcgov/citz-imb-kc-react';
 

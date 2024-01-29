@@ -1,4 +1,4 @@
-import './Button.css';
+import './styles.css';
 import React, { ReactNode } from 'react';
 
 type ButtonProps = {
@@ -10,7 +10,7 @@ type ButtonProps = {
 };
 
 export const Button = (props: ButtonProps) => {
-  const { color = 'grey', size = 'm', onClick, children, disabled=false } = props;
+  const { color = 'grey', size = 'm', onClick, children, disabled = false } = props;
 
   // Background color className:
   const backgroundColor =
@@ -20,7 +20,11 @@ export const Button = (props: ButtonProps) => {
   const sizeClass = size === 's' ? 'textSmall' : size === 'l' ? 'textLarge' : '';
 
   return (
-    <button className={`${backgroundColor} ${sizeClass}`} onClick={() => onClick()} disabled={disabled}>
+    <button
+      className={`${backgroundColor} ${sizeClass}`}
+      onClick={() => onClick()}
+      disabled={disabled}
+    >
       {children}
     </button>
   );

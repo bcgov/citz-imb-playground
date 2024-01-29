@@ -1,8 +1,6 @@
 import './Pages.css';
 import React from 'react';
-import { Card } from 'components/common/Card';
-import { Txt } from 'components/common/Txt';
-import { Stack } from 'components/common/Stack';
+import { Card, Txt, Stack } from 'components/common';
 import { LeftArrowIcon } from 'components/icons';
 import { useKeycloak } from '@bcgov/citz-imb-kc-react';
 

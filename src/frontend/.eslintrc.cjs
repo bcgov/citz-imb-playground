@@ -35,6 +35,9 @@ module.exports = {
     // Override ones from the extended configs.
     'prettier/prettier': 'warn',
     'react/prop-types': 'off',
+    'no-prototype-builtins': 'off',
+    'no-unused-vars': 'warn',
+    '@typescript-eslint/no-unused-vars': 'warn',
     '@typescript-eslint/no-non-null-assertion': 'off', // Allow use of non-null assertion operator (!).
     '@typescript-eslint/no-explicit-any': 'warn', // Warn if 'any' type is used.
     '@typescript-eslint/ban-types': [

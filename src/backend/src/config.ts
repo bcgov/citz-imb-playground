@@ -1,5 +1,4 @@
-import { KCOptions, KeycloakUser } from '@bcgov/citz-imb-kc-express';
-import { activateUser } from './utils';
+import { KEYCLOAK_OPTIONS } from './keycloak/config';
 
 // Environment variables set in compose file.
 const {
@@ -40,16 +39,6 @@ const RATE_LIMIT_OPTIONS = {
   max: 100,
   standardHeaders: true,
   legacyHeaders: false,
-};
-
-// Keycloak auth integration configuration.
-const KEYCLOAK_OPTIONS: KCOptions = {
-  afterUserLogin: (user: KeycloakUser | null) => {
-    if (user) activateUser(user);
-  },
-  afterUserLogout: (user: KeycloakUser | null) => {
-    console.log(`${user?.display_name ?? 'Unknown'} has logged out.`);
-  },
 };
 
 // Exported configuration values.

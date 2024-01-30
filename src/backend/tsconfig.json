@@ -8,8 +8,14 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
   },
   "include": ["**/*"],
-  "exclude": ["tsconfig.json", "scripts/", "node_modules/"]
+  "exclude": ["tsconfig.json", "scripts/", "node_modules/", "**/*.test.ts"]
 }

@@ -13,7 +13,7 @@ type ExpressHandler = (
 /**
  * Wraps a route handler (controller) function with error handling logic.
  * @param {ExpressHandler} handler - The route handler (controller) function to wrap.
- * @returns {Promise<void>} A new middleware function that wraps the route handler in a try-catch block.
+ * @returns {Promise<void | Response<unknown> | undefined>} A new middleware function that wraps the route handler in a try-catch block.
  */
 export const errorWrapper = (handler: ExpressHandler) => {
   return async (req: Request, res: Response, next: NextFunction) => {
@@ -23,7 +23,6 @@ export const errorWrapper = (handler: ExpressHandler) => {
       // Execute the request logic.
       await handler(req, res, next);
     } catch (error: unknown) {
-      // Catch any errors that occur during the request.
       const { method, originalUrl } = req;
       let statusCode = httpStatusCode.INTERNAL_SERVER_ERROR,
         message = 'An unexpected error occurred.';
@@ -32,7 +31,7 @@ export const errorWrapper = (handler: ExpressHandler) => {
         statusCode = error.statusCode;
         message = error.message;
       } else if (error instanceof Error) {
-        message = error?.message;
+        message = error.message;
       }
 
       // Log the error to the console.

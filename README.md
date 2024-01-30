@@ -145,6 +145,11 @@ $ npm run prune
 ```
 
 ```bash
+# Clean install packages in frontend and backend (requires prune and up to affect live site).
+$ npm run install
+```
+
+```bash
 # Clean install packages in frontend (requires prune and up to affect live site).
 $ npm run install:frontend
 ```
@@ -152,6 +157,11 @@ $ npm run install:frontend
 ```bash
 # Clean install packages in backend (requires prune and up to affect live site).
 $ npm run install:backend
+```
+
+```bash
+# Prunes, clean installs packages, and rebuilds containers.
+$ npm run rebuild
 ```
 
 ```bash

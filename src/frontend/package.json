@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@bcgov/bc-sans": "2.1.0",
-    "@bcgov/citz-imb-kc-react": "https://github.com/bcgov/citz-imb-kc-react/releases/download/v1.4.0/bcgov-citz-imb-kc-react-1.4.0.tgz",
+    "@bcgov/citz-imb-kc-react": "https://github.com/bcgov/citz-imb-kc-react/releases/download/v1.4.1/bcgov-citz-imb-kc-react-1.4.1.tgz",
     "@bcgov/citz-imb-richtexteditor": "https://github.com/bcgov/citz-imb-richtexteditor/releases/download/v1.13.1/bcgov-citz-imb-richtexteditor-1.13.1.tgz",
     "@vitejs/plugin-react": "4.2.1",
     "react": "18.2.0",

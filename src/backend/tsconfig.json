@@ -16,6 +16,6 @@
       ]
     }
   },
-  "include": ["**/*"],
+  "include": ["src"],
   "exclude": ["tsconfig.json", "scripts/", "node_modules/", "**/*.test.ts"]
 }

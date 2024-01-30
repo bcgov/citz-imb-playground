@@ -6,3 +6,4 @@ export * from './getPackageVersions';
 export * from './getLatestPackageVersions';
 export * from './debugStatements';
 export * from './httpStatusCode';
+export * from './HttpError';

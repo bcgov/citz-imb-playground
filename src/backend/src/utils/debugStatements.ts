@@ -1,8 +1,7 @@
 import { Request } from 'express';
 import * as c from './colors';
 
-import config from '../config';
-const { DEBUG, VERBOSE_DEBUG } = config;
+const { DEBUG, VERBOSE_DEBUG } = process.env;
 
 export const debugRequest = (req: Request) => {
   // Set method color.
@@ -14,10 +13,10 @@ export const debugRequest = (req: Request) => {
   else if (method === 'DELETE') methodText = `${c.Red}${methodText}${c.Reset}`;
 
   // DEBUG.
-  if (DEBUG) console.info(`DEBUG: Request made to [${methodText}] ${req.originalUrl}`);
+  if (DEBUG === 'true') console.info(`DEBUG: Request made to [${methodText}] ${req.originalUrl}`);
 
   // VERBOSE DEBUG.
-  if (VERBOSE_DEBUG) {
+  if (VERBOSE_DEBUG === 'true') {
     console.info(`  Request query: ${JSON.stringify(req.query)}`);
     console.info(`  Request body:`, req.body);
   }

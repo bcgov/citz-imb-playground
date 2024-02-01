@@ -1,13 +1,21 @@
 import { Request, Response } from 'express';
-import { errorWrapper, httpStatusCode } from '../../../utils';
+import { errorWrapper, getParams, getQuery } from '../../../utils';
 import {
   getRole,
   getRoles,
   createRole,
   deleteRole,
-  assignUserRoles,
-  unassignUserRole,
+  updateRole,
+  getRoleComposites,
+  addRoleComposite,
+  deleteRoleComposite,
 } from '@bcgov/citz-imb-kc-css-api';
+import {
+  addRoleCompositeQuerySchema,
+  deleteRoleCompositeQuerySchema,
+  rolePathParamsSchema,
+  updateRoleQuerySchema,
+} from './schemas';
 
 /**
  * @method GET
@@ -25,8 +33,8 @@ export const getKCRoles = errorWrapper(async (req: Request, res: Response) => {
  * @protected Requires "playground-admin"
  */
 export const getKCRole = errorWrapper(async (req: Request, res: Response) => {
-  const role = req.params.role;
-  if (!role) return res.status(httpStatusCode.NOT_FOUND).send("Missing 'role' in request query.");
+  const pathParamsSchema = rolePathParamsSchema;
+  const { role } = getParams(req, pathParamsSchema);
 
   res.json(await getRole(role));
 });
@@ -38,51 +46,10 @@ export const getKCRole = errorWrapper(async (req: Request, res: Response) => {
  * @protected Requires "playground-admin"
  */
 export const createKCRole = errorWrapper(async (req: Request, res: Response) => {
-  const role = req.params.role;
-  if (!role) return res.status(httpStatusCode.NOT_FOUND).send("Missing 'role' in request param.");
+  const pathParamsSchema = rolePathParamsSchema;
+  const { role } = getParams(req, pathParamsSchema);
 
   res.json(await createRole(role));
-});
-
-/**
- * @method POST
- * @param guid - The user's GUID
- * @query role - The role to assign
- * @route /cssapi/role/assign/:guid
- * @protected Requires "playground-admin"
- */
-export const assignKCUserRole = errorWrapper(async (req: Request, res: Response) => {
-  const { guid } = req.params;
-  const { role } = req.query;
-
-  if (!role || role === '' || typeof role !== 'string')
-    return res.status(404).send("Missing 'role' in request query.");
-
-  if (!guid || guid === '' || typeof role !== 'string')
-    return res.status(404).send("Missing 'guid' in request param.");
-
-  const roleNames = [role];
-
-  res.json(await assignUserRoles(guid, roleNames));
-});
-
-/**
- * @method DELETE
- * @param guid - The user's GUID
- * @query role - The role to unassign
- * @route /cssapi/role/assign/:guid
- * @protected Requires "playground-admin"
- */
-export const unassignKCUserRole = errorWrapper(async (req: Request, res: Response) => {
-  const { guid } = req.params;
-  const { role } = req.query;
-
-  if (!role || role === '' || typeof role !== 'string')
-    return res.status(404).send("Missing 'role' in request query.");
-
-  if (!guid) return res.status(404).send("Missing 'guid' in request param.");
-
-  res.json(await unassignUserRole(guid, role));
 });
 
 /**
@@ -92,8 +59,72 @@ export const unassignKCUserRole = errorWrapper(async (req: Request, res: Respons
  * @protected Requires "playground-admin"
  */
 export const deleteKCRole = errorWrapper(async (req: Request, res: Response) => {
-  const role = req.params.role;
-  if (!role) return res.status(httpStatusCode.NOT_FOUND).send("Missing 'role' in request param.");
+  const pathParamsSchema = rolePathParamsSchema;
+  const { role } = getParams(req, pathParamsSchema);
 
   res.json(await deleteRole(role));
+});
+
+/**
+ * @method PATCH
+ * @param role - The role name to update.
+ * @query newRoleName - The new role name.
+ * @route /cssapi/role/:role
+ * @protected Requires "playground-admin"
+ */
+export const updateKCRole = errorWrapper(async (req: Request, res: Response) => {
+  const querySchema = updateRoleQuerySchema;
+  const pathParamsSchema = rolePathParamsSchema;
+
+  const { role } = getParams(req, pathParamsSchema);
+  const { newRoleName } = getQuery(req, querySchema);
+
+  res.json(await updateRole(role, newRoleName));
+});
+
+/**
+ * @method GET
+ * @param role - The role name to get composites of.
+ * @route /cssapi/role/composite/:role
+ * @protected Requires "playground-admin"
+ */
+export const getKCRoleComposites = errorWrapper(async (req: Request, res: Response) => {
+  const pathParamsSchema = rolePathParamsSchema;
+  const { role } = getParams(req, pathParamsSchema);
+
+  res.json(await getRoleComposites(role));
+});
+
+/**
+ * @method POST
+ * @param role - The role name to update.
+ * @query newCompositeRoleName - The new role name.
+ * @route /cssapi/role/composite/:role
+ * @protected Requires "playground-admin"
+ */
+export const addKCRoleComposite = errorWrapper(async (req: Request, res: Response) => {
+  const querySchema = addRoleCompositeQuerySchema;
+  const pathParamsSchema = rolePathParamsSchema;
+
+  const { role } = getParams(req, pathParamsSchema);
+  const { newCompositeRoleName } = getQuery(req, querySchema);
+
+  res.json(await addRoleComposite(role, newCompositeRoleName));
+});
+
+/**
+ * @method DELETE
+ * @param role - The role name to update.
+ * @query compositeRoleName - The new role name.
+ * @route /cssapi/role/composite/:role
+ * @protected Requires "playground-admin"
+ */
+export const deleteKCRoleComposite = errorWrapper(async (req: Request, res: Response) => {
+  const querySchema = deleteRoleCompositeQuerySchema;
+  const pathParamsSchema = rolePathParamsSchema;
+
+  const { role } = getParams(req, pathParamsSchema);
+  const { compositeRoleName } = getQuery(req, querySchema);
+
+  res.json(await deleteRoleComposite(role, compositeRoleName));
 });

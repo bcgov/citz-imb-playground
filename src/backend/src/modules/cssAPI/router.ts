@@ -7,10 +7,26 @@ import {
   getKCRoles,
   createKCRole,
   deleteKCRole,
+  updateKCRole,
+  getKCRoleComposites,
+  addKCRoleComposite,
+  deleteKCRoleComposite,
+} from './role/controller';
+import {
+  getKCUserRoles,
+  getKCUsersWithRole,
   assignKCUserRole,
   unassignKCUserRole,
-} from './role/controller';
-import { getKCAzureIDIRUser, getKCIDIRUser } from './user/controller';
+} from './role-mapping/controller';
+import {
+  getKCAzureIDIRUser,
+  getKCIDIRUser,
+  getKCGitHubBCGovUsers,
+  getKCGitHubPublicUsers,
+  getKCBasicBCeIDUser,
+  getKCBusinessBCeIDUser,
+  getKCBothBCeIDUser,
+} from './user/controller';
 
 /**
  * @method GET
@@ -28,7 +44,6 @@ router.route('/role/roles').get(getKCRoles);
 
 /**
  * @method GET
- * @param user - The user's first name to search.
  * @route /cssapi/user/idir-user
  * @protected Requires "playground-admin"
  */
@@ -36,11 +51,48 @@ router.route('/user/idir-user').get(getKCIDIRUser);
 
 /**
  * @method GET
- * @param user - The user's first name to search.
  * @route /cssapi/user/azure-user
  * @protected Requires "playground-admin"
  */
 router.route('/user/azure-user').get(getKCAzureIDIRUser);
+
+/**
+ * @method GET
+ * @route /cssapi/user/github/bcgov
+ * @protected Requires "playground-admin"
+ */
+router.route('/user/github/bcgov').get(getKCGitHubBCGovUsers);
+
+/**
+ * @method GET
+ * @route /cssapi/user/github/public
+ * @protected Requires "playground-admin"
+ */
+router.route('/user/github/public').get(getKCGitHubPublicUsers);
+
+/**
+ * @method GET
+ * @param guid - The user guid to search for.
+ * @route /cssapi/user/bceid/basic/:guid
+ * @protected Requires "playground-admin"
+ */
+router.route('/user/github/bceid/basic/:guid').get(getKCBasicBCeIDUser);
+
+/**
+ * @method GET
+ * @param guid - The user guid to search for.
+ * @route /cssapi/user/bceid/business/:guid
+ * @protected Requires "playground-admin"
+ */
+router.route('/user/github/bceid/business/:guid').get(getKCBusinessBCeIDUser);
+
+/**
+ * @method GET
+ * @param guid - The user guid to search for.
+ * @route /cssapi/user/bceid/both/:guid
+ * @protected Requires "playground-admin"
+ */
+router.route('/user/github/bceid/both/:guid').get(getKCBothBCeIDUser);
 
 /**
  * @method POST
@@ -55,10 +107,46 @@ router.route('/role/assign/:guid').post(assignKCUserRole).delete(unassignKCUserR
  * @method GET
  * @method POST
  * @method DELETE
+ * @param role - The role name to search.
+ * @route /cssapi/role/composite/:role
+ * @protected Requires "playground-admin"
+ */
+router
+  .route('/role/composite/:role')
+  .get(getKCRoleComposites)
+  .post(addKCRoleComposite)
+  .delete(deleteKCRoleComposite);
+
+/**
+ * @method GET
+ * @param username - The username to search.
+ * @route /cssapi/role/user/:username
+ * @protected Requires "playground-admin"
+ */
+router.route('/role/user/:username').get(getKCUserRoles);
+
+/**
+ * @method GET
+ * @param role - The role name to search.
+ * @route /cssapi/role/users/:role
+ * @protected Requires "playground-admin"
+ */
+router.route('/role/users/:role').get(getKCUsersWithRole);
+
+/**
+ * @method GET
+ * @method POST
+ * @method PATCH
+ * @method DELETE
  * @param role - The role name to search, create, or delete.
  * @route /cssapi/role/:role
  * @protected Requires "playground-admin"
  */
-router.route('/role/:role').get(getKCRole).post(createKCRole).delete(deleteKCRole);
+router
+  .route('/role/:role')
+  .get(getKCRole)
+  .post(createKCRole)
+  .patch(updateKCRole)
+  .delete(deleteKCRole);
 
 export default router;

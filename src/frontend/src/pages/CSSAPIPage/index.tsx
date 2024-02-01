@@ -31,9 +31,27 @@ const CSSAPIPage = () => {
   type APIHookMethod = 'getMethod' | 'postMethod' | 'putMethod' | 'patchMethod' | 'deleteMethod';
 
   type APIRoute = 'getRoles' | 'getIntegration';
-  type APIRouteWithParam = 'getRole' | 'createRole' | 'deleteRole';
-  type APIRouteWithQuery = 'getIDIRUsers' | 'getAzureIDIRUsers';
-  type APIRouteWithParamAndQuery = 'assignUserRole' | 'unassignUserRole';
+  type APIRouteWithParam =
+    | 'getRole'
+    | 'createRole'
+    | 'deleteRole'
+    | 'getRoleComposites'
+    | 'getUserRoles'
+    | 'getBasicBCeIDUsers'
+    | 'getBusinessBCeIDUsers'
+    | 'getBothBCeIDUsers';
+  type APIRouteWithQuery =
+    | 'getIDIRUsers'
+    | 'getAzureIDIRUsers'
+    | 'getGitHubBCGovUsers'
+    | 'getGitHubPublicUsers';
+  type APIRouteWithParamAndQuery =
+    | 'assignUserRole'
+    | 'unassignUserRole'
+    | 'updateRole'
+    | 'deleteRoleComposite'
+    | 'addRoleComposite'
+    | 'getUsersWithRole';
 
   const makeAPICall = async () => {
     const apiHookMethod = `${selectedFunction.method.toLowerCase()}Method` as APIHookMethod;

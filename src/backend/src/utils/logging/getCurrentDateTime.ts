@@ -39,14 +39,16 @@ export const getCurrentDateTime = (): IGetCurrentDateTime => {
 
   const pacificParts = pacificFormatter.formatToParts(now);
 
-  const formattedDatePacific = `${pacificParts.find((part) => part.type === 'year')
-    ?.value}-${pacificParts.find((part) => part.type === 'month')?.value}-${pacificParts.find(
-    (part) => part.type === 'day',
-  )?.value}`;
-  const formattedTimePacific = `${pacificParts.find((part) => part.type === 'hour')
-    ?.value}:${pacificParts.find((part) => part.type === 'minute')?.value}:${pacificParts.find(
-    (part) => part.type === 'second',
-  )?.value}`;
+  const formattedDatePacific = `${
+    pacificParts.find((part) => part.type === 'year')?.value
+  }-${pacificParts.find((part) => part.type === 'month')?.value}-${
+    pacificParts.find((part) => part.type === 'day')?.value
+  }`;
+  const formattedTimePacific = `${
+    pacificParts.find((part) => part.type === 'hour')?.value
+  }:${pacificParts.find((part) => part.type === 'minute')?.value}:${
+    pacificParts.find((part) => part.type === 'second')?.value
+  }`;
 
   // Determine Pacific Time Zone
   const nowPacific = new Date(formattedDatePacific + 'T' + formattedTimePacific + 'Z');

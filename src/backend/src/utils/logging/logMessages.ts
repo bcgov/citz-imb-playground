@@ -1,7 +1,7 @@
 import { getCurrentDateTime } from './getCurrentDateTime';
 import * as c from './colors';
 
-import config from '../config';
+import config from '../../config';
 const { PORT, NODE_VERSION } = config;
 
 export const SERVER_START = `${c.LBlue}Express Server started on port ${c.Reset}${PORT}${c.LBlue}${c.Reset}.`;

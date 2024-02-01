@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { NextFunction, Request, Response } from 'express';
 import { httpStatusCode } from '../../../utils';
-import { errorWrapper } from '../../../utils/errorWrapper';
+import { errorWrapper } from '../../../utils/express-requests/errorWrapper';
 import { Service } from '../service/service.class';
 
 export class Controller<TEntity> {

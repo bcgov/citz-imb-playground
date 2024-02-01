@@ -5,6 +5,7 @@ import { IssuesIcon } from 'components/icons';
 export const PackagesCard = () => {
   const versions = window.configuration?.packageVersions;
   const latestVersions = window.configuration?.latestPackageVersions;
+  const issues = window.configuration?.packageIssues;
 
   return (
     <Card>
@@ -47,7 +48,13 @@ export const PackagesCard = () => {
           >
             <Stack direction="row" center>
               <Txt>
-                [<b>0</b>]
+                [
+                <b>
+                  {issues && issues.hasOwnProperty('https://github.com/bcgov/citz-imb-kc-css-api')
+                    ? issues['https://github.com/bcgov/citz-imb-kc-css-api']
+                    : 0}
+                </b>
+                ]
               </Txt>
               <Txt>GitHub Issues</Txt>
               <IssuesIcon />

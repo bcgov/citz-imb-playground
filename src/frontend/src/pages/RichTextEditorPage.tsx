@@ -12,6 +12,7 @@ const RichTextEditorPage = () => {
 
   const versions = window.configuration?.packageVersions;
   const latestVersions = window.configuration?.latestPackageVersions;
+  const issues = window.configuration?.packageIssues;
 
   // Redirect if not logged in.
   useEffect(() => {
@@ -60,7 +61,14 @@ const RichTextEditorPage = () => {
             >
               <Stack direction="row" center>
                 <Txt>
-                  [<b>0</b>]
+                  [
+                  <b>
+                    {issues &&
+                    issues.hasOwnProperty('https://github.com/bcgov/citz-imb-richtexteditor')
+                      ? issues['https://github.com/bcgov/citz-imb-richtexteditor']
+                      : 0}
+                  </b>
+                  ]
                 </Txt>
                 <Txt>GitHub Issues</Txt>
                 <IssuesIcon />

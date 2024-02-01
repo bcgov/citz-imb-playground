@@ -11,6 +11,7 @@ const KeycloakPage = () => {
 
   const versions = window.configuration?.packageVersions;
   const latestVersions = window.configuration?.latestPackageVersions;
+  const issues = window.configuration?.packageIssues;
 
   // Redirect if not logged in.
   useEffect(() => {
@@ -59,7 +60,13 @@ const KeycloakPage = () => {
             >
               <Stack direction="row" center>
                 <Txt>
-                  [<b>0</b>]
+                  [
+                  <b>
+                    {issues && issues.hasOwnProperty('https://github.com/bcgov/citz-imb-kc-react')
+                      ? issues['https://github.com/bcgov/citz-imb-kc-react']
+                      : 0}
+                  </b>
+                  ]
                 </Txt>
                 <Txt>GitHub Issues</Txt>
                 <IssuesIcon />
@@ -102,7 +109,13 @@ const KeycloakPage = () => {
             >
               <Stack direction="row" center>
                 <Txt>
-                  [<b>0</b>]
+                  [
+                  <b>
+                    {issues && issues.hasOwnProperty('https://github.com/bcgov/citz-imb-kc-express')
+                      ? issues['https://github.com/bcgov/citz-imb-kc-express']
+                      : 0}
+                  </b>
+                  ]
                 </Txt>
                 <Txt>GitHub Issues</Txt>
                 <IssuesIcon />

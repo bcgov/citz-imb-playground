@@ -28,7 +28,6 @@ export const getKCRoles = errorWrapper(async (req: Request, res: Response) => {
 
 /**
  * @method GET
- * @param role - The role name to search.
  * @route /cssapi/role/:role
  * @protected Requires "playground-admin"
  */
@@ -41,7 +40,6 @@ export const getKCRole = errorWrapper(async (req: Request, res: Response) => {
 
 /**
  * @method POST
- * @param role - The role name to create.
  * @route /cssapi/role/:role
  * @protected Requires "playground-admin"
  */
@@ -54,7 +52,6 @@ export const createKCRole = errorWrapper(async (req: Request, res: Response) => 
 
 /**
  * @method DELETE
- * @param role - The role name to delete.
  * @route /cssapi/role/:role
  * @protected Requires "playground-admin"
  */
@@ -67,8 +64,6 @@ export const deleteKCRole = errorWrapper(async (req: Request, res: Response) => 
 
 /**
  * @method PATCH
- * @param role - The role name to update.
- * @query newRoleName - The new role name.
  * @route /cssapi/role/:role
  * @protected Requires "playground-admin"
  */
@@ -84,7 +79,6 @@ export const updateKCRole = errorWrapper(async (req: Request, res: Response) => 
 
 /**
  * @method GET
- * @param role - The role name to get composites of.
  * @route /cssapi/role/composite/:role
  * @protected Requires "playground-admin"
  */
@@ -97,8 +91,6 @@ export const getKCRoleComposites = errorWrapper(async (req: Request, res: Respon
 
 /**
  * @method POST
- * @param role - The role name to update.
- * @query newCompositeRoleName - The new role name.
  * @route /cssapi/role/composite/:role
  * @protected Requires "playground-admin"
  */
@@ -114,8 +106,6 @@ export const addKCRoleComposite = errorWrapper(async (req: Request, res: Respons
 
 /**
  * @method DELETE
- * @param role - The role name to update.
- * @query compositeRoleName - The new role name.
  * @route /cssapi/role/composite/:role
  * @protected Requires "playground-admin"
  */

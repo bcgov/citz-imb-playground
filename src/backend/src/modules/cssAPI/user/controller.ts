@@ -61,7 +61,6 @@ export const getKCGitHubPublicUsers = errorWrapper(async (req: Request, res: Res
 
 /**
  * @method GET
- * @param guid - The user guid to search for.
  * @route /cssapi/user/bceid/basic/:guid
  * @protected Requires "playground-admin"
  */
@@ -74,7 +73,6 @@ export const getKCBasicBCeIDUser = errorWrapper(async (req: Request, res: Respon
 
 /**
  * @method GET
- * @param guid - The user guid to search for.
  * @route /cssapi/user/bceid/business/:guid
  * @protected Requires "playground-admin"
  */
@@ -87,7 +85,6 @@ export const getKCBusinessBCeIDUser = errorWrapper(async (req: Request, res: Res
 
 /**
  * @method GET
- * @param guid - The user guid to search for.
  * @route /cssapi/user/bceid/both/:guid
  * @protected Requires "playground-admin"
  */

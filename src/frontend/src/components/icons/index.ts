@@ -4,3 +4,4 @@ export * from './GearsIcon';
 export * from './DeniedIcon';
 export * from './LeftArrowIcon';
 export * from './DownArrowIcon';
+export * from './IssuesIcon';

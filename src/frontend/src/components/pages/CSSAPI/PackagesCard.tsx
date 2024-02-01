@@ -1,5 +1,6 @@
 import React from 'react';
-import { Card, Link, Txt, Stack } from 'components/common';
+import { Card, Link, Txt, Stack, Button } from 'components/common';
+import { IssuesIcon } from 'components/icons';
 
 export const PackagesCard = () => {
   const versions = window.configuration?.packageVersions;
@@ -39,6 +40,19 @@ export const PackagesCard = () => {
             </Txt>
             <Link size="s">https://github.com/bcgov/citz-imb-kc-css-api</Link>
           </Stack>
+          <Button
+            onClick={() =>
+              window.open('https://github.com/bcgov/citz-imb-kc-css-api/issues', '_blank')
+            }
+          >
+            <Stack direction="row" center>
+              <Txt>
+                [<b>0</b>]
+              </Txt>
+              <Txt>GitHub Issues</Txt>
+              <IssuesIcon />
+            </Stack>
+          </Button>
         </Stack>
       </Stack>
     </Card>

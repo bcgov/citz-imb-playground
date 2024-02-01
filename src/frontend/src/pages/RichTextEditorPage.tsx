@@ -1,8 +1,9 @@
 import './Pages.css';
 import React, { useEffect, useState } from 'react';
-import { Card, Link, Txt, Stack } from 'components/common';
+import { Card, Link, Txt, Stack, Button } from 'components/common';
 import { RichTextEditor } from '@bcgov/citz-imb-richtexteditor';
 import { useKeycloak } from '@bcgov/citz-imb-kc-react';
+import { IssuesIcon } from 'components/icons';
 
 const RichTextEditorPage = () => {
   const { isAuthenticated } = useKeycloak();
@@ -52,6 +53,19 @@ const RichTextEditorPage = () => {
               </Txt>
               <Link size="s">https://github.com/bcgov/citz-imb-richtexteditor</Link>
             </Stack>
+            <Button
+              onClick={() =>
+                window.open('https://github.com/bcgov/citz-imb-richtexteditor/issues', '_blank')
+              }
+            >
+              <Stack direction="row" center>
+                <Txt>
+                  [<b>0</b>]
+                </Txt>
+                <Txt>GitHub Issues</Txt>
+                <IssuesIcon />
+              </Stack>
+            </Button>
           </Stack>
         </Stack>
       </Card>

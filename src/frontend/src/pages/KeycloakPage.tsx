@@ -2,6 +2,7 @@ import './Pages.css';
 import React, { useEffect, useState } from 'react';
 import { Button, Card, Link, Txt, Stack } from 'components/common';
 import { useKeycloak } from '@bcgov/citz-imb-kc-react';
+import { IssuesIcon } from 'components/icons';
 
 const KeycloakPage = () => {
   const { state, user, hasRole, isAuthenticated, getAuthorizationHeaderValue } = useKeycloak();
@@ -51,6 +52,19 @@ const KeycloakPage = () => {
               </Txt>
               <Link size="s">https://github.com/bcgov/citz-imb-kc-react</Link>
             </Stack>
+            <Button
+              onClick={() =>
+                window.open('https://github.com/bcgov/citz-imb-kc-react/issues', '_blank')
+              }
+            >
+              <Stack direction="row" center>
+                <Txt>
+                  [<b>0</b>]
+                </Txt>
+                <Txt>GitHub Issues</Txt>
+                <IssuesIcon />
+              </Stack>
+            </Button>
           </Stack>
           <Stack direction="row" gap="30px" center>
             <Txt>@bcgov/citz-imb-kc-express</Txt>
@@ -81,6 +95,19 @@ const KeycloakPage = () => {
               </Txt>
               <Link size="s">https://github.com/bcgov/citz-imb-kc-express</Link>
             </Stack>
+            <Button
+              onClick={() =>
+                window.open('https://github.com/bcgov/citz-imb-kc-express/issues', '_blank')
+              }
+            >
+              <Stack direction="row" center>
+                <Txt>
+                  [<b>0</b>]
+                </Txt>
+                <Txt>GitHub Issues</Txt>
+                <IssuesIcon />
+              </Stack>
+            </Button>
           </Stack>
         </Stack>
       </Card>

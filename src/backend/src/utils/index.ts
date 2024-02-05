@@ -8,6 +8,5 @@ export * from './package-management/getPackageIssues';
 export * from './logging/debugStatements';
 export * from './express-requests/httpStatusCode';
 export * from './express-requests/HttpError';
-export * from './express-requests/getParams';
-export * from './express-requests/getQuery';
+export * from './express-requests/validateRequestSchema';
 export * from './zod';

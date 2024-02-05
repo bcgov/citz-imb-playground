@@ -17,8 +17,7 @@ import { getGitHubUserQuerySchema, getIDIRUserQuerySchema, guidPathParamsSchema 
  * @protected Requires "playground-admin"
  */
 export const getKCIDIRUser = errorWrapper(async (req: Request, res: Response) => {
-  const querySchema = getIDIRUserQuerySchema;
-  const user = getQuery(req, querySchema);
+  const user = getQuery(req, getIDIRUserQuerySchema);
 
   res.json(await getIDIRUsers(user));
 });
@@ -29,8 +28,7 @@ export const getKCIDIRUser = errorWrapper(async (req: Request, res: Response) =>
  * @protected Requires "playground-admin"
  */
 export const getKCAzureIDIRUser = errorWrapper(async (req: Request, res: Response) => {
-  const querySchema = getIDIRUserQuerySchema;
-  const user = getQuery(req, querySchema);
+  const user = getQuery(req, getIDIRUserQuerySchema);
 
   res.json(await getAzureIDIRUsers(user));
 });
@@ -41,8 +39,7 @@ export const getKCAzureIDIRUser = errorWrapper(async (req: Request, res: Respons
  * @protected Requires "playground-admin"
  */
 export const getKCGitHubBCGovUsers = errorWrapper(async (req: Request, res: Response) => {
-  const querySchema = getGitHubUserQuerySchema;
-  const user = getQuery(req, querySchema);
+  const user = getQuery(req, getGitHubUserQuerySchema);
 
   res.json(await getGitHubBCGovUsers(user));
 });
@@ -53,8 +50,7 @@ export const getKCGitHubBCGovUsers = errorWrapper(async (req: Request, res: Resp
  * @protected Requires "playground-admin"
  */
 export const getKCGitHubPublicUsers = errorWrapper(async (req: Request, res: Response) => {
-  const querySchema = getGitHubUserQuerySchema;
-  const user = getQuery(req, querySchema);
+  const user = getQuery(req, getGitHubUserQuerySchema);
 
   res.json(await getGitHubPublicUsers(user));
 });
@@ -65,8 +61,7 @@ export const getKCGitHubPublicUsers = errorWrapper(async (req: Request, res: Res
  * @protected Requires "playground-admin"
  */
 export const getKCBasicBCeIDUser = errorWrapper(async (req: Request, res: Response) => {
-  const pathParamsSchema = guidPathParamsSchema;
-  const { guid } = getParams(req, pathParamsSchema);
+  const { guid } = getParams(req, guidPathParamsSchema);
 
   res.json(await getBasicBCeIDUser(guid));
 });
@@ -77,8 +72,7 @@ export const getKCBasicBCeIDUser = errorWrapper(async (req: Request, res: Respon
  * @protected Requires "playground-admin"
  */
 export const getKCBusinessBCeIDUser = errorWrapper(async (req: Request, res: Response) => {
-  const pathParamsSchema = guidPathParamsSchema;
-  const { guid } = getParams(req, pathParamsSchema);
+  const { guid } = getParams(req, guidPathParamsSchema);
 
   res.json(await getBusinessBCeIDUser(guid));
 });
@@ -89,8 +83,7 @@ export const getKCBusinessBCeIDUser = errorWrapper(async (req: Request, res: Res
  * @protected Requires "playground-admin"
  */
 export const getKCBothBCeIDUser = errorWrapper(async (req: Request, res: Response) => {
-  const pathParamsSchema = guidPathParamsSchema;
-  const { guid } = getParams(req, pathParamsSchema);
+  const { guid } = getParams(req, guidPathParamsSchema);
 
   res.json(await getBothBCeIDUser(guid));
 });

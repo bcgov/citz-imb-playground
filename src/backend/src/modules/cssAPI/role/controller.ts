@@ -32,8 +32,7 @@ export const getKCRoles = errorWrapper(async (req: Request, res: Response) => {
  * @protected Requires "playground-admin"
  */
 export const getKCRole = errorWrapper(async (req: Request, res: Response) => {
-  const pathParamsSchema = rolePathParamsSchema;
-  const { role } = getParams(req, pathParamsSchema);
+  const { role } = getParams(req, rolePathParamsSchema);
 
   res.json(await getRole(role));
 });
@@ -44,8 +43,7 @@ export const getKCRole = errorWrapper(async (req: Request, res: Response) => {
  * @protected Requires "playground-admin"
  */
 export const createKCRole = errorWrapper(async (req: Request, res: Response) => {
-  const pathParamsSchema = rolePathParamsSchema;
-  const { role } = getParams(req, pathParamsSchema);
+  const { role } = getParams(req, rolePathParamsSchema);
 
   res.json(await createRole(role));
 });
@@ -56,8 +54,7 @@ export const createKCRole = errorWrapper(async (req: Request, res: Response) => 
  * @protected Requires "playground-admin"
  */
 export const deleteKCRole = errorWrapper(async (req: Request, res: Response) => {
-  const pathParamsSchema = rolePathParamsSchema;
-  const { role } = getParams(req, pathParamsSchema);
+  const { role } = getParams(req, rolePathParamsSchema);
 
   res.json(await deleteRole(role));
 });
@@ -68,11 +65,8 @@ export const deleteKCRole = errorWrapper(async (req: Request, res: Response) => 
  * @protected Requires "playground-admin"
  */
 export const updateKCRole = errorWrapper(async (req: Request, res: Response) => {
-  const querySchema = updateRoleQuerySchema;
-  const pathParamsSchema = rolePathParamsSchema;
-
-  const { role } = getParams(req, pathParamsSchema);
-  const { newRoleName } = getQuery(req, querySchema);
+  const { role } = getParams(req, rolePathParamsSchema);
+  const { newRoleName } = getQuery(req, updateRoleQuerySchema);
 
   res.json(await updateRole(role, newRoleName));
 });
@@ -83,8 +77,7 @@ export const updateKCRole = errorWrapper(async (req: Request, res: Response) => 
  * @protected Requires "playground-admin"
  */
 export const getKCRoleComposites = errorWrapper(async (req: Request, res: Response) => {
-  const pathParamsSchema = rolePathParamsSchema;
-  const { role } = getParams(req, pathParamsSchema);
+  const { role } = getParams(req, rolePathParamsSchema);
 
   res.json(await getRoleComposites(role));
 });
@@ -95,11 +88,8 @@ export const getKCRoleComposites = errorWrapper(async (req: Request, res: Respon
  * @protected Requires "playground-admin"
  */
 export const addKCRoleComposite = errorWrapper(async (req: Request, res: Response) => {
-  const querySchema = addRoleCompositeQuerySchema;
-  const pathParamsSchema = rolePathParamsSchema;
-
-  const { role } = getParams(req, pathParamsSchema);
-  const { newCompositeRoleName } = getQuery(req, querySchema);
+  const { role } = getParams(req, rolePathParamsSchema);
+  const { newCompositeRoleName } = getQuery(req, addRoleCompositeQuerySchema);
 
   res.json(await addRoleComposite(role, newCompositeRoleName));
 });
@@ -110,11 +100,8 @@ export const addKCRoleComposite = errorWrapper(async (req: Request, res: Respons
  * @protected Requires "playground-admin"
  */
 export const deleteKCRoleComposite = errorWrapper(async (req: Request, res: Response) => {
-  const querySchema = deleteRoleCompositeQuerySchema;
-  const pathParamsSchema = rolePathParamsSchema;
-
-  const { role } = getParams(req, pathParamsSchema);
-  const { compositeRoleName } = getQuery(req, querySchema);
+  const { role } = getParams(req, rolePathParamsSchema);
+  const { compositeRoleName } = getQuery(req, deleteRoleCompositeQuerySchema);
 
   res.json(await deleteRoleComposite(role, compositeRoleName));
 });

@@ -20,8 +20,7 @@ import {
  * @protected Requires "playground-admin"
  */
 export const getKCUserRoles = errorWrapper(async (req: Request, res: Response) => {
-  const pathParamsSchema = usernamePathParamsSchema;
-  const { username } = getParams(req, pathParamsSchema);
+  const { username } = getParams(req, usernamePathParamsSchema);
 
   res.json(await getUserRoles(username));
 });
@@ -32,11 +31,8 @@ export const getKCUserRoles = errorWrapper(async (req: Request, res: Response) =
  * @protected Requires "playground-admin"
  */
 export const getKCUsersWithRole = errorWrapper(async (req: Request, res: Response) => {
-  const querySchema = getUsersWithRoleQuerySchema;
-  const pathParamsSchema = rolePathParamsSchema;
-
-  const { role } = getParams(req, pathParamsSchema);
-  const { page, maxCount } = getQuery(req, querySchema);
+  const { role } = getParams(req, rolePathParamsSchema);
+  const { page, maxCount } = getQuery(req, getUsersWithRoleQuerySchema);
 
   res.json(await getUsersWithRole(role, Number(page), Number(maxCount)));
 });
@@ -47,11 +43,8 @@ export const getKCUsersWithRole = errorWrapper(async (req: Request, res: Respons
  * @protected Requires "playground-admin"
  */
 export const assignKCUserRole = errorWrapper(async (req: Request, res: Response) => {
-  const querySchema = roleQuerySchema;
-  const pathParamsSchema = guidPathParamsSchema;
-
-  const { guid } = getParams(req, pathParamsSchema);
-  const { role } = getQuery(req, querySchema);
+  const { guid } = getParams(req, guidPathParamsSchema);
+  const { role } = getQuery(req, roleQuerySchema);
 
   const roleNames = [role];
 
@@ -64,11 +57,8 @@ export const assignKCUserRole = errorWrapper(async (req: Request, res: Response)
  * @protected Requires "playground-admin"
  */
 export const unassignKCUserRole = errorWrapper(async (req: Request, res: Response) => {
-  const querySchema = roleQuerySchema;
-  const pathParamsSchema = guidPathParamsSchema;
-
-  const { guid } = getParams(req, pathParamsSchema);
-  const { role } = getQuery(req, querySchema);
+  const { guid } = getParams(req, guidPathParamsSchema);
+  const { role } = getQuery(req, roleQuerySchema);
 
   res.json(await unassignUserRole(guid, role));
 });

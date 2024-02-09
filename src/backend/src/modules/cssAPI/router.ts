@@ -94,10 +94,10 @@ router.route('/user/github/bceid/both/:guid').get(getKCBothBCeIDUser);
 /**
  * @method POST
  * @query role - The role to assign
- * @route /cssapi/role/assign/:guid
+ * @route /cssapi/role/assign/:username
  * @protected Requires "playground-admin"
  */
-router.route('/role/assign/:guid').post(assignKCUserRole).delete(unassignKCUserRole);
+router.route('/role/assign/:username').post(assignKCUserRole).delete(unassignKCUserRole);
 
 /**
  * @method GET

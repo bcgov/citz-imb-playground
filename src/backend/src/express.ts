@@ -5,9 +5,10 @@ import cookieParser from 'cookie-parser';
 import { keycloak, protectedRoute } from '@bcgov/citz-imb-kc-express';
 
 import { configRouter, cssapiRouter, healthRouter, userRouter } from './modules';
+import { apiDocs } from '@bcgov/citz-imb-kc-express-api-docs';
 
 import config from './config';
-const { CORS_OPTIONS, RATE_LIMIT_OPTIONS, KEYCLOAK_OPTIONS } = config;
+const { CORS_OPTIONS, RATE_LIMIT_OPTIONS, KEYCLOAK_OPTIONS, API_DOC_CONFIG } = config;
 
 // Define Express App
 const app = express();
@@ -39,5 +40,8 @@ app.use('/health', healthRouter);
 app.use('/config', configRouter);
 app.use('/cssapi', protectedRoute(['playground-admin']), cssapiRouter);
 app.use('/user', protectedRoute(), userRouter);
+
+// Initialize api docs
+apiDocs(app, API_DOC_CONFIG);
 
 export default app;

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { errorWrapper, getParams, getQuery } from '../../../utils';
+import { errorWrapper, getParams, getQuery, httpStatusCode } from '../../../utils';
 import {
   getRole,
   getRoles,
@@ -18,6 +18,7 @@ import {
 } from './schemas';
 
 /**
+ * Get all roles in Keycloak integration.
  * @method GET
  * @route /cssapi/role/roles
  * @protected Requires "playground-admin"
@@ -27,6 +28,7 @@ export const getKCRoles = errorWrapper(async (req: Request, res: Response) => {
 });
 
 /**
+ * Get details on a Keycloak role.
  * @method GET
  * @route /cssapi/role/:role
  * @protected Requires "playground-admin"
@@ -38,6 +40,7 @@ export const getKCRole = errorWrapper(async (req: Request, res: Response) => {
 });
 
 /**
+ * Create a new role in the Keycloak integration.
  * @method POST
  * @route /cssapi/role/:role
  * @protected Requires "playground-admin"
@@ -45,10 +48,11 @@ export const getKCRole = errorWrapper(async (req: Request, res: Response) => {
 export const createKCRole = errorWrapper(async (req: Request, res: Response) => {
   const { role } = getParams(req, rolePathParamsSchema);
 
-  res.json(await createRole(role));
+  res.send(httpStatusCode.CREATED).json(await createRole(role));
 });
 
 /**
+ * Delete a role in the Keycloak integration.
  * @method DELETE
  * @route /cssapi/role/:role
  * @protected Requires "playground-admin"
@@ -60,6 +64,7 @@ export const deleteKCRole = errorWrapper(async (req: Request, res: Response) => 
 });
 
 /**
+ * Update a role in the Keycloak integration.
  * @method PATCH
  * @route /cssapi/role/:role
  * @protected Requires "playground-admin"
@@ -68,10 +73,11 @@ export const updateKCRole = errorWrapper(async (req: Request, res: Response) => 
   const { role } = getParams(req, rolePathParamsSchema);
   const { newRoleName } = getQuery(req, updateRoleQuerySchema);
 
-  res.json(await updateRole(role, newRoleName));
+  res.send(httpStatusCode.ACCEPTED).json(await updateRole(role, newRoleName));
 });
 
 /**
+ * Get composites of a role in the Keycloak integration.
  * @method GET
  * @route /cssapi/role/composite/:role
  * @protected Requires "playground-admin"
@@ -83,6 +89,7 @@ export const getKCRoleComposites = errorWrapper(async (req: Request, res: Respon
 });
 
 /**
+ * Add a composite role to another role in the Keycloak integration.
  * @method POST
  * @route /cssapi/role/composite/:role
  * @protected Requires "playground-admin"
@@ -91,10 +98,11 @@ export const addKCRoleComposite = errorWrapper(async (req: Request, res: Respons
   const { role } = getParams(req, rolePathParamsSchema);
   const { newCompositeRoleName } = getQuery(req, addRoleCompositeQuerySchema);
 
-  res.json(await addRoleComposite(role, newCompositeRoleName));
+  res.send(httpStatusCode.CREATED).json(await addRoleComposite(role, newCompositeRoleName));
 });
 
 /**
+ * Remove a composite role from another role in the Keycloak integration.
  * @method DELETE
  * @route /cssapi/role/composite/:role
  * @protected Requires "playground-admin"

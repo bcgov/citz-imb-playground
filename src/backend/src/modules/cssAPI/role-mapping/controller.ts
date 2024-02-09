@@ -8,13 +8,13 @@ import {
 } from '@bcgov/citz-imb-kc-css-api';
 import {
   getUsersWithRoleQuerySchema,
-  guidPathParamsSchema,
   rolePathParamsSchema,
   roleQuerySchema,
   usernamePathParamsSchema,
 } from './schemas';
 
 /**
+ * Get roles of a user in the Keycloak integration.
  * @method GET
  * @route /cssapi/role/user/:username
  * @protected Requires "playground-admin"
@@ -26,6 +26,7 @@ export const getKCUserRoles = errorWrapper(async (req: Request, res: Response) =
 });
 
 /**
+ * Get users with a role in the Keycloak integration.
  * @method GET
  * @route /cssapi/role/users/:role
  * @protected Requires "playground-admin"
@@ -38,27 +39,29 @@ export const getKCUsersWithRole = errorWrapper(async (req: Request, res: Respons
 });
 
 /**
+ * Assign a role to a user in the Keycloak integration.
  * @method POST
- * @route /cssapi/role/assign/:guid
+ * @route /cssapi/role/assign/:username
  * @protected Requires "playground-admin"
  */
 export const assignKCUserRole = errorWrapper(async (req: Request, res: Response) => {
-  const { guid } = getParams(req, guidPathParamsSchema);
+  const { username } = getParams(req, usernamePathParamsSchema);
   const { role } = getQuery(req, roleQuerySchema);
 
   const roleNames = [role];
 
-  res.json(await assignUserRoles(guid, roleNames));
+  res.json(await assignUserRoles(username, roleNames));
 });
 
 /**
+ * Unassign a role from a user in the Keycloak integration.
  * @method DELETE
- * @route /cssapi/role/assign/:guid
+ * @route /cssapi/role/assign/:username
  * @protected Requires "playground-admin"
  */
 export const unassignKCUserRole = errorWrapper(async (req: Request, res: Response) => {
-  const { guid } = getParams(req, guidPathParamsSchema);
+  const { username } = getParams(req, usernamePathParamsSchema);
   const { role } = getQuery(req, roleQuerySchema);
 
-  res.json(await unassignUserRole(guid, role));
+  res.json(await unassignUserRole(username, role));
 });

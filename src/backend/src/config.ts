@@ -1,4 +1,5 @@
 import { KEYCLOAK_OPTIONS } from './keycloak/config';
+import { BaseAPIDocsConfig, CustomSchemaConfig } from '@bcgov/citz-imb-kc-express-api-docs';
 
 // Environment variables set in compose file.
 const {
@@ -41,6 +42,39 @@ const RATE_LIMIT_OPTIONS = {
   legacyHeaders: false,
 };
 
+const API_DOC_CONFIG = {
+  ...BaseAPIDocsConfig,
+  modules: {
+    health: {
+      description: 'Check application health.',
+    },
+    config: {
+      description: 'Configuration variables.',
+    },
+    cssapi: {
+      description: 'Interface with the Keycloak Integration through the CSS API.',
+    },
+    user: {
+      description: 'User data.',
+    },
+  },
+  customSchemas: {
+    'zodProperty.nonEmptyString': {
+      required: true,
+      type: 'string',
+    },
+    'zodProperty.numberQueryParam': {
+      required: true,
+      type: 'number',
+    },
+    'zodProperty.optionalNumberQueryParam': {
+      required: false,
+      type: 'number',
+    },
+  } as CustomSchemaConfig,
+  defaultResponses: [[503, 'An unexpected error occurred.']],
+};
+
 // Exported configuration values.
 export default {
   PORT: PORT ?? 3600,
@@ -54,6 +88,7 @@ export default {
   CORS_OPTIONS,
   RATE_LIMIT_OPTIONS,
   KEYCLOAK_OPTIONS,
+  API_DOC_CONFIG,
   PGHOST,
   PGUSER,
   PGPASSWORD,

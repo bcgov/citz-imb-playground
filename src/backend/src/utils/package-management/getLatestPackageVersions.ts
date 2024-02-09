@@ -11,6 +11,7 @@ const repoUrls = [
   'https://github.com/bcgov/citz-imb-kc-express',
   'https://github.com/bcgov/citz-imb-kc-css-api',
   'https://github.com/bcgov/citz-imb-richtexteditor',
+  'https://github.com/bcgov/citz-imb-kc-express-api-docs',
 ];
 
 // Extracts the owner and repo name from a GitHub URL.

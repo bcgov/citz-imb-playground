@@ -12,6 +12,7 @@ import {
 import { getGitHubUserQuerySchema, getIDIRUserQuerySchema, guidPathParamsSchema } from './schemas';
 
 /**
+ * Get a list of IDIR users in the Keycloak integration.
  * @method GET
  * @route /cssapi/user/idir-user
  * @protected Requires "playground-admin"
@@ -23,6 +24,7 @@ export const getKCIDIRUser = errorWrapper(async (req: Request, res: Response) =>
 });
 
 /**
+ * Get a list of Azure IDIR users in the Keycloak integration.
  * @method GET
  * @route /cssapi/user/azure-user
  * @protected Requires "playground-admin"
@@ -34,6 +36,7 @@ export const getKCAzureIDIRUser = errorWrapper(async (req: Request, res: Respons
 });
 
 /**
+ * Get a list of GitHub (BCGov) users in the Keycloak integration.
  * @method GET
  * @route /cssapi/user/github/bcgov
  * @protected Requires "playground-admin"
@@ -45,6 +48,7 @@ export const getKCGitHubBCGovUsers = errorWrapper(async (req: Request, res: Resp
 });
 
 /**
+ * Get a list of GitHub (Public) users in the Keycloak integration.
  * @method GET
  * @route /cssapi/user/github/public
  * @protected Requires "playground-admin"
@@ -56,6 +60,7 @@ export const getKCGitHubPublicUsers = errorWrapper(async (req: Request, res: Res
 });
 
 /**
+ * Get a BCeID (Basic) user in the Keycloak integration.
  * @method GET
  * @route /cssapi/user/bceid/basic/:guid
  * @protected Requires "playground-admin"
@@ -67,6 +72,7 @@ export const getKCBasicBCeIDUser = errorWrapper(async (req: Request, res: Respon
 });
 
 /**
+ * Get a BCeID (Business) user in the Keycloak integration.
  * @method GET
  * @route /cssapi/user/bceid/business/:guid
  * @protected Requires "playground-admin"
@@ -78,6 +84,7 @@ export const getKCBusinessBCeIDUser = errorWrapper(async (req: Request, res: Res
 });
 
 /**
+ * Get a BCeID (Basic & Business) user in the Keycloak integration.
  * @method GET
  * @route /cssapi/user/bceid/both/:guid
  * @protected Requires "playground-admin"

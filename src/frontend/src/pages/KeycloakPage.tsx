@@ -122,6 +122,69 @@ const KeycloakPage = () => {
               </Stack>
             </Button>
           </Stack>
+          <Stack direction="row" gap="30px" center>
+            <Txt>@bcgov/citz-imb-kc-express-api-docs</Txt>
+            <Stack direction="row">
+              <Txt size="s" bold>
+                Latest Version:
+              </Txt>
+              <Txt size="s">
+                {latestVersions &&
+                latestVersions.hasOwnProperty(
+                  'https://github.com/bcgov/citz-imb-kc-express-api-docs',
+                )
+                  ? latestVersions['https://github.com/bcgov/citz-imb-kc-express-api-docs']
+                  : '-'}
+              </Txt>
+            </Stack>
+            <Stack direction="row">
+              <Txt size="s" bold>
+                Current Version:
+              </Txt>
+              <Txt size="s">
+                {versions && versions.hasOwnProperty('@bcgov/citz-imb-kc-express-api-docs')
+                  ? versions['@bcgov/citz-imb-kc-express-api-docs']
+                  : '-'}
+              </Txt>
+            </Stack>
+            <Stack direction="row">
+              <Txt size="s" bold>
+                Repo:
+              </Txt>
+              <Link size="s">https://github.com/bcgov/citz-imb-kc-express-api-docs</Link>
+            </Stack>
+            <Button
+              onClick={() =>
+                window.open(
+                  'https://github.com/bcgov/citz-imb-kc-express-api-docs/issues',
+                  '_blank',
+                )
+              }
+            >
+              <Stack direction="row" center>
+                <Txt>
+                  [
+                  <b>
+                    {issues &&
+                    issues.hasOwnProperty('https://github.com/bcgov/citz-imb-kc-express-api-docs')
+                      ? issues['https://github.com/bcgov/citz-imb-kc-express-api-docs']
+                      : 0}
+                  </b>
+                  ]
+                </Txt>
+                <Txt>GitHub Issues</Txt>
+                <IssuesIcon />
+              </Stack>
+            </Button>
+          </Stack>
+        </Stack>
+      </Card>
+      <Card>
+        <Stack direction="row" center>
+          <Txt>View documentation on API endpoints and try them out (experimental)</Txt>
+          <Button onClick={() => window.open('http://localhost:6600/docs', '_blank')}>
+            <Txt>Open API Docs</Txt>
+          </Button>
         </Stack>
       </Card>
       <Stack direction="row" gap="10px">

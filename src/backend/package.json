@@ -18,7 +18,7 @@
   "dependencies": {
     "@bcgov/citz-imb-kc-css-api": "https://github.com/bcgov/citz-imb-kc-css-api/releases/download/v1.3.4/bcgov-citz-imb-kc-css-api-1.3.4.tgz",
     "@bcgov/citz-imb-kc-express": "https://github.com/bcgov/citz-imb-kc-express/releases/download/v1.3.3/bcgov-citz-imb-kc-express-1.3.3.tgz",
-    "@bcgov/citz-imb-kc-express-api-docs": "https://github.com/bcgov/citz-imb-kc-express-api-docs/releases/download/v0.14.6/bcgov-citz-imb-kc-express-api-docs-0.14.6.tgz",
+    "@bcgov/citz-imb-kc-express-api-docs": "file:./api-docs.tgz",
     "cookie-parser": "1.4.6",
     "cors": "2.8.5",
     "express": "4.18.2",

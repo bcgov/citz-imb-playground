@@ -22,7 +22,7 @@ export const activateKeycloakIdirUser = async (
 
   // if user exists, update user.
   if (idirUser)
-    return (await dataRepository.updateItem(
+    return (await dataRepository.updateItemById(
       idirUser.id.toString() as string,
       user as unknown as EntitySchema<User>,
     )) as unknown as User;

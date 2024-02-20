@@ -12,12 +12,12 @@ export class Repository<TEntity> {
 
   createItem: (item: EntitySchema<TEntity>) => Promise<EntitySchema<TEntity>>;
 
-  updateItem: (
+  updateItemById: (
     id: string,
     item: EntitySchema<TEntity>,
   ) => Promise<EntitySchema<TEntity> | undefined>;
 
-  deleteItem: (id: string) => Promise<void>;
+  deleteItemById: (id: string) => Promise<void>;
 
   constructor(entity: EntitySchema, dataSource: DataSource) {
     this.repository = dataSource.getRepository(entity);
@@ -30,14 +30,14 @@ export class Repository<TEntity> {
 
     this.createItem = async (item) => await this.repository.save(item);
 
-    this.updateItem = async (id, item) => {
+    this.updateItemById = async (id, item) => {
       const existingItem = await this.repository.findOne({ where: { id } } as object);
       if (!existingItem) return undefined;
       Object.assign(existingItem, item);
       return await this.repository.save(existingItem);
     };
 
-    this.deleteItem = async (id) => {
+    this.deleteItemById = async (id) => {
       await this.repository.delete(id);
     };
   }

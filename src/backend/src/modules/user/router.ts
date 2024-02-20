@@ -20,6 +20,6 @@ router.get('/all', dataController.getAllItems);
 
 router.get('/guid/:guid', dataController.getItemByWhere);
 
-router.patch('/guid/:guid', dataController.updateItem);
+router.patch('/id/:id', dataController.updateItemById);
 
 export default router;

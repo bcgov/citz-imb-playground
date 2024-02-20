@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { errorWrapper, getParams, getQuery } from '../../../utils';
+import { errorWrapper, getParams, getQuery, httpStatusCode as statusCode } from '../../../utils';
 import {
   getUserRoles,
   assignUserRoles,
@@ -50,7 +50,7 @@ export const assignKCUserRole = errorWrapper(async (req: Request, res: Response)
 
   const roleNames = [role];
 
-  res.json(await assignUserRoles(username, roleNames));
+  res.status(statusCode.ACCEPTED).json(await assignUserRoles(username, roleNames));
 });
 
 /**
@@ -63,5 +63,5 @@ export const unassignKCUserRole = errorWrapper(async (req: Request, res: Respons
   const { username } = getParams(req, usernamePathParamsSchema);
   const { role } = getQuery(req, roleQuerySchema);
 
-  res.json(await unassignUserRole(username, role));
+  res.status(statusCode.ACCEPTED).json(await unassignUserRole(username, role));
 });

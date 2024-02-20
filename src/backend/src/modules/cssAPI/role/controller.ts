@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { errorWrapper, getParams, getQuery, httpStatusCode } from '../../../utils';
+import { errorWrapper, getParams, getQuery, httpStatusCode as statusCode } from '../../../utils';
 import {
   getRole,
   getRoles,
@@ -11,10 +11,16 @@ import {
   deleteRoleComposite,
 } from '@bcgov/citz-imb-kc-css-api';
 import {
-  addRoleCompositeQuerySchema,
-  deleteRoleCompositeQuerySchema,
-  rolePathParamsSchema,
-  updateRoleQuerySchema,
+  addKCRoleCompositeParamsSchema,
+  addKCRoleCompositeQuerySchema,
+  createKCRoleParamsSchema,
+  deleteKCRoleCompositeParamsSchema,
+  deleteKCRoleCompositeQuerySchema,
+  deleteKCRoleParamsSchema,
+  getKCRoleCompositesParamsSchema,
+  getKCRoleParamsSchema,
+  updateKCRoleParamsSchema,
+  updateKCRoleQuerySchema,
 } from './schemas';
 
 /**
@@ -34,7 +40,7 @@ export const getKCRoles = errorWrapper(async (req: Request, res: Response) => {
  * @protected Requires "playground-admin"
  */
 export const getKCRole = errorWrapper(async (req: Request, res: Response) => {
-  const { role } = getParams(req, rolePathParamsSchema);
+  const { role } = getParams(req, getKCRoleParamsSchema);
 
   res.json(await getRole(role));
 });
@@ -46,9 +52,9 @@ export const getKCRole = errorWrapper(async (req: Request, res: Response) => {
  * @protected Requires "playground-admin"
  */
 export const createKCRole = errorWrapper(async (req: Request, res: Response) => {
-  const { role } = getParams(req, rolePathParamsSchema);
+  const { role } = getParams(req, createKCRoleParamsSchema);
 
-  res.send(httpStatusCode.CREATED).json(await createRole(role));
+  res.send(statusCode.CREATED).json(await createRole(role));
 });
 
 /**
@@ -58,9 +64,9 @@ export const createKCRole = errorWrapper(async (req: Request, res: Response) => 
  * @protected Requires "playground-admin"
  */
 export const deleteKCRole = errorWrapper(async (req: Request, res: Response) => {
-  const { role } = getParams(req, rolePathParamsSchema);
+  const { role } = getParams(req, deleteKCRoleParamsSchema);
 
-  res.json(await deleteRole(role));
+  res.status(statusCode.ACCEPTED).json(await deleteRole(role));
 });
 
 /**
@@ -70,10 +76,10 @@ export const deleteKCRole = errorWrapper(async (req: Request, res: Response) => 
  * @protected Requires "playground-admin"
  */
 export const updateKCRole = errorWrapper(async (req: Request, res: Response) => {
-  const { role } = getParams(req, rolePathParamsSchema);
-  const { newRoleName } = getQuery(req, updateRoleQuerySchema);
+  const { role } = getParams(req, updateKCRoleParamsSchema);
+  const { newRoleName } = getQuery(req, updateKCRoleQuerySchema);
 
-  res.send(httpStatusCode.ACCEPTED).json(await updateRole(role, newRoleName));
+  res.status(statusCode.ACCEPTED).json(await updateRole(role, newRoleName));
 });
 
 /**
@@ -83,7 +89,7 @@ export const updateKCRole = errorWrapper(async (req: Request, res: Response) => 
  * @protected Requires "playground-admin"
  */
 export const getKCRoleComposites = errorWrapper(async (req: Request, res: Response) => {
-  const { role } = getParams(req, rolePathParamsSchema);
+  const { role } = getParams(req, getKCRoleCompositesParamsSchema);
 
   res.json(await getRoleComposites(role));
 });
@@ -95,10 +101,10 @@ export const getKCRoleComposites = errorWrapper(async (req: Request, res: Respon
  * @protected Requires "playground-admin"
  */
 export const addKCRoleComposite = errorWrapper(async (req: Request, res: Response) => {
-  const { role } = getParams(req, rolePathParamsSchema);
-  const { newCompositeRoleName } = getQuery(req, addRoleCompositeQuerySchema);
+  const { role } = getParams(req, addKCRoleCompositeParamsSchema);
+  const { newCompositeRoleName } = getQuery(req, addKCRoleCompositeQuerySchema);
 
-  res.send(httpStatusCode.CREATED).json(await addRoleComposite(role, newCompositeRoleName));
+  res.status(statusCode.CREATED).json(await addRoleComposite(role, newCompositeRoleName));
 });
 
 /**
@@ -108,8 +114,8 @@ export const addKCRoleComposite = errorWrapper(async (req: Request, res: Respons
  * @protected Requires "playground-admin"
  */
 export const deleteKCRoleComposite = errorWrapper(async (req: Request, res: Response) => {
-  const { role } = getParams(req, rolePathParamsSchema);
-  const { compositeRoleName } = getQuery(req, deleteRoleCompositeQuerySchema);
+  const { role } = getParams(req, deleteKCRoleCompositeParamsSchema);
+  const { compositeRoleName } = getQuery(req, deleteKCRoleCompositeQuerySchema);
 
-  res.json(await deleteRoleComposite(role, compositeRoleName));
+  res.status(statusCode.ACCEPTED).json(await deleteRoleComposite(role, compositeRoleName));
 });

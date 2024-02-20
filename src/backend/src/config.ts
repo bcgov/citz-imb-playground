@@ -1,5 +1,4 @@
 import { KEYCLOAK_OPTIONS } from './keycloak/config';
-import { BaseAPIDocsConfig, CustomSchemaConfig } from '@bcgov/citz-imb-kc-express-api-docs';
 
 // Environment variables set in compose file.
 const {
@@ -43,7 +42,7 @@ const RATE_LIMIT_OPTIONS = {
 };
 
 const API_DOC_CONFIG = {
-  ...BaseAPIDocsConfig,
+  title: 'Playground API Documentation',
   modules: {
     health: {
       description: 'Check application health.',
@@ -71,8 +70,34 @@ const API_DOC_CONFIG = {
       required: false,
       type: 'number',
     },
-  } as CustomSchemaConfig,
-  defaultResponses: [[503, 'An unexpected error occurred.']],
+  },
+  customControllers: {
+    'dataController.getAllItems': {
+      description: 'Returns all items.',
+    },
+    'dataController.getItemByWhere': {
+      description: 'Returns an item based on request body.',
+    },
+    'dataController.updateItemById': {
+      description: 'Update an item based on id and request body.',
+    },
+  },
+  customResponseStatuses: {
+    'statusCode.OK': 200,
+    'statusCode.CREATED': 201,
+    'statusCode.ACCEPTED': 202,
+    'statusCode.NO_CONTENT': 204,
+    'statusCode.NOT_MODIFIED': 304,
+    'statusCode.BAD_REQUEST': 400,
+    'statusCode.UNAUTHORIZED': 401,
+    'statusCode.FORBIDDEN': 403,
+    'statusCode.NOT_FOUND': 404,
+    'statusCode.IM_A_TEAPOT': 418,
+    'statusCode.INTERNAL_SERVER_ERROR': 500,
+    'statusCode.NOT_IMPLEMENTED': 501,
+    'statusCode.SERVICE_UNAVAIBLABLE': 503,
+  },
+  defaultResponses: [500],
 };
 
 // Exported configuration values.

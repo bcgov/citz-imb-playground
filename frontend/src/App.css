@@ -1,0 +1,254 @@
+main {
+  flex: 1;
+  padding: var(--layout-margin-large);
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* BC Gov Button styles using design tokens */
+.btn {
+  padding: var(--layout-margin-small) var(--layout-margin-medium);
+  border: var(--layout-border-width-large) solid transparent;
+  border-radius: var(--layout-border-radius-medium);
+  font-size: var(--typography-font-size-body);
+  font-weight: var(--typography-font-weight-bold);
+  font-family: 'BC Sans', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
+  min-height: var(--layout-grid-base-4);
+  line-height: var(--typography-line-height-body);
+}
+
+.btn:focus {
+  outline: var(--layout-border-width-thick) solid var(--surface-color-border-active);
+  outline-offset: var(--layout-border-width-thin);
+}
+
+.btn-primary {
+  background-color: var(--surface-color-primary-button-default);
+  color: var(--typography-color-primary-invert);
+  border-color: var(--surface-color-primary-button-default);
+}
+
+.btn-primary:hover {
+  background-color: var(--surface-color-primary-button-hover);
+  border-color: var(--surface-color-primary-button-hover);
+}
+
+.btn-primary:active {
+  background-color: var(--surface-color-primary-button-pressed);
+  border-color: var(--surface-color-primary-button-pressed);
+}
+
+.btn-secondary {
+  background-color: var(--surface-color-secondary-button-default);
+  color: var(--typography-color-primary);
+  border-color: var(--surface-color-border-medium);
+}
+
+.btn-secondary:hover {
+  background-color: var(--surface-color-secondary-button-hover);
+  border-color: var(--surface-color-border-dark);
+}
+
+.btn-secondary:active {
+  background-color: var(--surface-color-secondary-button-pressed);
+}
+
+.btn-success {
+  background-color: var(--surface-color-success-button-default);
+  color: var(--typography-color-primary-invert);
+  border-color: var(--surface-color-success-button-default);
+}
+
+.btn-success:hover {
+  background-color: var(--surface-color-success-button-hover);
+  border-color: var(--surface-color-success-button-hover);
+}
+
+.btn-success:active {
+  background-color: var(--surface-color-success-button-pressed);
+  border-color: var(--surface-color-success-button-pressed);
+}
+
+.btn-danger {
+  background-color: var(--surface-color-danger-button-default);
+  color: var(--typography-color-primary-invert);
+  border-color: var(--surface-color-danger-button-default);
+}
+
+.btn-danger:hover {
+  background-color: var(--surface-color-danger-button-hover);
+  border-color: var(--surface-color-danger-button-hover);
+}
+
+.btn-danger:active {
+  background-color: var(--surface-color-danger-button-pressed);
+  border-color: var(--surface-color-danger-button-pressed);
+}
+
+.btn:disabled {
+  background-color: var(--surface-color-forms-disabled);
+  color: var(--typography-color-disabled);
+  border-color: var(--surface-color-border-light);
+  cursor: not-allowed;
+}
+
+/* BC Gov Form styles using design tokens */
+.form-group {
+  margin-bottom: var(--layout-margin-large);
+  text-align: left;
+}
+
+.form-group > label {
+  display: block;
+  margin-bottom: var(--layout-margin-xsmall);
+  font-weight: var(--typography-font-weight-bold);
+  color: var(--typography-color-primary);
+  font-size: var(--typography-font-size-body);
+}
+
+.form-control {
+  width: 100%;
+  padding: var(--layout-margin-small);
+  border: var(--layout-border-width-large) solid var(--surface-color-border-medium);
+  border-radius: var(--layout-border-radius-medium);
+  font-size: var(--typography-font-size-body);
+  font-family: 'BC Sans', sans-serif;
+  line-height: var(--typography-line-height-body);
+  transition: border-color 0.2s ease;
+  background-color: var(--surface-color-background-white);
+  color: var(--typography-color-primary);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--surface-color-border-active);
+  box-shadow: 0 0 0 var(--layout-border-width-thin) var(--surface-color-border-active);
+}
+
+.form-control:disabled {
+  background-color: var(--surface-color-forms-disabled);
+  color: var(--typography-color-disabled);
+  border-color: var(--surface-color-border-light);
+}
+
+/* BC Gov Card styles using design tokens */
+.card {
+  background: var(--surface-color-background-white);
+  border-radius: var(--layout-border-radius-large);
+  padding: var(--layout-margin-xlarge);
+  box-shadow: var(--elevation-box-shadow-medium);
+  margin-bottom: var(--layout-margin-large);
+  border: var(--layout-border-width-large) solid var(--surface-color-border-light);
+}
+
+.card-title {
+  font-size: var(--typography-font-size-h3);
+  font-weight: var(--typography-font-weight-bold);
+  margin-bottom: var(--layout-margin-medium);
+  color: var(--typography-color-primary);
+}
+
+/* BC Gov Alert styles using design tokens */
+.error {
+  color: var(--typography-color-danger);
+  background-color: var(--surface-color-background-danger);
+  border: var(--layout-border-width-large) solid var(--surface-color-border-danger);
+  padding: var(--layout-margin-medium);
+  border-radius: var(--layout-border-radius-medium);
+  margin-bottom: var(--layout-margin-large);
+  font-size: var(--typography-font-size-body);
+}
+
+.success {
+  color: var(--typography-color-success);
+  background-color: var(--surface-color-background-success);
+  border: var(--layout-border-width-large) solid var(--surface-color-border-success);
+  padding: var(--layout-margin-medium);
+  border-radius: var(--layout-border-radius-medium);
+  margin-bottom: var(--layout-margin-large);
+  font-size: var(--typography-font-size-body);
+}
+
+/* BC Gov Loading styles */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--layout-margin-xxlarge);
+}
+
+.spinner {
+  border: var(--layout-border-width-thick) solid var(--surface-color-border-light);
+  border-top: var(--layout-border-width-thick) solid var(--surface-color-primary-button-default);
+  border-radius: 50%;
+  width: var(--layout-grid-base-5);
+  height: var(--layout-grid-base-5);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* BC Gov responsive design using design tokens */
+@media (max-width: 768px) {
+  .App-header h1 {
+    font-size: var(--typography-font-size-h2);
+  }
+  
+  main {
+    padding: var(--layout-margin-medium);
+  }
+  
+  .card {
+    padding: var(--layout-margin-large);
+  }
+  
+  .btn {
+    padding: var(--layout-margin-medium) var(--layout-margin-large);
+    font-size: var(--typography-font-size-body);
+  }
+}
+
+/* BC Gov utility classes */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.mb-small {
+  margin-bottom: var(--layout-margin-small);
+}
+
+.mb-medium {
+  margin-bottom: var(--layout-margin-medium);
+}
+
+.mb-large {
+  margin-bottom: var(--layout-margin-large);
+}
+
+.mt-small {
+  margin-top: var(--layout-margin-small);
+}
+
+.mt-medium {
+  margin-top: var(--layout-margin-medium);
+}
+
+.mt-large {
+  margin-top: var(--layout-margin-large);
+}

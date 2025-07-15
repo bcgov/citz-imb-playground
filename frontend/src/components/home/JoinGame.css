@@ -1,0 +1,6 @@
+/* Override exclamation icon color only when TextField is invalid */
+.bcds-react-aria-TextField--container #exclamation-icon {
+  color: #d8292f !important;
+  fill: #d8292f !important;
+}
+

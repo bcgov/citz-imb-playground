@@ -1,0 +1,210 @@
+.game-results {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.results-header {
+  margin-bottom: 40px;
+}
+
+.celebration {
+  padding: 30px;
+}
+
+.trophy {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.celebration h2 {
+  font-size: 2.5rem;
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.celebration p {
+  font-size: 1.2rem;
+  color: #666;
+  margin: 0;
+}
+
+.results-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+}
+
+.card-title {
+  margin: 0 0 15px 0;
+  color: #333;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.rank-value {
+  font-size: 3rem;
+}
+
+.results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.result-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.result-item.current-user {
+  border-color: #007bff;
+  background-color: #e3f2fd;
+}
+
+.rank-display {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 80px;
+}
+
+.rank-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.medal {
+  font-size: 24px;
+}
+
+.player-info {
+  flex: 1;
+  text-align: left;
+}
+
+.username {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.performance {
+  display: flex;
+  gap: 15px;
+  font-size: 14px;
+  color: #666;
+}
+
+.wpm {
+  font-weight: 600;
+  color: #007bff;
+}
+
+.accuracy {
+  font-weight: 600;
+  color: #28a745;
+}
+
+.finish-time {
+  font-size: 14px;
+  color: #666;
+  font-family: monospace;
+}
+
+.results-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .results-content {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .celebration h2 {
+    font-size: 2rem;
+  }
+
+  .trophy {
+    font-size: 3rem;
+  }
+
+  .result-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .player-info {
+    text-align: center;
+  }
+
+  .performance {
+    justify-content: center;
+  }
+
+  .results-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .results-actions button {
+    width: 200px;
+  }
+}

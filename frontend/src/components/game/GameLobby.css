@@ -1,0 +1,239 @@
+.game-lobby {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.lobby-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  gap: var(--layout-margin-large);
+  grid-template-areas: 
+    "room-info text-preview"
+    "players players"
+    "actions actions";
+}
+
+.room-info {
+  grid-area: room-info;
+}
+
+.text-preview {
+  grid-area: text-preview;
+}
+
+.players-list {
+  grid-area: players;
+}
+
+.lobby-actions {
+  grid-area: actions;
+  text-align: center;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--layout-margin-medium);
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--layout-margin-xsmall);
+}
+
+.info-item label {
+  font-weight: var(--typography-font-weight-bold);
+  color: var(--typography-color-secondary);
+  font-size: var(--typography-font-size-small);
+  font-family: 'BC Sans', sans-serif;
+}
+
+.info-item span {
+  font-size: var(--typography-font-size-body);
+  color: var(--typography-color-primary);
+  font-family: 'BC Sans', sans-serif;
+}
+
+.room-code {
+  font-family: 'BC Sans', monospace;
+  font-size: var(--typography-font-size-h5);
+  font-weight: var(--typography-font-weight-bold);
+  color: var(--surface-color-primary-button-default);
+  background-color: var(--surface-color-background-light-gray);
+  padding: var(--layout-margin-xsmall) var(--layout-margin-small);
+  border-radius: var(--layout-border-radius-small);
+  display: inline-block;
+  border: var(--layout-border-width-large) solid var(--surface-color-border-light);
+}
+
+.preview-content {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.text-content {
+  background-color: var(--surface-color-background-light-gray);
+  padding: var(--layout-margin-medium);
+  border-radius: var(--layout-border-radius-medium);
+  border: var(--layout-border-width-large) solid var(--surface-color-border-light);
+  font-size: var(--typography-font-size-small);
+  line-height: var(--typography-line-height-body);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin: 0;
+  font-family: 'BC Sans', monospace;
+  color: var(--typography-color-primary);
+}
+
+.participants {
+  display: flex;
+  flex-direction: column;
+  gap: var(--layout-margin-small);
+}
+
+.participant {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--layout-margin-small) var(--layout-margin-medium);
+  background-color: var(--surface-color-background-light-gray);
+  border-radius: var(--layout-border-radius-medium);
+  border: var(--layout-border-width-large) solid transparent;
+  transition: all 0.2s ease;
+}
+
+.participant.current-user {
+  border-color: var(--surface-color-primary-button-default);
+  background-color: var(--surface-color-background-white);
+  box-shadow: var(--elevation-box-shadow-small);
+}
+
+.participant-info {
+  display: flex;
+  align-items: center;
+  gap: var(--layout-margin-small);
+}
+
+.username {
+  font-weight: var(--typography-font-weight-bold);
+  color: var(--typography-color-primary);
+  font-family: 'BC Sans', sans-serif;
+  font-size: var(--typography-font-size-body);
+}
+
+.host-badge, .you-badge {
+  font-size: var(--typography-font-size-small);
+  font-weight: var(--typography-font-weight-bold);
+  padding: var(--layout-margin-xxsmall) var(--layout-margin-xsmall);
+  border-radius: var(--layout-border-radius-small);
+  text-transform: uppercase;
+  font-family: 'BC Sans', sans-serif;
+}
+
+.host-badge {
+  background-color: #656565;
+  color: #ffffff;
+  border: var(--layout-border-width-thin) solid var(--surface-color-border-warning);
+}
+
+.you-badge {
+  background-color: var(--surface-color-primary-button-default);
+  color: var(--typography-color-primary-invert);
+}
+
+.participant-status {
+  display: flex;
+  align-items: center;
+  gap: var(--layout-margin-xsmall);
+  font-size: var(--typography-font-size-small);
+  color: var(--typography-color-success);
+  font-family: 'BC Sans', sans-serif;
+}
+
+.status-indicator {
+  width: var(--layout-margin-small);
+  height: var(--layout-margin-small);
+  border-radius: 50%;
+}
+
+.status-indicator.ready {
+  background-color: var(--surface-color-success-button-default);
+}
+
+.host-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--layout-margin-medium);
+}
+
+.action-hint {
+  margin: 0;
+  color: var(--typography-color-secondary);
+  font-size: var(--typography-font-size-small);
+  font-family: 'BC Sans', sans-serif;
+}
+
+.player-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.waiting-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--layout-margin-medium);
+  color: var(--typography-color-secondary);
+}
+
+.waiting-message p {
+  margin: 0;
+  font-size: var(--typography-font-size-body);
+  font-family: 'BC Sans', sans-serif;
+}
+
+.spinner {
+  width: var(--layout-grid-base-3);
+  height: var(--layout-grid-base-3);
+  border: var(--layout-border-width-medium) solid var(--surface-color-border-light);
+  border-top: var(--layout-border-width-medium) solid var(--surface-color-primary-button-default);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Mobile Responsive using BC Gov breakpoints */
+@media (max-width: 768px) {
+  .lobby-content {
+    grid-template-columns: 1fr;
+    gap: var(--layout-margin-medium);
+    grid-template-areas: 
+      "room-info"
+      "text-preview"
+      "players"
+      "actions";
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+    gap: var(--layout-margin-small);
+  }
+
+  .participant {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--layout-margin-small);
+    padding: var(--layout-margin-medium);
+  }
+
+  .participant-info {
+    width: 100%;
+  }
+}

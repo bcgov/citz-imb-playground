@@ -1,0 +1,70 @@
+/* Import BC Sans font */
+@import url('@bcgov/bc-sans/css/BCSans.css');
+
+/* Import BC Gov design tokens */
+@import '@bcgov/design-tokens/css/variables.css';
+
+body {
+  margin: 0;
+  font-family: 'BC Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--surface-color-background-light-gray);
+  color: var(--typography-color-primary);
+  line-height: var(--typography-line-height-body);
+}
+
+code {
+  font-family: 'BC Sans', source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+/* BC Gov base typography styles */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'BC Sans', sans-serif;
+  font-weight: var(--typography-font-weight-bold);
+  color: var(--typography-color-primary);
+  margin-top: 0;
+}
+
+h1 {
+  font-size: var(--typography-font-size-h1);
+  line-height: var(--typography-line-height-h1);
+}
+
+h2 {
+  font-size: var(--typography-font-size-h2);
+  line-height: var(--typography-line-height-h2);
+}
+
+h3 {
+  font-size: var(--typography-font-size-h3);
+  line-height: var(--typography-line-height-h3);
+}
+
+p {
+  font-size: var(--typography-font-size-body);
+  line-height: var(--typography-line-height-body);
+  margin-bottom: var(--layout-margin-medium);
+}
+
+/* Focus styles following BC Gov accessibility guidelines */
+*:focus {
+  outline: var(--layout-border-width-thick) solid var(--surface-color-border-active);
+  outline-offset: var(--layout-border-width-thin);
+}
+
+/* Remove default focus for mouse users */
+*:focus:not(:focus-visible) {
+  outline: none;
+}

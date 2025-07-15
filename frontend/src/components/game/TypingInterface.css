@@ -1,0 +1,300 @@
+.typing-interface {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--layout-margin-large);
+  background-color: var(--surface-color-background-light-gray);
+}
+
+.game-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto auto;
+  gap: var(--layout-margin-large);
+  grid-template-areas: 
+    "text-display leaderboard"
+    "typing-area leaderboard";
+}
+
+.text-display {
+  grid-area: text-display;
+  overflow-y: auto;
+}
+
+.typing-area {
+  grid-area: typing-area;
+}
+
+.leaderboard {
+  grid-area: leaderboard;
+}
+
+.card {
+  background: var(--surface-color-background-white);
+  border-radius: var(--layout-border-radius-large);
+  box-shadow: var(--elevation-box-shadow-medium);
+  padding: var(--layout-margin-large);
+  border: var(--layout-border-width-large) solid var(--surface-color-border-light);
+}
+
+.card-title {
+  margin: 0 0 var(--layout-margin-medium) 0;
+  color: var(--typography-color-primary);
+  font-size: var(--typography-font-size-h4);
+  font-weight: var(--typography-font-weight-bold);
+  font-family: 'BC Sans', sans-serif;
+}
+
+.text-container {
+  max-height: 300px;
+  overflow-y: auto;
+  border: var(--layout-border-width-large) solid var(--surface-color-border-medium);
+  border-radius: var(--layout-border-radius-medium);
+  padding: var(--layout-margin-large);
+  background-color: var(--surface-color-background-light-gray);
+}
+
+.text-content {
+  font-family: 'BC Sans', monospace;
+  font-size: var(--typography-font-size-h5);
+  line-height: var(--typography-line-height-body);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: var(--typography-color-primary);
+}
+
+.char {
+  position: relative;
+}
+
+.char.correct {
+  background-color: var(--surface-color-background-success);
+  color: var(--typography-color-success);
+}
+
+.char.incorrect {
+  background-color: var(--surface-color-background-danger);
+  color: var(--typography-color-danger);
+}
+
+.char.current {
+  background-color: var(--surface-color-primary-button-default);
+  color: var(--typography-color-primary-invert);
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0.3; }
+}
+
+.stats-bar {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: var(--layout-margin-large);
+  padding: var(--layout-margin-medium);
+  background-color: var(--surface-color-background-light-gray);
+  border-radius: var(--layout-border-radius-medium);
+  border: var(--layout-border-width-large) solid var(--surface-color-border-light);
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat label {
+  display: block;
+  font-size: var(--typography-font-size-small);
+  color: var(--typography-color-secondary);
+  margin-bottom: var(--layout-margin-xsmall);
+  font-family: 'BC Sans', sans-serif;
+  font-weight: var(--typography-font-weight-bold);
+}
+
+.stat-value {
+  font-size: var(--typography-font-size-h3);
+  font-weight: var(--typography-font-weight-bold);
+  color: var(--typography-color-primary);
+  font-family: 'BC Sans', sans-serif;
+}
+
+.typing-input {
+  width: 100%;
+  min-height: 150px;
+  padding: var(--layout-margin-medium);
+  border: var(--layout-border-width-large) solid var(--surface-color-border-medium);
+  border-radius: var(--layout-border-radius-medium);
+  font-family: 'BC Sans', monospace;
+  font-size: var(--typography-font-size-body);
+  line-height: var(--typography-line-height-body);
+  resize: vertical;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+  background-color: var(--surface-color-background-white);
+  color: var(--typography-color-primary);
+}
+
+.typing-input:focus {
+  outline: none;
+  border-color: var(--surface-color-border-active);
+  box-shadow: 0 0 0 var(--layout-border-width-thin) var(--surface-color-border-active);
+}
+
+.typing-input:disabled {
+  background-color: var(--surface-color-forms-disabled);
+  color: var(--typography-color-disabled);
+  cursor: not-allowed;
+}
+
+.completion-message {
+  text-align: center;
+  padding: var(--layout-margin-large);
+  background-color: var(--surface-color-background-success);
+  border-radius: var(--layout-border-radius-medium);
+  margin-top: var(--layout-margin-medium);
+  border: var(--layout-border-width-large) solid var(--surface-color-border-success);
+}
+
+.completion-message h4 {
+  margin: 0 0 var(--layout-margin-small) 0;
+  color: var(--typography-color-success);
+  font-family: 'BC Sans', sans-serif;
+  font-size: var(--typography-font-size-h4);
+  font-weight: var(--typography-font-weight-bold);
+}
+
+.completion-message p {
+  margin: 0;
+  color: var(--typography-color-success);
+  font-weight: var(--typography-font-weight-bold);
+  font-family: 'BC Sans', sans-serif;
+  font-size: var(--typography-font-size-body);
+}
+
+.participants-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--layout-margin-small);
+}
+
+.participant-item {
+  display: flex;
+  align-items: center;
+  gap: var(--layout-margin-small);
+  padding: var(--layout-margin-small);
+  background-color: var(--surface-color-background-light-gray);
+  border-radius: var(--layout-border-radius-medium);
+  border: var(--layout-border-width-large) solid transparent;
+  transition: all 0.2s ease;
+}
+
+.participant-item.current-user {
+  border-color: var(--surface-color-primary-button-default);
+  background-color: var(--surface-color-background-white);
+  box-shadow: var(--elevation-box-shadow-small);
+}
+
+.participant-item.finished {
+  background-color: var(--surface-color-background-success);
+  border-color: var(--surface-color-border-success);
+}
+
+.rank {
+  font-weight: var(--typography-font-weight-bold);
+  font-size: var(--typography-font-size-body);
+  color: var(--typography-color-secondary);
+  min-width: 30px;
+  font-family: 'BC Sans', sans-serif;
+}
+
+.participant-details {
+  flex: 1;
+}
+
+.username {
+  font-weight: var(--typography-font-weight-bold);
+  margin-bottom: var(--layout-margin-xsmall);
+  color: var(--typography-color-primary);
+  font-family: 'BC Sans', sans-serif;
+  font-size: var(--typography-font-size-body);
+}
+
+.progress-bar {
+  width: 100%;
+  height: var(--layout-margin-small);
+  background-color: var(--surface-color-border-light);
+  border-radius: var(--layout-border-radius-small);
+  overflow: hidden;
+  margin-bottom: var(--layout-margin-xsmall);
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--surface-color-primary-button-default);
+  transition: width 0.3s ease;
+}
+
+.stats {
+  font-size: var(--typography-font-size-small);
+  color: var(--typography-color-secondary);
+  font-family: 'BC Sans', sans-serif;
+}
+
+.finished-badge {
+  color: var(--typography-color-success);
+  font-size: var(--typography-font-size-h5);
+  font-weight: var(--typography-font-weight-bold);
+  font-family: 'BC Sans', sans-serif;
+}
+
+/* Mobile Responsive using BC Gov breakpoints */
+@media (max-width: 768px) {
+  .typing-interface {
+    padding: var(--layout-margin-medium);
+  }
+
+  .game-content {
+    grid-template-columns: 1fr;
+    gap: var(--layout-margin-medium);
+    grid-template-areas: 
+      "text-display"
+      "typing-area"
+      "leaderboard";
+  }
+
+  .text-content {
+    font-size: var(--typography-font-size-body);
+  }
+
+  .stats-bar {
+    flex-direction: column;
+    gap: var(--layout-margin-small);
+    padding: var(--layout-margin-small);
+  }
+
+  .stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .stat label {
+    margin-bottom: 0;
+  }
+
+  .stat-value {
+    font-size: var(--typography-font-size-h4);
+  }
+
+  .card {
+    padding: var(--layout-margin-medium);
+  }
+
+  .text-container {
+    padding: var(--layout-margin-medium);
+  }
+
+  .typing-input {
+    min-height: 120px;
+    padding: var(--layout-margin-small);
+  }
+}

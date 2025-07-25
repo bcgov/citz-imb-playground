@@ -2,6 +2,8 @@
 
 This guide explains how to set up self-hosted Sentry for monitoring the TypeRacer application.
 
+> **Note**: This application uses a monorepo structure with Turborepo. All backend and frontend code is located in the `packages/` directory.
+
 ## 🚀 Quick Start
 
 ### 1. Start Self-Hosted Sentry
@@ -24,7 +26,7 @@ docker-compose -f docker-compose.sentry.yml logs -f sentry-web
 ### 3. Configure Environment Variables
 
 #### Backend Configuration
-Copy `backend/.env.example` to `backend/.env` and update:
+Copy `packages/backend/.env.example` to `packages/backend/.env` and update:
 
 ```env
 # Server Configuration
@@ -43,7 +45,7 @@ FRONTEND_URL=http://localhost:3000
 ```
 
 #### Frontend Configuration
-Copy `frontend/.env.example` to `frontend/.env` and update:
+Copy `packages/frontend/.env.example` to `packages/frontend/.env` and update:
 
 ```env
 # React App Configuration
@@ -61,10 +63,10 @@ REACT_APP_SENTRY_DEBUG=true
 ### 4. Start the Application
 
 ```bash
-# Install dependencies (if not already done)
-npm run install:all
+# Install dependencies for the monorepo
+npm install
 
-# Start both frontend and backend with hot reload
+# Start both frontend and backend with hot reload using Turborepo
 npm run dev
 ```
 

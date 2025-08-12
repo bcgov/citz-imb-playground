@@ -15,11 +15,15 @@
     "lint": "turbo run lint",
     "clean": "turbo run clean",
     "format": "turbo run format",
-    "sentry:up": "docker compose -f docker-compose.sentry.yml up -d",
-    "sentry:down": "docker compose -f docker-compose.sentry.yml down",
-    "sentry:logs": "docker compose -f docker-compose.sentry.yml logs -f",
-    "docker:up": "docker compose up -d",
-    "docker:down": "docker compose down"
+    "docker:up": "docker compose --profile full up -d",
+    "docker:down": "docker compose down",
+    "docker:build": "docker compose build",
+    "docker:logs": "docker compose logs -f",
+    "docker:dev": "docker compose --env-file .env.dev up",
+    "docker:app": "docker compose up backend frontend -d",
+    "sentry:up": "docker compose --profile sentry up -d",
+    "sentry:down": "docker compose --profile sentry down",
+    "sentry:logs": "docker compose --profile sentry logs -f"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.21.0",

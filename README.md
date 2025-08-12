@@ -29,12 +29,6 @@ This TypeRacer application follows a **modern full-stack layered monolith archit
    - File system storage for uploaded content
    - No persistent database (stateless design)
 
-### Secondary Patterns
-- **Component-Based Architecture**: React functional components with hooks
-- **Event-Driven Architecture**: Socket.IO for real-time event handling
-- **Modular Architecture**: Clear separation of routes, services, and components
-- **Client-Server Architecture**: Traditional separation with real-time enhancements
-
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -55,6 +49,112 @@ The application will be available at:
 - **Frontend**: http://localhost:3000
 - **Backend API**: http://localhost:3001
 
+## 🐳 Container Deployment (Docker/Podman)
+
+### Prerequisites
+- **Docker** with Docker Compose **OR** **Podman** with podman-compose
+- At least 4GB of available RAM (for Sentry services)
+
+### Quick Container Start
+
+```bash
+# Using Docker
+npm run docker:up
+
+# Using Podman (replace 'docker' with 'podman' in commands)
+podman-compose --profile full up -d
+
+# Or build first, then start
+npm run docker:build
+npm run docker:up
+```
+
+The application will be available at:
+- **Frontend**: http://localhost:3000
+- **Backend API**: http://localhost:3001  
+- **Sentry Dashboard**: http://localhost:9000 (optional monitoring)
+
+### Container Commands
+
+```bash
+# Production deployment
+npm run docker:up              # Start all services (app + Sentry)
+npm run docker:app             # Start only app services (no Sentry)
+npm run docker:down            # Stop all services
+npm run docker:build           # Build all container images
+npm run docker:logs            # View logs from all services
+
+# Development with hot reload
+npm run docker:dev             # Start in development mode with hot reload
+
+# Sentry only (monitoring stack)
+npm run sentry:up              # Start only Sentry services
+npm run sentry:down            # Stop Sentry services
+npm run sentry:logs            # View Sentry logs
+```
+
+**Using Podman instead of Docker:**
+```bash
+# Replace npm scripts with direct podman-compose commands
+podman-compose --profile full up -d           # Start all services
+podman-compose up backend frontend -d         # Start only app services
+podman-compose down                           # Stop all services
+podman-compose build                          # Build all images
+podman-compose logs -f                        # View logs
+
+# Development mode
+podman-compose -f docker-compose.yml -f docker-compose.override.yml up
+```
+
+### Container Environment Configuration
+
+The docker-compose.yml works out of the box with sensible defaults. **Environment variables are optional** - only configure if needed.
+
+```bash
+# Copy environment template (optional - only for Sentry)
+copy .env.example .env         # Windows
+# cp .env.example .env         # Linux/Mac
+
+# Edit .env file to configure Sentry (optional)
+# - Set BACKEND_SENTRY_DSN and FRONTEND_SENTRY_DSN for error tracking
+# - Change SENTRY_SECRET_KEY for production security
+```
+
+**Deployment modes:**
+- **Production**: `npm run docker:up` or `podman-compose --profile full up -d`
+- **Development**: `npm run docker:dev` or `podman-compose -f docker-compose.yml -f docker-compose.override.yml up`
+- **App only**: `npm run docker:app` or `podman-compose up backend frontend -d`
+- **Sentry only**: `npm run sentry:up` or `podman-compose --profile sentry up -d`
+
+### Container vs Local Development
+
+| Aspect | Container Deployment | Local Development |
+|--------|---------------------|-------------------|
+| **Setup** | `npm run docker:up` or `podman-compose up` | `npm install && npm run dev` |
+| **Environment** | Containerized, production-like | Native Node.js |
+| **Hot Reload** | Available with development mode | Built-in with `npm run dev` |
+| **Sentry** | Included with monitoring stack | Optional, requires separate setup |
+| **Resources** | ~4GB RAM (with Sentry) | ~500MB RAM |
+| **Dependencies** | Docker/Podman + Compose | Node.js 18+ |
+
+### Container Architecture
+
+The single `docker-compose.yml` uses **profiles** and **override files** for different deployment scenarios:
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                docker-compose.yml (base)                │
+├─────────────────────────────────────────────────────────┤
+│  + docker-compose.override.yml (development)           │
+│  → Hot reload + development mode                        │
+├─────────────────────────────────────────────────────────┤
+│  + --profile full (production)                         │
+│  → Frontend + Backend + Sentry Stack                   │
+├─────────────────────────────────────────────────────────┤
+│  + --profile sentry (monitoring only)                  │
+│  → Redis + PostgreSQL + Sentry Services                │
+└─────────────────────────────────────────────────────────┘
+```
 ### Individual Package Commands
 
 ```bash
@@ -79,23 +179,6 @@ Both frontend and backend support hot reload for rapid development:
 - **Backend Hot Reload**: `nodemon` watches TypeScript files and auto-restarts server
 - **Frontend Hot Reload**: React's built-in HMR updates components without page refresh
 - **Shared Types**: Changes in `shared/types.ts` trigger rebuilds in both frontend and backend
-
-## ✨ Features
-
-### Core Functionality
-- **Host Games**: Create typing competitions with custom text sources
-- **Join Games**: Enter existing games using room codes
-- **Real-time Multiplayer**: Live player updates and synchronized gameplay
-- **File Upload**: Support for multiple file types (.txt, .js, .ts, .py, .java, .cpp, .html, .css, .json, .md)
-- **Performance Tracking**: WPM calculation, accuracy tracking, and live leaderboards
-- **Game States**: Waiting → Countdown → Active → Finished with proper state management
-
-### Technical Features
-- **Full TypeScript**: End-to-end type safety with shared interfaces
-- **Socket.IO Integration**: Seamless real-time communication
-- **Error Handling**: Comprehensive error handling and user feedback
-- **Responsive Design**: Works on desktop and mobile devices
-- **Hot Module Replacement**: Fast development workflow
 
 ## 📊 Monitoring with Sentry
 
@@ -153,19 +236,6 @@ This application leverages the **BC Government Design System** to ensure consist
 - **@bcgov/design-tokens**: Design tokens for consistent spacing, colors, typography
 - **@bcgov/bc-sans**: Official BC Government font family
 
-### Benefits
-- **Accessibility**: WCAG 2.1 AA compliant components out of the box
-- **Consistency**: Standardized look and feel across BC Government applications
-- **Efficiency**: Pre-built, tested components reduce development time
-- **Compliance**: Meets BC Government digital standards and branding guidelines
-
-### Implementation
-The design system is integrated at the component level, providing:
-- Consistent button styles and interactions
-- Standardized form elements and validation
-- Accessible color schemes and typography
-- Responsive layout components
-
 ## 🏗️ Monorepo vs Conventional Structure
 
 ### Current Monorepo Architecture (Turborepo)
@@ -193,99 +263,7 @@ typeracer-monorepo/
 | **Refactoring** | Cross-package changes in single PR | Easier large-scale changes |
 | **Dependencies** | Centralized dependency management | Consistent versions across packages |
 
-### Conventional Structure Comparison
-
-**Conventional Separate Repositories:**
-```
-typeracer-frontend/         # Separate repo
-typeracer-backend/          # Separate repo  
-typeracer-shared/           # Separate npm package
-```
-
-### Trade-offs Analysis
-
-| Factor | Monorepo | Conventional Repos |
-|--------|----------|-------------------|
-| **Setup Complexity** | Medium (Turborepo config) | Low (standard npm) |
-| **CI/CD** | Complex (affected packages) | Simple (per repo) |
-| **Team Coordination** | Easier (single repo) | Harder (multiple repos) |
-| **Deployment** | Coordinated releases | Independent releases |
-| **Repository Size** | Larger (all code) | Smaller (focused) |
-| **Build Performance** | Optimized (Turborepo cache) | Standard |
-
-### Why Monorepo Works for TypeRacer
-
-1. **Real-time Coordination**: Frontend/backend must stay synchronized for Socket.IO events
-2. **Shared Game Logic**: Game state interfaces used by both client and server
-3. **Rapid Prototyping**: Quick feature development across full stack
-4. **Type Safety**: Immediate feedback when API contracts change
-5. **Single Deployment**: Simplified hosting and environment management
-
-**Recommendation**: Monorepo is ideal for tightly coupled applications like real-time games where frontend and backend evolve together.
-
-## 📁 Project Structure
-
-```
-typeracer-monorepo/
-├── packages/
-│   ├── frontend/                # React TypeScript frontend
-│   │   ├── src/
-│   │   │   ├── components/     # Reusable UI components
-│   │   │   │   ├── game/      # Game-specific components (composed architecture)
-│   │   │   │   ├── home/      # Home page components  
-│   │   │   │   └── host/      # Host-specific components
-│   │   │   ├── pages/         # Route components
-│   │   │   ├── config/        # Configuration (Sentry, etc.)
-│   │   │   └── types/         # Frontend-specific types
-│   │   └── package.json       # Frontend dependencies
-│   ├── backend/                # Node.js TypeScript backend
-│   │   ├── src/
-│   │   │   ├── routes/        # Express route handlers
-│   │   │   ├── services/      # Business logic
-│   │   │   ├── socket/        # Socket.IO handlers
-│   │   │   ├── config/        # Configuration (Sentry, etc.)
-│   │   │   └── types/         # Backend-specific types
-│   │   └── package.json       # Backend dependencies
-│   └── shared/                 # Shared TypeScript types
-│       └── types.ts           # Cross-package type definitions
-├── turbo.json                  # Turborepo build configuration
-├── docker-compose.sentry.yml   # Self-hosted Sentry setup
-├── SENTRY_SETUP.md            # Sentry configuration guide
-└── package.json               # Root workspace with scripts
-```
-
 ## 🛠️ Development
-
-### Available Scripts
-
-```bash
-# Development (Turborepo orchestration)
-npm run dev              # Start all packages in development mode
-npm run dev:frontend     # Start frontend only (localhost:3000)
-npm run dev:backend      # Start backend only (localhost:3001)
-npm run build           # Build all packages for production
-npm run build:frontend  # Build frontend only
-npm run build:backend   # Build backend only
-npm run test            # Run tests across all packages
-npm run lint            # Lint all packages
-npm run clean           # Clean build artifacts
-npm run format          # Format code across all packages
-
-# Monitoring
-npm run sentry:up       # Start self-hosted Sentry stack
-npm run sentry:down     # Stop Sentry stack
-npm run sentry:logs     # View Sentry logs
-
-# Docker (if using containerization)
-npm run docker:up       # Start application in Docker
-npm run docker:down     # Stop Docker containers
-
-# Alternative package-specific commands
-npm run dev --workspace=packages/frontend   # Frontend only
-npm run dev --workspace=packages/backend    # Backend only
-npm run build --filter=frontend             # Build frontend only
-npm run build --filter=backend              # Build backend only
-```
 
 ### Environment Variables
 
@@ -303,65 +281,6 @@ Environment variables are **optional for basic local development**. The applicat
 **Optional setup:**
 - `packages/backend/.env` (from `packages/backend/.env.example`)
 - `packages/frontend/.env` (from `packages/frontend/.env.example`)
-
-**Quick setup commands:**
-```bash
-# Windows (only if you want Sentry monitoring)
-copy packages\backend\.env.example packages\backend\.env
-copy packages\frontend\.env.example packages\frontend\.env
-
-# Linux/Mac (only if you want Sentry monitoring)
-cp packages/backend/.env.example packages/backend/.env
-cp packages/frontend/.env.example packages/frontend/.env
-```
-
-## 🎮 How to Play
-
-1. **Host a Game**:
-   - Enter your username
-   - Choose between default text or upload a custom file
-   - Click "Create Room" to generate a room code
-
-2. **Join a Game**:
-   - Enter your username and the room code
-   - Click "Join Game"
-
-3. **Compete**:
-   - Wait for other players to join
-   - Host starts the game when ready
-   - Type the displayed text as fast and accurately as possible
-   - View real-time results and final rankings
-
-## 🔧 Technical Details
-
-### Frontend Stack
-- React 18 with TypeScript
-- React Router for navigation
-- Socket.IO client for real-time communication
-- **BC Government Design System** (@bcgov/design-system-react-components)
-- **BC Sans Font** (@bcgov/bc-sans) and Design Tokens (@bcgov/design-tokens)
-- Styled Components for custom styling
-- Sentry for error tracking and performance monitoring
-
-### Backend Stack
-- Node.js with Express and TypeScript
-- Socket.IO for real-time communication
-- Multer for file uploads
-- CORS for cross-origin requests
-- Sentry for error tracking and performance monitoring
-
-### Monorepo Infrastructure
-- **Turborepo** for build orchestration and caching
-- **npm workspaces** for dependency management
-- **Shared TypeScript types** for cross-package consistency
-- **Coordinated development** with hot reload across packages
-
-### Real-time Features
-- Live player status updates
-- Synchronized game countdown
-- Real-time typing progress
-- Instant result updates
-- Connection status monitoring
 
 ## 🤝 Contributing
 

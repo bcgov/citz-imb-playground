@@ -1,0 +1,66 @@
+services:
+  # Development Services with Hot Reload
+  backend:
+    build:
+      context: .
+      dockerfile: packages/backend/Dockerfile
+      target: development  # Use development stage (not builder)
+    container_name: typeracer-backend-dev
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=development
+      - PORT=3001
+      # Sentry configuration (optional)
+      - SENTRY_DSN=${BACKEND_SENTRY_DSN:-}
+      - SENTRY_ENVIRONMENT=${SENTRY_ENVIRONMENT:-development}
+    volumes:
+      # Mount source code for hot reload
+      - ./packages/backend/src:/app/packages/backend/src
+      - ./packages/backend/package.json:/app/packages/backend/package.json
+      - ./packages/shared:/app/packages/shared
+      - backend-uploads:/app/packages/backend/uploads
+    networks:
+      - app-network
+      - sentry
+    restart: unless-stopped
+    working_dir: /app/packages/backend
+    command: npm run dev  # Use development command with nodemon/ts-node
+
+  frontend:
+    build:
+      context: .
+      dockerfile: packages/frontend/Dockerfile
+      target: development  # Use development stage (not builder)
+    container_name: typeracer-frontend-dev
+    ports:
+      - "3000:3000"  # React dev server runs on 3000
+    environment:
+      - NODE_ENV=development
+      - REACT_APP_API_URL=http://localhost:3001
+      - BROWSER=none  # Disable browser auto-launch in containers
+      - CHOKIDAR_USEPOLLING=true  # Enable polling for file changes in Docker
+      - WATCHPACK_POLLING=true
+      # Sentry configuration (optional)
+      - REACT_APP_SENTRY_DSN=${FRONTEND_SENTRY_DSN:-}
+      - REACT_APP_SENTRY_ENVIRONMENT=${SENTRY_ENVIRONMENT:-development}
+    volumes:
+      # Mount source code for hot reload
+      - ./packages/frontend/src:/app/packages/frontend/src
+      - ./packages/frontend/public:/app/packages/frontend/public
+      - ./packages/frontend/package.json:/app/packages/frontend/package.json
+      - ./packages/shared:/app/packages/shared
+    networks:
+      - app-network
+    restart: unless-stopped
+    working_dir: /app/packages/frontend
+    command: npm start  # Use React development server
+
+volumes:
+  backend-uploads:
+
+networks:
+  app-network:
+    driver: bridge
+  sentry:
+    driver: bridge

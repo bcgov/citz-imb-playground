@@ -1,0 +1,74 @@
+services:
+  # Sentry Dependencies
+  redis:
+    image: redis:7-alpine
+    container_name: sentry-redis
+    volumes:
+      - sentry-redis:/data
+    networks:
+      - sentry
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:14
+    container_name: sentry-postgres
+    environment:
+      POSTGRES_USER: sentry
+      POSTGRES_PASSWORD: sentry
+      POSTGRES_DB: sentry
+    volumes:
+      - sentry-postgres:/var/lib/postgresql/data
+    networks:
+      - sentry
+    restart: unless-stopped
+
+  # Sentry Services
+  sentry-base:
+    image: sentry:latest
+    container_name: sentry-base
+    depends_on:
+      - redis
+      - postgres
+    environment:
+      SENTRY_SECRET_KEY: 'your-secret-key-here-change-this-in-production'
+      SENTRY_POSTGRES_HOST: postgres
+      SENTRY_POSTGRES_PORT: 5432
+      SENTRY_DB_NAME: sentry
+      SENTRY_DB_USER: sentry
+      SENTRY_DB_PASSWORD: sentry
+      SENTRY_REDIS_HOST: redis
+      SENTRY_REDIS_PORT: 6379
+    volumes:
+      - sentry-data:/var/lib/sentry/files
+    networks:
+      - sentry
+    restart: unless-stopped
+
+  sentry-cron:
+    extends:
+      service: sentry-base
+    container_name: sentry-cron
+    command: run cron
+
+  sentry-worker:
+    extends:
+      service: sentry-base
+    container_name: sentry-worker
+    command: run worker
+
+  sentry-web:
+    extends:
+      service: sentry-base
+    container_name: sentry-web
+    ports:
+      - "9000:9000"
+    command: run web
+
+volumes:
+  sentry-data:
+  sentry-postgres:
+  sentry-redis:
+
+networks:
+  sentry:
+    driver: bridge

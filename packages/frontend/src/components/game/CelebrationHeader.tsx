@@ -1,5 +1,5 @@
 import React from 'react';
-import { GameResult, GameParticipant } from '../../types';
+import { GameResult } from '../../types';
 
 interface CelebrationHeaderProps {
   currentUserResult: GameResult | undefined;

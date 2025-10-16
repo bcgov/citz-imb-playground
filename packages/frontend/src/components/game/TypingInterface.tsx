@@ -83,7 +83,7 @@ const TypingInterface: React.FC<TypingInterfaceProps> = ({
     }
 
     onProgress(progress, newWpm, newAccuracy, isFinished);
-  }, [typedText, targetText, startTime, isActive, onProgress, finished]);
+  }, [typedText, targetText, startTime, isActive, onProgress, finished, currentUser.username, gameRoom.roomCode]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (!isActive || finished) return;

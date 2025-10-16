@@ -23,6 +23,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          npm install
           cd packages/frontend && npm install
           cd ../backend && npm install
 
@@ -32,8 +33,9 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
-          eslint_flags: 'packages/frontend/src packages/backend/src'
-          fail_on_error: false
+          eslint_flags: 'packages/frontend/src/**/*.{js,jsx,ts,tsx} packages/backend/src/**/*.{js,ts}'
+          fail_level: error
+          workdir: packages/frontend
 
       # Run shellcheck with ReviewDog
       - name: Run shellcheck
@@ -41,7 +43,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
-          fail_on_error: false
+          fail_level: error
 
       # Additional code suggestions with ReviewDog suggester
       - name: Suggest code improvements
@@ -52,4 +54,4 @@ jobs:
           level: warning
           filter_mode: added
           reporter: github-pr-review
-          fail_on_error: false
+          fail_level: error

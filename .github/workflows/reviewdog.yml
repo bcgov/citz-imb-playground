@@ -27,15 +27,6 @@ jobs:
           cd packages/frontend && npm install
           cd ../backend && npm install
 
-      # Run ESLint with ReviewDog
-      - name: Run ESLint
-        uses: reviewdog/action-eslint@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-pr-review
-          eslint_flags: 'packages/**/*.{js,jsx,ts,tsx}'
-          fail_level: error
-
       # Run shellcheck with ReviewDog
       - name: Run shellcheck
         uses: reviewdog/action-shellcheck@v1

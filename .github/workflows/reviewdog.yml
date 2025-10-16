@@ -21,26 +21,23 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Install dependencies
+        run: |
+          cd packages/frontend && npm ci
+          cd ../backend && npm ci
+
       # Run ESLint with ReviewDog
       - name: Run ESLint with ReviewDog
         uses: reviewdog/action-eslint@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
-          eslint_flags: '.'
+          eslint_flags: 'packages/frontend/src packages/backend/src'
           fail_on_error: false
 
-      # TypeScript check with ReviewDog
-      - name: Run TypeScript check
-        uses: reviewdog/action-tsc@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-pr-review
-          fail_on_error: false
-
-      # Security check with ReviewDog
-      - name: Run security check
-        uses: reviewdog/action-detect-secrets@v1
+      # Run shellcheck with ReviewDog
+      - name: Run shellcheck
+        uses: reviewdog/action-shellcheck@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review

@@ -1,0 +1,46 @@
+name: Code Review with ReviewDog
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  reviewdog:
+    name: ReviewDog
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          npm install
+          cd packages/frontend && npm install
+          cd ../backend && npm install
+
+      # Run shellcheck with ReviewDog
+      - name: Run shellcheck
+        uses: reviewdog/action-shellcheck@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          fail_level: error
+
+      # Additional code suggestions with ReviewDog suggester
+      - name: Suggest code improvements
+        uses: reviewdog/action-suggester@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          tool_name: suggester
+          level: warning
+          filter_mode: added
+          fail_level: error

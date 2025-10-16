@@ -363,6 +363,23 @@ cp packages/frontend/.env.example packages/frontend/.env
 - Instant result updates
 - Connection status monitoring
 
+## 🤖 Automated Code Review with ReviewDog
+
+This repository uses ReviewDog for automated code reviews on pull requests. ReviewDog provides:
+- **ESLint checks**: JavaScript/TypeScript linting
+- **TypeScript type checking**: Catch type errors
+- **Security scanning**: Detect potential secrets and vulnerabilities
+- **Code suggestions**: Automated improvement recommendations
+
+### Features
+- ✅ **Completely free** - No API costs or subscriptions
+- ✅ **Automatic reviews** on every PR
+- ✅ **Inline comments** with specific feedback
+- ✅ **Multiple checks** running in parallel
+- ✅ **No setup required** - Works with `GITHUB_TOKEN` automatically
+
+The workflow runs automatically on all pull requests and posts review comments directly on the changed lines.
+
 ## 🤝 Contributing
 
 1. Fork the repository

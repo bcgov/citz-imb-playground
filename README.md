@@ -363,6 +363,38 @@ cp packages/frontend/.env.example packages/frontend/.env
 - Instant result updates
 - Connection status monitoring
 
+
+## 🤖 OpenAI Codex Code Review
+
+This repository uses OpenAI Codex for automated code reviews on pull requests. The Codex Action will:
+- Review code changes and provide suggestions
+- Respond to review comments
+- Help maintain code quality
+
+### Setup Instructions
+
+1. **Get OpenAI API Key**:
+   - Visit https://platform.openai.com/
+   - Sign in or create an account
+   - Go to API Keys in your account settings
+   - Create a new secret key
+   - Copy the key (it won't be shown again)
+
+2. **Add Repository Secret**:
+   - Go to repository Settings
+   - Navigate to Secrets and Variables → Actions
+   - Click "New repository secret"
+   - Name: `OPENAI_API_KEY`
+   - Value: Your OpenAI API key
+   - Click "Add secret"
+
+The `GITHUB_TOKEN` is automatically provided by GitHub Actions - no setup needed.
+
+### How It Works
+- Creates review comments on pull requests
+- Responds to review comment threads
+- Triggers on PR creation/update and review comment creation
+
 ## 🤝 Contributing
 
 1. Fork the repository

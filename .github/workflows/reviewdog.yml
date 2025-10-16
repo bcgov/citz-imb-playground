@@ -43,5 +43,4 @@ jobs:
           tool_name: suggester
           level: warning
           filter_mode: added
-          reporter: github-pr-review
           fail_level: error

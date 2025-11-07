@@ -1,0 +1,26 @@
+node_modules
+npm-debug.log
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.git
+.gitignore
+README.md
+.dockerignore
+coverage
+.nyc_output
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Build artifacts
+packages/*/dist
+packages/*/build
+packages/*/coverage
+
+# Package-specific ignores
+packages/backend/uploads

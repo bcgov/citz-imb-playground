@@ -1,6 +1,5 @@
-version: '3.8'
-
 services:
+  # Sentry Dependencies
   redis:
     image: redis:7-alpine
     container_name: sentry-redis
@@ -8,6 +7,7 @@ services:
       - sentry-redis:/data
     networks:
       - sentry
+    restart: unless-stopped
 
   postgres:
     image: postgres:14
@@ -20,7 +20,9 @@ services:
       - sentry-postgres:/var/lib/postgresql/data
     networks:
       - sentry
+    restart: unless-stopped
 
+  # Sentry Services
   sentry-base:
     image: sentry:latest
     container_name: sentry-base
@@ -40,6 +42,7 @@ services:
       - sentry-data:/var/lib/sentry/files
     networks:
       - sentry
+    restart: unless-stopped
 
   sentry-cron:
     extends:
